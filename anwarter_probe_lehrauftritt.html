@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anwärter Ski – Probe Lehrauftritt</title>
+  <style>
+    :root{
+      --bg:#0f172a;
+      --card:#111827;
+      --muted:#1f2937;
+      --text:#f8fafc;
+      --sub:#cbd5e1;
+      --accent:#38bdf8;
+      --ok:#22c55e;
+      --warn:#f59e0b;
+      --border:#334155;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:linear-gradient(180deg,#0b1220,#111827 40%,#0b1220);
+      color:var(--text);
+      line-height:1.45;
+    }
+    header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(15,23,42,.92);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--border);
+      padding:12px 14px;
+    }
+    .title{font-size:20px;font-weight:800;margin:0 0 6px}
+    .subtitle{margin:0;color:var(--sub);font-size:13px}
+    nav{
+      display:flex; gap:8px; overflow:auto; padding-top:10px;
+      scrollbar-width:none;
+    }
+    nav a{
+      text-decoration:none; color:var(--text); white-space:nowrap;
+      background:var(--muted); border:1px solid var(--border);
+      padding:8px 12px; border-radius:999px; font-size:13px;
+    }
+    main{max-width:860px; margin:0 auto; padding:14px}
+    .card{
+      background:rgba(17,24,39,.95);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:16px;
+      margin:0 0 14px;
+      box-shadow:0 8px 30px rgba(0,0,0,.18);
+    }
+    h2{font-size:22px;margin:0 0 10px}
+    h3{font-size:16px;margin:16px 0 8px;color:#e2e8f0}
+    p{margin:8px 0}
+    .goal{
+      display:inline-block;
+      background:rgba(56,189,248,.12);
+      border:1px solid rgba(56,189,248,.35);
+      color:#bae6fd;
+      padding:8px 10px;
+      border-radius:12px;
+      font-size:14px;
+      margin-bottom:8px;
+    }
+    .say{
+      background:rgba(34,197,94,.10);
+      border-left:4px solid var(--ok);
+      padding:10px 12px;
+      border-radius:10px;
+      margin:8px 0;
+    }
+    .steps{display:grid; gap:10px}
+    .step{
+      background:#0b1220; border:1px solid var(--border); border-radius:14px; padding:12px;
+    }
+    .num{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:28px;height:28px;border-radius:50%; background:var(--accent); color:#082f49; font-weight:800; margin-right:8px;
+    }
+    ul{margin:8px 0 0 18px; padding:0}
+    li{margin:6px 0}
+    .grid{display:grid; gap:12px}
+    @media(min-width:780px){ .grid{grid-template-columns:1fr 1fr} }
+    .pill{
+      display:inline-block; padding:5px 10px; border-radius:999px;
+      background:#172554; color:#bfdbfe; border:1px solid #1d4ed8; font-size:12px; margin:4px 6px 0 0;
+    }
+    .warn{
+      background:rgba(245,158,11,.10);
+      border-left:4px solid var(--warn);
+      padding:10px 12px; border-radius:10px;
+    }
+    .footer{
+      color:var(--sub); font-size:12px; text-align:center; padding:18px 10px 28px;
+    }
+    .toplink{
+      position:fixed; right:14px; bottom:14px; text-decoration:none;
+      background:var(--accent); color:#082f49; font-weight:800;
+      width:46px;height:46px;border-radius:50%; display:flex; align-items:center; justify-content:center;
+      box-shadow:0 8px 24px rgba(0,0,0,.28);
+    }
+    details{
+      background:#0b1220; border:1px solid var(--border); border-radius:14px; padding:10px 12px; margin-top:10px;
+    }
+    summary{cursor:pointer; font-weight:700}
+  </style>
+</head>
+<body id="top">
+  <header>
+    <h1 class="title">Anwärter – Probe Lehrauftritt</h1>
+    <p class="subtitle">Mobiele spiekbrief voor morgen: Gewöhnen, Schuss, Pflug, Pflug drehen</p>
+    <nav>
+      <a href="#quick">Snel</a>
+      <a href="#gew">Gewöhnen</a>
+      <a href="#schuss">Schuss</a>
+      <a href="#pflug">Pflug</a>
+      <a href="#drehen">Pflug drehen</a>
+      <a href="#phrases">Zinnen</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="card" id="quick">
+      <h2>Snelstructuur voor elke les</h2>
+      <div class="grid">
+        <div>
+          <div class="pill">1. Ziel</div>
+          <div class="pill">2. Vormachen</div>
+          <div class="pill">3. Kurz erklären</div>
+          <div class="pill">4. Üben</div>
+          <div class="pill">5. Korrigieren</div>
+          <div class="pill">6. Abschluss</div>
+        </div>
+        <div class="warn">
+          <strong>Examentip:</strong> praat kort, laat veel skiën, doe altijd eerst voor, corrigeer steeds maar één ding.
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="gew">
+      <h2>1. Gewöhnen</h2>
+      <div class="goal"><strong>Doel:</strong> wennen aan ski’s, materiaal en balans</div>
+
+      <div class="say"><strong>Wat je zegt:</strong><br>
+      “Hallo zusammen, ich bin … Heute beginnen wir mit <strong>Gewöhnen an die Ski und das Gleichgewicht</strong>.”</div>
+
+      <div class="steps">
+        <div class="step"><strong><span class="num">1</span>Vormachen</strong>
+          <ul>
+            <li>Lopen met ski’s op vlak terrein</li>
+            <li>Zijwaarts stappen</li>
+            <li>Kort glijden op één ski</li>
+          </ul>
+        </div>
+
+        <div class="step"><strong><span class="num">2</span>Korte uitleg</strong>
+          <div class="say">“Wichtig ist eine <strong>lockere Haltung</strong> und <strong>leichte Beugung in den Knien</strong>. Wir bleiben in der <strong>Mittellage</strong>.”</div>
+        </div>
+
+        <div class="step"><strong><span class="num">3</span>Oefeningen</strong>
+          <ul>
+            <li><strong>Geradeaus gehen</strong> – ski’s niet optillen, maar licht laten glijden</li>
+            <li><strong>Seitwärtsgehen</strong> – goed voor kanten en balans</li>
+            <li><strong>Scooter-Übung</strong> – één ski aan, afzetten met de andere voet</li>
+            <li><strong>Gleiten auf einem Ski</strong> – kort, rustig, balans zoeken</li>
+            <li><strong>Treppenschritt / Grätenschritt</strong> – opstappen</li>
+          </ul>
+        </div>
+
+        <div class="step"><strong><span class="num">4</span>Correcties</strong>
+          <ul>
+            <li>Achterover → <em>“Druck nach vorne, gegen den Schuh.”</em></li>
+            <li>Stijf → <em>“Locker bleiben.”</em></li>
+            <li>Te grote stappen → <em>“Kleine Schritte.”</em></li>
+          </ul>
+        </div>
+
+        <div class="step"><strong><span class="num">5</span>Afsluiting</strong>
+          <div class="say">“Sehr gut. Jetzt habt ihr ein erstes Gefühl für die Ski.”</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="schuss">
+      <h2>2. Schuss</h2>
+      <div class="goal"><strong>Doel:</strong> recht glijden en balans houden</div>
+
+      <div class="say"><strong>Wat je zegt:</strong><br>
+      “Heute lernen wir den <strong>Schuss</strong> – geradeaus fahren und Gleichgewicht halten.”</div>
+
+      <div class="steps">
+        <div class="step"><strong><span class="num">1</span>Vormachen</strong>
+          <ul>
+            <li>Eén keer rustig recht naar beneden glijden</li>
+            <li>Duidelijk zichtbaar: parallelle ski’s, armen voor, rustige houding</li>
+          </ul>
+        </div>
+
+        <div class="step"><strong><span class="num">2</span>Korte uitleg</strong>
+          <div class="say">“Die Ski sind <strong>parallel</strong>. Wir bleiben in der <strong>Mittellage</strong>. Die <strong>Arme sind vorne</strong>.”</div>
+        </div>
+
+        <div class="step"><strong><span class="num">3</span>Oefeningen</strong>
+          <ul>
+            <li><strong>Geradeaus fahren</strong> – gewoon laten lopen</li>
+            <li><strong>Hände nach vorne</strong> – handen actief naar voren</li>
+            <li><strong>Hoch/Tief-Bewegung</strong> – licht hoog en laag gaan</li>
+            <li><strong>Kleine Sprünge</strong> – alleen als groep het aankan</li>
+            <li><strong>Zu den Knien greifen</strong> – helpt tegen achterover hangen</li>
+          </ul>
+        </div>
+
+        <div class="step"><strong><span class="num">4</span>Correcties</strong>
+          <ul>
+            <li>Achterover → <em>“Mehr Druck nach vorne.”</em></li>
+            <li>Ski’s te dicht / kruisen → <em>“Ski etwas breiter halten.”</em></li>
+            <li>Stijf bovenlichaam → <em>“Locker in den Knien.”</em></li>
+          </ul>
+        </div>
+
+        <div class="step"><strong><span class="num">5</span>Afsluiting</strong>
+          <div class="say">“Sehr gut. Jetzt könnt ihr stabil geradeaus fahren.”</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="pflug">
+      <h2>3. Pflug</h2>
+      <div class="goal"><strong>Doel:</strong> remmen en stoppen</div>
+
+      <div class="say"><strong>Wat je zegt:</strong><br>
+      “Heute lernen wir den <strong>Pflug</strong> – bremsen und anhalten.”</div>
+
+      <div class="steps">
+        <div class="step"><strong><span class="num">1</span>Vormachen</strong>
+          <ul>
+            <li>Schuss → overgaan in pflug → gecontroleerd stoppen</li>
+          </ul>
+        </div>
+
+        <div class="step"><strong><span class="num">2</span>Korte uitleg</strong>
+          <div class="say">“Die Ski bilden ein <strong>V</strong>. Wir drücken auf die <strong>Innenkanten</strong>.”</div>
+        </div>
+
+        <div class="step"><strong><span class="num">3</span>Oefeningen</strong>
+          <ul>
+            <li><strong>Pflug im Stand</strong> – V-vorm maken in stilstand</li>
+            <li><strong>Pflug im Auslauf</strong> – pas in uitloop in pflug gaan</li>
+            <li><strong>Pflug während der Fahrt</strong> – van parallel naar pflug</li>
+            <li><strong>Kleiner Pflug / großer Pflug</strong> – snelheid doseren</li>
+            <li><strong>Stoppen bei einer Markierung</strong> – heel goed voor examen</li>
+          </ul>
+        </div>
+
+        <div class="step"><strong><span class="num">4</span>Correcties</strong>
+          <ul>
+            <li>Geen druk → <em>“Mehr Druck auf die Innenkanten.”</em></li>
+            <li>Te klein pflug → <em>“Mach den Pflug etwas größer.”</em></li>
+            <li>Te rechtop → <em>“Leicht in die Knie gehen.”</em></li>
+          </ul>
+        </div>
+
+        <div class="step"><strong><span class="num">5</span>Afsluiting</strong>
+          <div class="say">“Sehr gut. Jetzt könnt ihr selbst bremsen und anhalten.”</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="drehen">
+      <h2>4. Pflug drehen</h2>
+      <div class="goal"><strong>Doel:</strong> eerste richtingsverandering / bochten maken</div>
+
+      <div class="say"><strong>Wat je zegt:</strong><br>
+      “Heute lernen wir <strong>Pflugdrehen</strong>, also das erste Richtungsändern beim Skifahren.”</div>
+
+      <div class="steps">
+        <div class="step"><strong><span class="num">1</span>Vormachen</strong>
+          <ul>
+            <li>2–3 rustige pflugbochten links/rechts</li>
+          </ul>
+        </div>
+
+        <div class="step"><strong><span class="num">2</span>Korte uitleg</strong>
+          <div class="say">“Wir fahren im Pflug. Zum Drehen belasten wir den <strong>Außenski mehr</strong>. Wir machen eine kleine <strong>Vor- und Hochbewegung</strong>.”</div>
+        </div>
+
+        <div class="step"><strong><span class="num">3</span>Oefeningen</strong>
+          <ul>
+            <li><strong>Halbe Kurve links</strong> en stoppen</li>
+            <li><strong>Halbe Kurve rechts</strong> en stoppen</li>
+            <li><strong>Fächerförmiger Aufbau</strong> – bochten geleidelijk groter</li>
+            <li><strong>Kurven aneinanderreihen</strong> – links/rechts ritme</li>
+            <li><strong>Rhythmuswechsel</strong> – alleen als het goed gaat</li>
+          </ul>
+        </div>
+
+        <div class="step"><strong><span class="num">4</span>Correcties</strong>
+          <ul>
+            <li>Geen druk op buitenski → <em>“Mehr Gewicht auf den Außenski.”</em></li>
+            <li>Alleen bovenlichaam draait → <em>“Die Ski drehen – nicht nur der Oberkörper.”</em></li>
+            <li>Te weinig pflug → <em>“Mach den Pflug etwas größer.”</em></li>
+          </ul>
+        </div>
+
+        <div class="step"><strong><span class="num">5</span>Afsluiting</strong>
+          <div class="say">“Sehr gut. Jetzt könnt ihr schon selbstständig Richtungen ändern.”</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="phrases">
+      <h2>Handige Duitse zinnen</h2>
+      <div class="grid">
+        <div>
+          <h3>Altijd bruikbaar</h3>
+          <ul>
+            <li>“Ziel der Übung ist …”</li>
+            <li>“Ich zeige es einmal vor.”</li>
+            <li>“Jetzt probieren wir das.”</li>
+            <li>“Wir machen das nochmal.”</li>
+            <li>“Ich zeige es nochmal vor.”</li>
+            <li>“Sehr gut.”</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Bij correcties</h3>
+          <ul>
+            <li>“Mehr Druck nach vorne.”</li>
+            <li>“Locker bleiben.”</li>
+            <li>“Kleine Schritte.”</li>
+            <li>“Arme nach vorne.”</li>
+            <li>“Mehr Gewicht auf den Außenski.”</li>
+            <li>“Mach den Pflug größer.”</li>
+          </ul>
+        </div>
+      </div>
+
+      <details>
+        <summary>Wat je niet moet doen</summary>
+        <ul>
+          <li>Te lang praten</li>
+          <li>Teveel tegelijk corrigeren</li>
+          <li>Te moeilijke oefening kiezen</li>
+          <li>Niet eerst voordoen</li>
+        </ul>
+      </details>
+    </section>
+
+    <div class="footer">
+      Gemaakt als mobiele spiekbrief. Open dit bestand in je browser of zet het online.
+    </div>
+  </main>
+
+  <a class="toplink" href="#top">↑</a>
+</body>
+</html>
