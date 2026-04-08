@@ -1,0 +1,94 @@
+:root {
+  --bg: #0f1b2d;
+  --panel: #17273f;
+  --text: #ecf3ff;
+  --accent: #ffd34d;
+  --danger: #ff6b6b;
+  --ok: #7df79a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Courier New", Courier, monospace;
+  background: radial-gradient(circle at top, #203b66 0%, var(--bg) 60%);
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.layout {
+  width: min(92vw, 640px);
+  text-align: center;
+}
+
+h1 {
+  margin: 0 0 8px;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  opacity: 0.85;
+  margin: 0 0 16px;
+}
+
+.hud {
+  background: var(--panel);
+  border: 2px solid #3f628f;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 10px;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+
+.hud div {
+  min-width: 120px;
+}
+
+#statusText {
+  color: var(--accent);
+}
+
+canvas {
+  width: 100%;
+  max-width: 540px;
+  border: 3px solid #bfd7ff;
+  border-radius: 8px;
+  background: #f1f8ff;
+  image-rendering: pixelated;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+}
+
+.controls {
+  margin-top: 16px;
+}
+
+button {
+  background: var(--accent);
+  color: #1f2b3c;
+  font-family: inherit;
+  font-weight: 700;
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.05);
+}
+
+.controls p {
+  margin: 12px 0 0;
+  line-height: 1.4;
+  opacity: 0.92;
+}
