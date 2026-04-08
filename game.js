@@ -350,8 +350,8 @@ function drawBackground() {
   ctx.closePath();
   ctx.fill();
 
-  ctx.strokeStyle = "#a8d4f8";
-  ctx.lineWidth = 4;
+  ctx.strokeStyle = "#7bc5ff";
+  ctx.lineWidth = 6;
   ctx.beginPath();
   ctx.moveTo(canvas.width / 2 - pisteTopHalf, 0);
   ctx.lineTo(canvas.width / 2 - pisteBottomHalf, canvas.height);
@@ -359,6 +359,17 @@ function drawBackground() {
   ctx.beginPath();
   ctx.moveTo(canvas.width / 2 + pisteTopHalf, 0);
   ctx.lineTo(canvas.width / 2 + pisteBottomHalf, canvas.height);
+  ctx.stroke();
+
+  ctx.strokeStyle = "#d6f1ff";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(canvas.width / 2 - pisteTopHalf + 2, 0);
+  ctx.lineTo(canvas.width / 2 - pisteBottomHalf + 2, canvas.height);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(canvas.width / 2 + pisteTopHalf - 2, 0);
+  ctx.lineTo(canvas.width / 2 + pisteBottomHalf - 2, canvas.height);
   ctx.stroke();
 
   ctx.strokeStyle = "#c9e6fb";
