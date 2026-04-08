@@ -9,6 +9,10 @@ const statusTextEl = document.getElementById("statusText");
 const startButton = document.getElementById("startButton");
 
 const GAME_TIME_SECONDS = 30;
+const FINISH_TARGET_METERS = 4300;
+const FINISH_REVEAL_METERS = 700;
+const FINISH_REVEAL_SECONDS = 4;
+const FINISH_GRACE_SECONDS = 6;
 const HIGH_SCORE_KEY = "robbie-ski-highscore-v1";
 
 const keys = {
@@ -42,7 +46,10 @@ const state = {
   },
   obstacles: [],
   spawnTimer: 0,
-  stars: []
+  stars: [],
+  finishLineY: -999,
+  finishVisible: false,
+  finishOvertime: 0
 };
 
 let audioCtx = null;
@@ -135,6 +142,9 @@ function resetGame() {
   state.falls = 0;
   state.spawnTimer = 0;
   state.obstacles = [];
+  state.finishLineY = -999;
+  state.finishVisible = false;
+  state.finishOvertime = 0;
 
   state.player.x = canvas.width / 2;
   state.player.y = canvas.height * 0.8;
@@ -200,6 +210,10 @@ function pisteHalfWidthAt(y) {
   return top + (bottom - top) * t;
 }
 
+function clamp01(value) {
+  return Math.max(0, Math.min(1, value));
+}
+
 function update(dt) {
   if (!state.running) return;
 
@@ -234,13 +248,20 @@ function update(dt) {
   }
 
   state.timeLeft = Math.max(0, GAME_TIME_SECONDS - state.elapsed);
-  if (state.timeLeft <= 0) {
-    finishGame(true);
-    return;
+  const remainingMeters = Math.max(0, FINISH_TARGET_METERS - state.distanceTravelled);
+  const revealByDistance = clamp01(1 - remainingMeters / FINISH_REVEAL_METERS);
+  const revealByTime = clamp01(1 - state.timeLeft / FINISH_REVEAL_SECONDS);
+  const revealProgress = Math.max(revealByDistance, revealByTime);
+
+  state.finishVisible = revealProgress > 0;
+  if (state.finishVisible) {
+    state.finishLineY = -80 + revealProgress * (canvas.height + 90);
   }
 
-  state.spawnTimer += dt;
-  if (state.spawnTimer > 0.23) {
+  if (state.timeLeft > 0) {
+    state.spawnTimer += dt;
+  }
+  if (state.timeLeft > 0 && state.spawnTimer > 0.23) {
     spawnObstacle();
     state.spawnTimer = 0;
   }
@@ -268,6 +289,25 @@ function update(dt) {
       statusTextEl.textContent = "Oei! Gevallen...";
       soundCrash();
       break;
+    }
+  }
+
+  if (state.finishVisible && !p.falling) {
+    const finishHalf = pisteHalfWidthAt(Math.min(canvas.height, state.finishLineY)) * 0.6;
+    const crossedLine = state.finishLineY >= p.y + 10;
+    const insideGate = Math.abs(p.x - canvas.width / 2) < finishHalf - 14;
+    if (crossedLine && insideGate) {
+      finishGame(true);
+      return;
+    }
+  }
+
+  if (state.timeLeft <= 0) {
+    state.finishOvertime += dt;
+    statusTextEl.textContent = "Finish in zicht!";
+    if (state.finishOvertime >= FINISH_GRACE_SECONDS) {
+      finishGame(false);
+      return;
     }
   }
 
@@ -349,8 +389,10 @@ function drawBackground() {
   ctx.textAlign = "center";
   ctx.fillText("START", canvas.width / 2, startY - 10);
 
-  const finishY = canvas.height - 92;
-  const finishHalf = pisteHalfWidthAt(finishY) * 0.6;
+  if (!state.finishVisible) return;
+
+  const finishY = state.finishLineY;
+  const finishHalf = pisteHalfWidthAt(Math.min(canvas.height, finishY)) * 0.6;
   ctx.fillStyle = "#2159aa";
   ctx.fillRect(canvas.width / 2 - finishHalf - 10, finishY - 46, 12, 62);
   ctx.fillRect(canvas.width / 2 + finishHalf - 2, finishY - 46, 12, 62);
@@ -366,6 +408,8 @@ function drawBackground() {
   ctx.moveTo(canvas.width / 2 - finishHalf + 8, finishY + 2);
   ctx.lineTo(canvas.width / 2 + finishHalf - 8, finishY + 2);
   ctx.stroke();
+
+  if (finishY < canvas.height - 160) return;
 
   const crowdBaseY = canvas.height - 34;
   for (let i = 0; i < 16; i += 1) {
