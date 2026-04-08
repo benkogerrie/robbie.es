@@ -8,8 +8,7 @@ const highScoreValueEl = document.getElementById("highScoreValue");
 const statusTextEl = document.getElementById("statusText");
 const startButton = document.getElementById("startButton");
 
-const GAME_TIME_SECONDS = 60;
-const COURSE_DISTANCE = 7000;
+const GAME_TIME_SECONDS = 30;
 const HIGH_SCORE_KEY = "robbie-ski-highscore-v1";
 
 const keys = {
@@ -119,10 +118,7 @@ function soundBoost() {
 
 function updateHud() {
   timeLeftEl.textContent = state.timeLeft.toFixed(1);
-  distanceLeftEl.textContent = Math.max(
-    0,
-    Math.round(COURSE_DISTANCE - state.distanceTravelled)
-  ).toString();
+  distanceLeftEl.textContent = Math.max(0, Math.round(state.distanceTravelled)).toString();
   scoreValueEl.textContent = Math.max(0, Math.round(state.score)).toString();
   highScoreValueEl.textContent = state.highScore.toString();
 }
@@ -154,11 +150,20 @@ function spawnObstacle() {
   const types = ["tree", "skier", "snowman"];
   const type = types[Math.floor(Math.random() * types.length)];
   const size = type === "tree" ? 22 : type === "skier" ? 20 : 18;
-  const pisteHalf = pisteHalfWidthAt(28) - 18;
-  const x = canvas.width / 2 + (Math.random() * 2 - 1) * pisteHalf;
+  const spawnY = 28;
+  const pisteHalf = pisteHalfWidthAt(spawnY) - 16;
+  const targetBias = Math.random() < 0.65;
+  const targetX = targetBias
+    ? state.player.x + (Math.random() * 2 - 1) * 80
+    : canvas.width / 2 + (Math.random() * 2 - 1) * pisteHalf;
+  const x = Math.max(
+    canvas.width / 2 - pisteHalf,
+    Math.min(canvas.width / 2 + pisteHalf, targetX)
+  );
   const y = -40 - Math.random() * 80;
-  const speed = 190 + Math.random() * 120;
-  state.obstacles.push({ x, y, size, speed, type });
+  const speed = 220 + Math.random() * 150;
+  const drift = type === "skier" ? (Math.random() * 2 - 1) * 42 : (Math.random() * 2 - 1) * 14;
+  state.obstacles.push({ x, y, size, speed, drift, type });
 }
 
 function finishGame(won) {
@@ -166,8 +171,8 @@ function finishGame(won) {
   state.won = won;
   state.lost = !won;
   if (won) {
-    statusTextEl.textContent = "Gewonnen!";
-    state.score += Math.round(state.timeLeft * 24) + 1000;
+    statusTextEl.textContent = "Finish!";
+    state.score += Math.round(state.distanceTravelled * 0.32) + 500;
     soundWin();
   } else {
     statusTextEl.textContent = "Te laat!";
@@ -230,23 +235,26 @@ function update(dt) {
 
   state.timeLeft = Math.max(0, GAME_TIME_SECONDS - state.elapsed);
   if (state.timeLeft <= 0) {
-    finishGame(false);
-    return;
-  }
-
-  if (state.distanceTravelled >= COURSE_DISTANCE) {
     finishGame(true);
     return;
   }
 
   state.spawnTimer += dt;
-  if (state.spawnTimer > 0.34) {
+  if (state.spawnTimer > 0.23) {
     spawnObstacle();
     state.spawnTimer = 0;
   }
 
   for (const ob of state.obstacles) {
     ob.y += ob.speed * dt;
+    ob.x += ob.drift * dt;
+    const half = pisteHalfWidthAt(ob.y) - 12;
+    const minX = canvas.width / 2 - half;
+    const maxX = canvas.width / 2 + half;
+    if (ob.x < minX || ob.x > maxX) {
+      ob.drift *= -1;
+      ob.x = Math.max(minX, Math.min(maxX, ob.x));
+    }
   }
   state.obstacles = state.obstacles.filter((ob) => ob.y < canvas.height + 52);
 
@@ -256,7 +264,7 @@ function update(dt) {
       p.fallTimer = p.fallDuration;
       state.elapsed += 1.5;
       state.falls += 1;
-      state.score = Math.max(0, state.score - 160);
+      state.score = Math.max(0, state.score - 240);
       statusTextEl.textContent = "Oei! Gevallen...";
       soundCrash();
       break;
