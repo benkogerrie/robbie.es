@@ -9,7 +9,7 @@ const statusTextEl = document.getElementById("statusText");
 const startButton = document.getElementById("startButton");
 
 const GAME_TIME_SECONDS = 60;
-const COURSE_DISTANCE = 1000;
+const COURSE_DISTANCE = 7000;
 const HIGH_SCORE_KEY = "robbie-ski-highscore-v1";
 
 const keys = {
@@ -154,10 +154,10 @@ function spawnObstacle() {
   const types = ["tree", "skier", "snowman"];
   const type = types[Math.floor(Math.random() * types.length)];
   const size = type === "tree" ? 22 : type === "skier" ? 20 : 18;
-  const lanePadding = 24;
-  const x = lanePadding + Math.random() * (canvas.width - lanePadding * 2);
+  const pisteHalf = pisteHalfWidthAt(28) - 18;
+  const x = canvas.width / 2 + (Math.random() * 2 - 1) * pisteHalf;
   const y = -40 - Math.random() * 80;
-  const speed = 170 + Math.random() * 95;
+  const speed = 190 + Math.random() * 120;
   state.obstacles.push({ x, y, size, speed, type });
 }
 
@@ -188,6 +188,13 @@ function checkCollision(ob, p) {
   return dx < ob.size * 0.72 && dy < ob.size * 0.78;
 }
 
+function pisteHalfWidthAt(y) {
+  const top = canvas.width * 0.12;
+  const bottom = canvas.width * 0.46;
+  const t = Math.max(0, Math.min(1, y / canvas.height));
+  return top + (bottom - top) * t;
+}
+
 function update(dt) {
   if (!state.running) return;
 
@@ -209,7 +216,8 @@ function update(dt) {
   if (keys.ArrowUp) p.y -= p.verticalAdjust * dt;
   if (keys.ArrowDown) p.y += p.verticalAdjust * dt;
 
-  p.x = Math.max(16, Math.min(canvas.width - 16, p.x));
+  const pisteHalf = pisteHalfWidthAt(p.y) - 14;
+  p.x = Math.max(canvas.width / 2 - pisteHalf, Math.min(canvas.width / 2 + pisteHalf, p.x));
   p.y = Math.max(canvas.height * 0.4, Math.min(canvas.height - 28, p.y));
 
   const speed = keys.Space ? p.boostSpeed : p.baseSpeed;
@@ -232,7 +240,7 @@ function update(dt) {
   }
 
   state.spawnTimer += dt;
-  if (state.spawnTimer > 0.42) {
+  if (state.spawnTimer > 0.34) {
     spawnObstacle();
     state.spawnTimer = 0;
   }
@@ -259,65 +267,65 @@ function update(dt) {
 }
 
 function drawBackground() {
-  const sky = ctx.createLinearGradient(0, 0, 0, canvas.height);
-  sky.addColorStop(0, "#d7ebff");
-  sky.addColorStop(0.32, "#eaf5ff");
-  sky.addColorStop(0.33, "#f5fbff");
-  sky.addColorStop(1, "#f0f7ff");
+  const sky = ctx.createLinearGradient(0, 0, 0, canvas.height * 0.32);
+  sky.addColorStop(0, "#9fd0ff");
+  sky.addColorStop(1, "#dff1ff");
   ctx.fillStyle = sky;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillRect(0, 0, canvas.width, canvas.height * 0.34);
 
-  ctx.fillStyle = "#bfdfff";
+  ctx.fillStyle = "#edf7ff";
+  ctx.fillRect(0, canvas.height * 0.34, canvas.width, canvas.height * 0.66);
+
+  ctx.fillStyle = "#8ebee7";
   ctx.beginPath();
-  ctx.moveTo(0, 255);
-  ctx.lineTo(100, 120);
-  ctx.lineTo(190, 255);
+  ctx.moveTo(0, canvas.height * 0.34);
+  ctx.lineTo(canvas.width * 0.2, canvas.height * 0.12);
+  ctx.lineTo(canvas.width * 0.38, canvas.height * 0.34);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(canvas.width, canvas.height * 0.34);
+  ctx.lineTo(canvas.width * 0.8, canvas.height * 0.11);
+  ctx.lineTo(canvas.width * 0.62, canvas.height * 0.34);
   ctx.closePath();
   ctx.fill();
 
+  const pisteTopHalf = pisteHalfWidthAt(0);
+  const pisteBottomHalf = pisteHalfWidthAt(canvas.height);
+  ctx.fillStyle = "#fdfefe";
   ctx.beginPath();
-  ctx.moveTo(canvas.width, 250);
-  ctx.lineTo(canvas.width - 110, 108);
-  ctx.lineTo(canvas.width - 220, 250);
+  ctx.moveTo(canvas.width / 2 - pisteTopHalf, 0);
+  ctx.lineTo(canvas.width / 2 + pisteTopHalf, 0);
+  ctx.lineTo(canvas.width / 2 + pisteBottomHalf, canvas.height);
+  ctx.lineTo(canvas.width / 2 - pisteBottomHalf, canvas.height);
   ctx.closePath();
   ctx.fill();
 
-  ctx.fillStyle = "#e6f3ff";
+  ctx.strokeStyle = "#a8d4f8";
+  ctx.lineWidth = 4;
   ctx.beginPath();
-  ctx.moveTo(90, 0);
-  ctx.lineTo(24, canvas.height);
-  ctx.lineTo(0, canvas.height);
-  ctx.lineTo(0, 0);
-  ctx.closePath();
-  ctx.fill();
-
+  ctx.moveTo(canvas.width / 2 - pisteTopHalf, 0);
+  ctx.lineTo(canvas.width / 2 - pisteBottomHalf, canvas.height);
+  ctx.stroke();
   ctx.beginPath();
-  ctx.moveTo(canvas.width - 90, 0);
-  ctx.lineTo(canvas.width - 18, canvas.height);
-  ctx.lineTo(canvas.width, canvas.height);
-  ctx.lineTo(canvas.width, 0);
-  ctx.closePath();
-  ctx.fill();
+  ctx.moveTo(canvas.width / 2 + pisteTopHalf, 0);
+  ctx.lineTo(canvas.width / 2 + pisteBottomHalf, canvas.height);
+  ctx.stroke();
 
-  ctx.fillStyle = "#ffffff";
-  for (const star of state.stars) {
-    const blink = 0.7 + Math.sin(state.elapsed * 2 + star.x) * 0.3;
-    ctx.globalAlpha = blink;
-    ctx.fillRect(star.x, star.y, star.r, star.r);
-  }
-  ctx.globalAlpha = 1;
-
-  ctx.strokeStyle = "#c2dfff";
+  ctx.strokeStyle = "#c9e6fb";
   ctx.lineWidth = 2;
-  for (let i = 0; i < 13; i += 1) {
-    const y = (i * 66 + (state.elapsed * 180) % 66) % canvas.height;
+  for (let i = 0; i < 18; i += 1) {
+    const y = (i * 52 + (state.elapsed * 260) % 52) % canvas.height;
+    const t = y / canvas.height;
+    const half = pisteHalfWidthAt(y) * 0.45;
+    const center = canvas.width / 2;
     ctx.beginPath();
-    ctx.moveTo(canvas.width * 0.35, y);
-    ctx.lineTo(canvas.width * 0.31, y + 40);
+    ctx.moveTo(center - half, y);
+    ctx.lineTo(center - half * 0.86, y + 30 + t * 20);
     ctx.stroke();
     ctx.beginPath();
-    ctx.moveTo(canvas.width * 0.65, y);
-    ctx.lineTo(canvas.width * 0.69, y + 40);
+    ctx.moveTo(center + half, y);
+    ctx.lineTo(center + half * 0.86, y + 30 + t * 20);
     ctx.stroke();
   }
 }
