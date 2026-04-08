@@ -23,7 +23,7 @@ body {
 }
 
 .layout {
-  width: min(92vw, 640px);
+  width: min(96vw, 1100px);
   text-align: center;
 }
 
@@ -59,8 +59,10 @@ h1 {
 }
 
 canvas {
-  width: 100%;
-  max-width: 540px;
+  width: min(100%, 1100px);
+  max-height: 72vh;
+  height: auto;
+  aspect-ratio: 16 / 9;
   border: 3px solid #bfd7ff;
   border-radius: 8px;
   background: #f1f8ff;

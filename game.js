@@ -8,7 +8,7 @@ const highScoreValueEl = document.getElementById("highScoreValue");
 const statusTextEl = document.getElementById("statusText");
 const startButton = document.getElementById("startButton");
 
-const GAME_TIME_SECONDS = 30;
+const GAME_TIME_SECONDS = 60;
 const COURSE_DISTANCE = 1000;
 const HIGH_SCORE_KEY = "robbie-ski-highscore-v1";
 
@@ -32,7 +32,7 @@ const state = {
   falls: 0,
   player: {
     x: canvas.width / 2,
-    y: canvas.height * 0.76,
+    y: canvas.height * 0.8,
     baseSpeed: 160,
     boostSpeed: 260,
     lateralSpeed: 210,
@@ -141,7 +141,7 @@ function resetGame() {
   state.obstacles = [];
 
   state.player.x = canvas.width / 2;
-  state.player.y = canvas.height * 0.76;
+  state.player.y = canvas.height * 0.8;
   state.player.falling = false;
   state.player.fallTimer = 0;
 
@@ -210,7 +210,7 @@ function update(dt) {
   if (keys.ArrowDown) p.y += p.verticalAdjust * dt;
 
   p.x = Math.max(16, Math.min(canvas.width - 16, p.x));
-  p.y = Math.max(canvas.height * 0.44, Math.min(canvas.height - 28, p.y));
+  p.y = Math.max(canvas.height * 0.4, Math.min(canvas.height - 28, p.y));
 
   const speed = keys.Space ? p.boostSpeed : p.baseSpeed;
   const distanceGain = speed * dt * 0.9;
@@ -371,16 +371,25 @@ function drawPlayer() {
   ctx.translate(p.x, p.y);
   ctx.rotate(p.falling ? Math.sin(state.elapsed * 30) * 0.75 : tilt + wobble);
 
-  ctx.fillStyle = p.falling ? "#f65c5c" : "#3557d6";
-  ctx.fillRect(-9, -15, 18, 22);
-  ctx.fillStyle = "#243e9e";
-  ctx.fillRect(-9, -2, 18, 3);
+  ctx.fillStyle = p.falling ? "#f65c5c" : "#2d55d8";
+  ctx.fillRect(-9, -15, 18, 20);
+  ctx.fillStyle = "#ffec74";
+  ctx.fillRect(-8, -26, 16, 4); // helm
+  ctx.fillStyle = "#202020";
+  ctx.fillRect(-5, -22, 10, 3); // bril
   ctx.fillStyle = "#ffd9b2";
-  ctx.fillRect(-6, -23, 12, 8);
-  ctx.fillStyle = "#1c1c1c";
-  ctx.fillRect(-8, -26, 16, 3);
+  ctx.fillRect(-5, -19, 10, 4); // gezicht
+  ctx.fillStyle = "#20388f";
+  ctx.fillRect(-9, -3, 18, 3); // jas accent
+  ctx.fillStyle = "#1f2740";
+  ctx.fillRect(-8, 5, 6, 6); // linker been
+  ctx.fillRect(2, 5, 6, 6); // rechter been
   ctx.fillStyle = "#2f2f2f";
-  ctx.fillRect(-16, 8, 32, 3);
+  ctx.fillRect(-18, 10, 36, 3); // skis
+  ctx.fillRect(-14, 13, 28, 2);
+  ctx.fillStyle = "#7e5228";
+  ctx.fillRect(-13, -12, 2, 22); // stok links
+  ctx.fillRect(11, -12, 2, 22); // stok rechts
 
   if (keys.Space && state.running && !p.falling) {
     ctx.fillStyle = "#ffd34d";
@@ -416,22 +425,23 @@ function drawOverlay() {
   }
 
   if (state.won) {
+    const podiumBaseY = canvas.height * 0.86;
     ctx.fillStyle = "#7df79a";
     ctx.font = "bold 34px Courier New";
-    ctx.fillText("Finish gehaald!", canvas.width / 2, 100);
+    ctx.fillText("Finish gehaald!", canvas.width / 2, canvas.height * 0.18);
 
     ctx.fillStyle = "#e4ecff";
-    ctx.fillRect(canvas.width / 2 - 120, 460, 80, 120);
-    ctx.fillRect(canvas.width / 2 - 30, 430, 80, 150);
-    ctx.fillRect(canvas.width / 2 + 60, 490, 80, 90);
+    ctx.fillRect(canvas.width / 2 - 190, podiumBaseY - 90, 120, 90);
+    ctx.fillRect(canvas.width / 2 - 60, podiumBaseY - 120, 120, 120);
+    ctx.fillRect(canvas.width / 2 + 70, podiumBaseY - 70, 120, 70);
     ctx.fillStyle = "#202020";
     ctx.font = "bold 22px Courier New";
-    ctx.fillText("2", canvas.width / 2 - 80, 445);
-    ctx.fillText("1", canvas.width / 2 + 10, 415);
-    ctx.fillText("3", canvas.width / 2 + 100, 475);
+    ctx.fillText("2", canvas.width / 2 - 130, podiumBaseY - 104);
+    ctx.fillText("1", canvas.width / 2, podiumBaseY - 134);
+    ctx.fillText("3", canvas.width / 2 + 130, podiumBaseY - 84);
     ctx.fillStyle = "#ffd34d";
     ctx.font = "18px Courier New";
-    ctx.fillText("Podium! Score: " + Math.round(state.score), canvas.width / 2, 620);
+    ctx.fillText("Podium! Score: " + Math.round(state.score), canvas.width / 2, canvas.height * 0.95);
   } else {
     ctx.fillStyle = "#ff8f8f";
     ctx.font = "bold 34px Courier New";
