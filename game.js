@@ -204,8 +204,8 @@ function checkCollision(ob, p) {
 }
 
 function pisteHalfWidthAt(y) {
-  const top = canvas.width * 0.12;
-  const bottom = canvas.width * 0.46;
+  const top = canvas.width * 0.16;
+  const bottom = canvas.width * 0.49;
   const t = Math.max(0, Math.min(1, y / canvas.height));
   return top + (bottom - top) * t;
 }
@@ -235,7 +235,8 @@ function update(dt) {
   if (keys.ArrowUp) p.y -= p.verticalAdjust * dt;
   if (keys.ArrowDown) p.y += p.verticalAdjust * dt;
 
-  const pisteHalf = pisteHalfWidthAt(p.y) - 14;
+  const skierHalfWidth = 18;
+  const pisteHalf = pisteHalfWidthAt(p.y) - skierHalfWidth;
   p.x = Math.max(canvas.width / 2 - pisteHalf, Math.min(canvas.width / 2 + pisteHalf, p.x));
   p.y = Math.max(canvas.height * 0.4, Math.min(canvas.height - 28, p.y));
 
@@ -449,13 +450,17 @@ function drawTree(ob) {
 }
 
 function drawSnowman(ob) {
+  ctx.strokeStyle = "#9eb6c9";
+  ctx.lineWidth = 2;
   ctx.fillStyle = "#ffffff";
   ctx.beginPath();
   ctx.arc(ob.x, ob.y + 6, ob.size * 0.45, 0, Math.PI * 2);
   ctx.fill();
+  ctx.stroke();
   ctx.beginPath();
   ctx.arc(ob.x, ob.y - 8, ob.size * 0.32, 0, Math.PI * 2);
   ctx.fill();
+  ctx.stroke();
   ctx.fillStyle = "#ff8f31";
   ctx.fillRect(ob.x + 1, ob.y - 9, 5, 2);
   ctx.fillStyle = "#222";
