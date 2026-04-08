@@ -328,6 +328,58 @@ function drawBackground() {
     ctx.lineTo(center + half * 0.86, y + 30 + t * 20);
     ctx.stroke();
   }
+
+  const startY = 56;
+  const startHalf = pisteHalfWidthAt(startY) * 0.72;
+  ctx.fillStyle = "#d72843";
+  ctx.fillRect(canvas.width / 2 - startHalf - 8, startY - 22, 10, 36);
+  ctx.fillRect(canvas.width / 2 + startHalf - 2, startY - 22, 10, 36);
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(canvas.width / 2 - startHalf + 2, startY - 18, startHalf * 2 - 4, 8);
+  ctx.fillStyle = "#193a67";
+  ctx.font = "bold 12px Courier New";
+  ctx.textAlign = "center";
+  ctx.fillText("START", canvas.width / 2, startY - 10);
+
+  const finishY = canvas.height - 92;
+  const finishHalf = pisteHalfWidthAt(finishY) * 0.6;
+  ctx.fillStyle = "#2159aa";
+  ctx.fillRect(canvas.width / 2 - finishHalf - 10, finishY - 46, 12, 62);
+  ctx.fillRect(canvas.width / 2 + finishHalf - 2, finishY - 46, 12, 62);
+  ctx.fillStyle = "#ffd24d";
+  ctx.fillRect(canvas.width / 2 - finishHalf + 2, finishY - 42, finishHalf * 2 - 4, 10);
+  ctx.fillStyle = "#1d2b44";
+  ctx.font = "bold 13px Courier New";
+  ctx.fillText("FINISH", canvas.width / 2, finishY - 34);
+
+  ctx.strokeStyle = "#b6daf5";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(canvas.width / 2 - finishHalf + 8, finishY + 2);
+  ctx.lineTo(canvas.width / 2 + finishHalf - 8, finishY + 2);
+  ctx.stroke();
+
+  const crowdBaseY = canvas.height - 34;
+  for (let i = 0; i < 16; i += 1) {
+    const side = i % 2 === 0 ? -1 : 1;
+    const row = Math.floor(i / 2);
+    const xOffset = finishHalf + 38 + row * 16;
+    const x = canvas.width / 2 + side * xOffset;
+    const y = crowdBaseY - (row % 3) * 10;
+    const shirt = ["#e04646", "#3d7be0", "#34a35c", "#f0b43a"][i % 4];
+    ctx.fillStyle = "#ffe1bd";
+    ctx.fillRect(x - 4, y - 14, 8, 6);
+    ctx.fillStyle = shirt;
+    ctx.fillRect(x - 5, y - 8, 10, 9);
+    ctx.fillStyle = "#22324d";
+    ctx.fillRect(x - 6, y + 1, 12, 3);
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    ctx.moveTo(x - 9, y - 2);
+    ctx.lineTo(x + 9, y - 2);
+    ctx.stroke();
+  }
 }
 
 function drawTree(ob) {
