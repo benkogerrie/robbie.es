@@ -100,6 +100,26 @@
             width: 80px;
             margin: 0;
         }
+        .btn-reset {
+            margin-top: 8px;
+            padding: 7px 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--surface-2);
+            color: var(--muted);
+            cursor: pointer;
+            width: auto;
+        }
+        .btn-reset:hover {
+            border-color: var(--accent-dim);
+            color: var(--text);
+            background: var(--surface);
+        }
+        .btn-reset:active {
+            transform: scale(0.98);
+        }
         .blocks-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -258,6 +278,7 @@
         <div class="header-left">
             <h1>Block A Calculator</h1>
             <p>Revenue, costs and profit</p>
+            <button type="button" class="btn-reset" id="btn_reset">Reset to default</button>
         </div>
         <div class="header-profit highlight" id="res_winst_header_wrap">
             <div class="result-label">Total profit</div>
@@ -409,12 +430,31 @@
         A2: { app: 13505, comm: 920, park: 280 }
     };
 
-    const inputIds = [
-        "fx_rate", "strat_a1", "strat_a2",
-        "vkp_app", "vkp_comm", "vkp_park",
-        "huur_app", "huur_comm", "huur_park", "yield_perc",
-        "kosten_a1", "kosten_a2", "kosten_buiten", "kosten_bijk_pct"
-    ];
+    const defaults = {
+        fx_rate: "25",
+        strat_a1: "markt",
+        strat_a2: "belegger",
+        vkp_app: "140000",
+        vkp_comm: "57851",
+        vkp_park: "500000",
+        huur_app: "400",
+        huur_comm: "400",
+        huur_park: "2500",
+        yield_perc: "4.5",
+        kosten_a1: "263212140",
+        kosten_a2: "802241140",
+        kosten_buiten: "22468000",
+        kosten_bijk_pct: "2"
+    };
+
+    const inputIds = Object.keys(defaults);
+
+    function resetToDefaults() {
+        Object.keys(defaults).forEach(function (id) {
+            document.getElementById(id).value = defaults[id];
+        });
+        calculate();
+    }
 
     function getFxRate() {
         return parseFloat(document.getElementById("fx_rate").value) || 0;
@@ -497,6 +537,8 @@
         el.addEventListener("input", calculate);
         el.addEventListener("change", calculate);
     });
+
+    document.getElementById("btn_reset").addEventListener("click", resetToDefaults);
 
     calculate();
 </script>
