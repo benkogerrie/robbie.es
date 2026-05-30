@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Opbrengsten- en winstcalculator voor Horizont Řečkovice - Blok A">
-    <title>Horizont Řečkovice - Blok A Rekentool</title>
+    <meta name="description" content="Revenue and profit calculator for Horizont Řečkovice - Block A">
+    <title>Horizont Řečkovice - Block A Calculator</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 20px; }
         .container { max-width: 1000px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
@@ -30,27 +30,27 @@
 <body>
 
 <div class="container">
-    <h1>Horizont Řečkovice - Blok A Rekentool</h1>
-    <p>Bereken de verwachte opbrengsten en winst door te spelen met de marktprijzen, huren en yields. U kunt per blok bepalen of u het los verkoopt of in zijn geheel verkoopt aan een verhurende belegger.</p>
+    <h1>Horizont Řečkovice - Block A Calculator</h1>
+    <p>Estimate expected revenue and profit by adjusting market prices, rents, and yields. For each block, choose whether to sell units individually or sell the entire block to an investor landlord.</p>
 
     <div class="grid">
         <div class="column">
-            <h2>Blok A1</h2>
-            <p>Appartementen: 4.840 m²<br>Commercieel: 760 m²<br>Parkeren: 50 stuks</p>
-            <label for="strat_a1">Strategie Blok A1:</label>
+            <h2>Block A1</h2>
+            <p>Apartments: 4,840 m²<br>Commercial: 760 m²<br>Parking: 50 units</p>
+            <label for="strat_a1">Block A1 strategy:</label>
             <select id="strat_a1">
-                <option value="markt">Losse verkoop (Markt)</option>
-                <option value="belegger">Verkoop aan belegger (Verhuur)</option>
+                <option value="markt">Individual sale (Market)</option>
+                <option value="belegger">Sale to investor (Rental)</option>
             </select>
         </div>
 
         <div class="column">
-            <h2>Blok A2</h2>
-            <p>Appartementen: 13.505 m²<br>Commercieel: 920 m²<br>Parkeren: 280 stuks</p>
-            <label for="strat_a2">Strategie Blok A2:</label>
+            <h2>Block A2</h2>
+            <p>Apartments: 13,505 m²<br>Commercial: 920 m²<br>Parking: 280 units</p>
+            <label for="strat_a2">Block A2 strategy:</label>
             <select id="strat_a2">
-                <option value="belegger">Verkoop aan belegger (Verhuur)</option>
-                <option value="markt">Losse verkoop (Markt)</option>
+                <option value="belegger">Sale to investor (Rental)</option>
+                <option value="markt">Individual sale (Market)</option>
             </select>
         </div>
     </div>
@@ -59,49 +59,49 @@
 
     <div class="grid">
         <div class="column">
-            <h3>Prijzen Losse Verkoop (CZK)</h3>
-            <label for="vkp_app">Verkoopprijs appartement per m²:</label>
+            <h3>Individual Sale Prices (CZK)</h3>
+            <label for="vkp_app">Apartment sale price per m²:</label>
             <input type="number" id="vkp_app" value="140000" min="0" step="1">
 
-            <label for="vkp_comm">Verkoopprijs commercieel per m²:</label>
+            <label for="vkp_comm">Commercial sale price per m²:</label>
             <input type="number" id="vkp_comm" value="57851" min="0" step="1">
 
-            <label for="vkp_park">Verkoopprijs parkeerplaats (stuk):</label>
+            <label for="vkp_park">Parking space sale price (per unit):</label>
             <input type="number" id="vkp_park" value="500000" min="0" step="1">
         </div>
 
         <div class="column">
-            <h3>Variabelen Belegger / Verhuur</h3>
-            <label for="huur_app">Huurprijs appartement (CZK / m² / mnd):</label>
+            <h3>Investor / Rental Variables</h3>
+            <label for="huur_app">Apartment rent (CZK / m² / month):</label>
             <input type="number" id="huur_app" value="400" min="0" step="1">
 
-            <label for="huur_comm">Huurprijs commercieel (CZK / m² / mnd):</label>
+            <label for="huur_comm">Commercial rent (CZK / m² / month):</label>
             <input type="number" id="huur_comm" value="400" min="0" step="1">
 
-            <label for="huur_park">Huurprijs parkeerplaats (CZK / stuk / mnd):</label>
+            <label for="huur_park">Parking rent (CZK / unit / month):</label>
             <input type="number" id="huur_park" value="2500" min="0" step="1">
 
-            <label for="yield_perc">Geëiste yield koper (%):</label>
+            <label for="yield_perc">Required buyer yield (%):</label>
             <input type="number" id="yield_perc" step="0.1" value="4.5" min="0.1">
         </div>
     </div>
 
     <div class="results">
-        <h2>Verwacht Projectresultaat</h2>
+        <h2>Expected Project Result</h2>
         <div class="grid" style="margin-bottom:0;">
             <div class="column" style="background:transparent; border:none;">
-                Opbrengst Blok A1:<br>
+                Block A1 revenue:<br>
                 <span class="number" id="res_a1">0 CZK</span>
             </div>
             <div class="column" style="background:transparent; border:none;">
-                Opbrengst Blok A2:<br>
+                Block A2 revenue:<br>
                 <span class="number" id="res_a2">0 CZK</span>
             </div>
         </div>
         <hr style="border-color:#555;">
-        <p>Totale opbrengst (A1 + A2): <span class="number" id="res_totaal">0 CZK</span></p>
-        <p>Totale stichtingskosten: <span class="number" id="res_kosten">1.109.679.706 CZK</span></p>
-        <h2>Totale winst: <span class="number" id="res_winst">0 CZK</span></h2>
+        <p>Total revenue (A1 + A2): <span class="number" id="res_totaal">0 CZK</span></p>
+        <p>Total development costs: <span class="number" id="res_kosten">1,109,679,706 CZK</span></p>
+        <h2>Total profit: <span class="number" id="res_winst">0 CZK</span></h2>
     </div>
 </div>
 
@@ -119,7 +119,7 @@
     ];
 
     function formatCZK(number) {
-        return Math.round(number).toLocaleString("nl-NL") + " CZK";
+        return Math.round(number).toLocaleString("en-US") + " CZK";
     }
 
     function calcBlock(blockName) {
