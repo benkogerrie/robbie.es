@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Revenue and profit calculator for Block A">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+    <meta name="googlebot" content="noindex, nofollow">
     <title>Block A Calculator</title>
     <style>
         :root {
@@ -284,11 +285,73 @@
             .results-grid .result-card:nth-child(4) { grid-column: 1 / 2; }
             .results-grid .result-card:nth-child(5) { grid-column: 2 / 4; }
         }
+        .auth-gate {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: var(--bg);
+        }
+        .auth-gate[hidden],
+        .app[hidden] {
+            display: none !important;
+        }
+        .auth-card {
+            width: 100%;
+            max-width: 320px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+        }
+        .auth-card h2 {
+            margin: 0 0 8px;
+            font-size: 1.1rem;
+        }
+        .auth-card p {
+            margin: 0 0 14px;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+        .auth-error {
+            margin: 8px 0 0;
+            font-size: 0.8rem;
+            color: var(--danger);
+        }
+        .auth-error[hidden] { display: none; }
+        .auth-card button[type="submit"] {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px 14px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border: 1px solid #1f6feb;
+            border-radius: 6px;
+            background: #1f6feb;
+            color: #fff;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
-<div class="app">
+<div id="auth-gate" class="auth-gate">
+    <div class="auth-card">
+        <h2>Access required</h2>
+        <p>This page is private. Enter the password to continue.</p>
+        <form id="auth-form">
+            <label for="auth-password">Password</label>
+            <input type="password" id="auth-password" autocomplete="current-password" required>
+            <button type="submit">Continue</button>
+            <p id="auth-error" class="auth-error" hidden>Incorrect password</p>
+        </form>
+    </div>
+</div>
+
+<div class="app" id="app-content" hidden>
     <header>
         <div class="header-left">
             <h1>Block A Calculator</h1>
@@ -456,6 +519,59 @@
 </div>
 
 <script>
+    (function () {
+        const AUTH_STORAGE_KEY = "trl_calc_auth_v1";
+        const PASSWORD_HASH = "74ca1d86590db7fd94e49b472f109a902c4a8cf6284446eb102eead7b8d3def6";
+
+        function sha256Hex(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            return crypto.subtle.digest("SHA-256", msgBuffer).then(function (hashBuffer) {
+                return Array.from(new Uint8Array(hashBuffer))
+                    .map(function (b) { return b.toString(16).padStart(2, "0"); })
+                    .join("");
+            });
+        }
+
+        function showApp() {
+            document.getElementById("auth-gate").hidden = true;
+            document.getElementById("app-content").hidden = false;
+            if (typeof window.trlAppInit === "function") {
+                window.trlAppInit();
+            }
+        }
+
+        function initAuth() {
+            if (sessionStorage.getItem(AUTH_STORAGE_KEY) === "1") {
+                showApp();
+                return;
+            }
+
+            document.getElementById("auth-form").addEventListener("submit", function (event) {
+                event.preventDefault();
+                const input = document.getElementById("auth-password");
+                const errorEl = document.getElementById("auth-error");
+                sha256Hex(input.value).then(function (hash) {
+                    if (hash === PASSWORD_HASH) {
+                        sessionStorage.setItem(AUTH_STORAGE_KEY, "1");
+                        errorEl.hidden = true;
+                        showApp();
+                    } else {
+                        errorEl.hidden = false;
+                        input.value = "";
+                        input.focus();
+                    }
+                });
+            });
+        }
+
+        if (window.crypto && window.crypto.subtle) {
+            initAuth();
+        } else {
+            document.getElementById("auth-error").textContent = "Browser not supported";
+            document.getElementById("auth-error").hidden = false;
+        }
+    })();
+
     const data = {
         A1: { app: 4840, comm: 760, park: 50 },
         A2: { app: 13505, comm: 920, park: 280 }
@@ -765,9 +881,15 @@
     document.getElementById("btn_reset").addEventListener("click", resetToDefaults);
     document.getElementById("fx_refresh").addEventListener("click", fetchLiveFxRate);
 
-    calculate();
-    fetchLiveFxRate();
-    setInterval(fetchLiveFxRate, 30 * 60 * 1000);
+    window.trlAppInit = function () {
+        calculate();
+        fetchLiveFxRate();
+        setInterval(fetchLiveFxRate, 30 * 60 * 1000);
+    };
+
+    if (!document.getElementById("app-content").hidden) {
+        window.trlAppInit();
+    }
 </script>
 
 </body>
