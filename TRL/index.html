@@ -269,6 +269,9 @@
             .results-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .results-grid .result-card.highlight {
+                grid-column: 1 / -1;
+            }
             .amount-czk { font-size: 1.05rem; }
         }
 
@@ -276,8 +279,10 @@
             .inputs-row { grid-template-columns: 1fr 1fr; }
             .inputs-row .panel:last-child { grid-column: 1 / -1; }
             .results-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
+            .results-grid .result-card:nth-child(4) { grid-column: 1 / 2; }
+            .results-grid .result-card:nth-child(5) { grid-column: 2 / 4; }
         }
     </style>
 </head>
@@ -435,6 +440,13 @@
             <div class="result-card">
                 <div class="result-label">Dev. costs</div>
                 <div id="res_kosten">
+                    <span class="amount-czk" data-czk>0 CZK</span>
+                    <span class="amount-eur" data-eur>€0</span>
+                </div>
+            </div>
+            <div class="result-card highlight" id="res_winst_bottom_wrap">
+                <div class="result-label">Total profit</div>
+                <div id="res_winst_bottom">
                     <span class="amount-czk" data-czk>0 CZK</span>
                     <span class="amount-eur" data-eur>€0</span>
                 </div>
@@ -719,11 +731,15 @@
         setAmount("res_a2", revenueA2);
         setAmount("res_totaal", totalRevenue);
         setAmount("res_kosten", kostenTotaal);
-        setAmount("res_winst", profit);
-        setAmount("res_winst_header", profit);
+        const profitAmountIds = ["res_winst_header", "res_winst", "res_winst_bottom"];
+        const profitWrapIds = ["res_winst_header_wrap", "res_winst_wrap", "res_winst_bottom_wrap"];
+
+        profitAmountIds.forEach(function (id) {
+            setAmount(id, profit);
+        });
 
         const profitClass = profit >= 0 ? "profit-positive" : "profit-negative";
-        ["res_winst_wrap", "res_winst_header_wrap"].forEach(function (id) {
+        profitWrapIds.forEach(function (id) {
             const wrap = document.getElementById(id);
             wrap.classList.remove("profit-positive", "profit-negative");
             wrap.classList.add(profitClass);
