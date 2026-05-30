@@ -29,8 +29,8 @@
             font-family: "Segoe UI", system-ui, sans-serif;
             background: var(--bg);
             color: var(--text);
-            font-size: 14px;
-            line-height: 1.4;
+            font-size: 16px;
+            line-height: 1.45;
         }
         .app {
             max-width: 1100px;
@@ -53,12 +53,12 @@
         }
         header h1 {
             margin: 0;
-            font-size: 1.15rem;
+            font-size: 1.35rem;
             font-weight: 600;
         }
         header p {
             margin: 2px 0 0;
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             color: var(--muted);
         }
         .header-profit {
@@ -72,14 +72,14 @@
             min-width: 0;
         }
         .header-profit .result-label {
-            font-size: 0.68rem;
+            font-size: 0.85rem;
             margin-bottom: 2px;
         }
         .header-profit .amount-czk {
-            font-size: 1.05rem;
+            font-size: 1.25rem;
         }
         .header-profit .amount-eur {
-            font-size: 0.75rem;
+            font-size: 0.95rem;
         }
         .rate-box {
             display: flex;
@@ -92,7 +92,7 @@
         }
         .rate-box label {
             margin: 0;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             color: var(--muted);
             white-space: nowrap;
         }
@@ -102,8 +102,8 @@
         }
         .btn-reset {
             margin-top: 8px;
-            padding: 7px 12px;
-            font-size: 0.75rem;
+            padding: 9px 14px;
+            font-size: 0.9rem;
             font-weight: 500;
             border: 1px solid #1f6feb;
             border-radius: 6px;
@@ -138,7 +138,7 @@
         }
         .panel h2, .panel h3 {
             margin: 0 0 8px;
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--accent);
             text-transform: uppercase;
@@ -146,7 +146,7 @@
         }
         .panel .meta {
             margin: -4px 0 8px;
-            font-size: 0.75rem;
+            font-size: 0.9rem;
             color: var(--muted);
         }
         .field {
@@ -163,18 +163,18 @@
         label {
             display: block;
             margin-bottom: 4px;
-            font-size: 0.72rem;
+            font-size: 0.88rem;
             font-weight: 500;
             color: var(--muted);
         }
         input, select {
             width: 100%;
-            padding: 8px 10px;
+            padding: 10px 12px;
             border: 1px solid var(--border);
             border-radius: 6px;
             background: var(--input-bg);
             color: var(--text);
-            font-size: 16px;
+            font-size: 17px;
         }
         input:focus, select:focus {
             outline: none;
@@ -188,7 +188,7 @@
         }
         .results-title {
             margin: 0 0 8px;
-            font-size: 0.75rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--muted);
             text-transform: uppercase;
@@ -212,14 +212,14 @@
             background: #1a2e1f;
         }
         .result-label {
-            font-size: 0.65rem;
+            font-size: 0.82rem;
             color: var(--muted);
             margin-bottom: 4px;
             line-height: 1.25;
         }
         .amount-czk {
             display: block;
-            font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+            font-size: clamp(1rem, 3.2vw, 1.15rem);
             font-weight: 700;
             color: var(--text);
             line-height: 1.2;
@@ -227,10 +227,10 @@
         }
         .amount-eur {
             display: block;
-            font-size: 0.7rem;
+            font-size: 0.9rem;
             font-weight: 500;
             color: var(--muted);
-            margin-top: 2px;
+            margin-top: 3px;
         }
         .profit-positive .amount-czk { color: var(--accent); }
         .profit-negative .amount-czk { color: var(--danger); }
@@ -245,9 +245,10 @@
                 text-align: center;
                 order: -1;
             }
-            header h1 { font-size: 1.1rem; }
+            header h1 { font-size: 1.25rem; }
+            .header-profit .amount-czk { font-size: 1.35rem; }
             .rate-box { justify-content: space-between; }
-            .rate-box input { flex: 1; max-width: 120px; }
+            .rate-box input { flex: 1; max-width: 140px; }
             .blocks-row,
             .inputs-row { grid-template-columns: 1fr; }
             .field-grid { grid-template-columns: 1fr; }
@@ -257,7 +258,7 @@
             .result-card.highlight {
                 grid-column: 1 / -1;
             }
-            .amount-czk { font-size: 0.85rem; }
+            .amount-czk { font-size: 1.05rem; }
         }
 
         @media (min-width: 721px) and (max-width: 960px) {
@@ -296,7 +297,7 @@
     <div class="blocks-row">
         <div class="panel">
             <h2>Block A1</h2>
-            <p class="meta">4,840 m² apts · 760 m² comm. · 50 parking</p>
+            <p class="meta">4.840 m² apts · 760 m² comm. · 50 parking</p>
             <div class="field">
                 <label for="strat_a1">Strategy</label>
                 <select id="strat_a1">
@@ -307,7 +308,7 @@
         </div>
         <div class="panel">
             <h2>Block A2</h2>
-            <p class="meta">13,505 m² apts · 920 m² comm. · 280 parking</p>
+            <p class="meta">13.505 m² apts · 920 m² comm. · 280 parking</p>
             <div class="field">
                 <label for="strat_a2">Strategy</label>
                 <select id="strat_a2">
@@ -460,15 +461,33 @@
         return parseFloat(document.getElementById("fx_rate").value) || 0;
     }
 
+    const numberLocale = "de-DE";
+
+    function formatNumber(value) {
+        return Math.round(value).toLocaleString(numberLocale);
+    }
+
+    function parseNumberInput(value) {
+        if (value === "" || value == null) return 0;
+        const s = String(value).trim();
+        if (/,/.test(s)) {
+            return parseFloat(s.replace(/\./g, "").replace(",", ".")) || 0;
+        }
+        if (/^\d{1,3}(\.\d{3})+$/.test(s)) {
+            return parseFloat(s.replace(/\./g, "")) || 0;
+        }
+        return parseFloat(s) || 0;
+    }
+
     function formatCZK(number) {
-        return Math.round(number).toLocaleString("en-US") + " CZK";
+        return formatNumber(number) + " CZK";
     }
 
     function formatEUR(czkAmount) {
         const rate = getFxRate();
         if (rate <= 0) return "€—";
         const eur = czkAmount / rate;
-        return "€" + Math.round(eur).toLocaleString("en-US");
+        return "€" + formatNumber(eur);
     }
 
     function setAmount(containerId, czkValue) {
@@ -482,16 +501,16 @@
         const bData = data[blockName];
 
         if (strat === "markt") {
-            const vkp_app = parseFloat(document.getElementById("vkp_app").value) || 0;
-            const vkp_comm = parseFloat(document.getElementById("vkp_comm").value) || 0;
-            const vkp_park = parseFloat(document.getElementById("vkp_park").value) || 0;
+            const vkp_app = parseNumberInput(document.getElementById("vkp_app").value);
+            const vkp_comm = parseNumberInput(document.getElementById("vkp_comm").value);
+            const vkp_park = parseNumberInput(document.getElementById("vkp_park").value);
             return (bData.app * vkp_app) + (bData.comm * vkp_comm) + (bData.park * vkp_park);
         }
 
-        const huur_app = parseFloat(document.getElementById("huur_app").value) || 0;
-        const huur_comm = parseFloat(document.getElementById("huur_comm").value) || 0;
-        const huur_park = parseFloat(document.getElementById("huur_park").value) || 0;
-        const yield_perc = parseFloat(document.getElementById("yield_perc").value) || 0;
+        const huur_app = parseNumberInput(document.getElementById("huur_app").value);
+        const huur_comm = parseNumberInput(document.getElementById("huur_comm").value);
+        const huur_park = parseNumberInput(document.getElementById("huur_park").value);
+        const yield_perc = parseNumberInput(document.getElementById("yield_perc").value);
 
         const annualRent =
             (bData.app * huur_app * 12) +
@@ -502,10 +521,10 @@
     }
 
     function calcTotalCosts() {
-        const bouwA1 = parseFloat(document.getElementById("kosten_a1").value) || 0;
-        const bouwA2 = parseFloat(document.getElementById("kosten_a2").value) || 0;
-        const buiten = parseFloat(document.getElementById("kosten_buiten").value) || 0;
-        const bijkPct = parseFloat(document.getElementById("kosten_bijk_pct").value) || 0;
+        const bouwA1 = parseNumberInput(document.getElementById("kosten_a1").value);
+        const bouwA2 = parseNumberInput(document.getElementById("kosten_a2").value);
+        const buiten = parseNumberInput(document.getElementById("kosten_buiten").value);
+        const bijkPct = parseNumberInput(document.getElementById("kosten_bijk_pct").value);
         const subtotaal = bouwA1 + bouwA2 + buiten;
         return subtotaal + (subtotaal * (bijkPct / 100));
     }
