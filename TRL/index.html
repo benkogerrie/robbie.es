@@ -17,46 +17,47 @@
             --accent-dim: #238636;
             --danger: #f85149;
             --input-bg: #0d1117;
+            --gap: 10px;
+            --radius: 8px;
         }
         *, *::before, *::after { box-sizing: border-box; }
-        html, body {
-            height: 100%;
-            margin: 0;
-            overflow: hidden;
+        html {
+            -webkit-text-size-adjust: 100%;
         }
         body {
+            margin: 0;
             font-family: "Segoe UI", system-ui, sans-serif;
             background: var(--bg);
             color: var(--text);
-            font-size: 12px;
-            line-height: 1.35;
+            font-size: 14px;
+            line-height: 1.4;
         }
         .app {
-            height: 100vh;
-            max-height: 100vh;
-            display: grid;
-            grid-template-rows: auto minmax(0, 1fr) auto;
-            gap: 8px;
-            padding: 10px 14px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 12px 14px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: var(--gap);
         }
         header {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
-            flex-shrink: 0;
+            gap: 10px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--border);
         }
         header h1 {
             margin: 0;
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             font-weight: 600;
-            color: var(--text);
         }
         header p {
             margin: 2px 0 0;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             color: var(--muted);
-            max-width: 52ch;
         }
         .rate-box {
             display: flex;
@@ -64,67 +65,74 @@
             gap: 8px;
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 6px 10px;
-            flex-shrink: 0;
+            border-radius: var(--radius);
+            padding: 8px 12px;
         }
         .rate-box label {
             margin: 0;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             color: var(--muted);
             white-space: nowrap;
         }
         .rate-box input {
-            width: 72px;
+            width: 80px;
             margin: 0;
-            padding: 4px 6px;
         }
-        .main-grid {
+        .blocks-row {
             display: grid;
-            grid-template-columns: repeat(5, minmax(0, 1fr));
-            gap: 8px;
-            min-height: 0;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--gap);
+        }
+        .inputs-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--gap);
         }
         .panel {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 8px 10px;
-            min-height: 0;
-            display: flex;
-            flex-direction: column;
+            border-radius: var(--radius);
+            padding: 10px 12px;
         }
         .panel h2, .panel h3 {
-            margin: 0 0 6px;
-            font-size: 0.78rem;
+            margin: 0 0 8px;
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--accent);
             text-transform: uppercase;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.04em;
         }
         .panel .meta {
-            margin: 0 0 6px;
-            font-size: 0.68rem;
+            margin: -4px 0 8px;
+            font-size: 0.75rem;
             color: var(--muted);
-            line-height: 1.4;
         }
+        .field {
+            margin-bottom: 8px;
+        }
+        .field:last-child { margin-bottom: 0; }
+        .field-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 10px;
+        }
+        .field-grid .field { margin-bottom: 0; }
+        .field-grid .field-full { grid-column: 1 / -1; }
         label {
             display: block;
-            margin-top: 5px;
-            font-size: 0.65rem;
+            margin-bottom: 4px;
+            font-size: 0.72rem;
             font-weight: 500;
             color: var(--muted);
         }
-        label:first-of-type { margin-top: 0; }
         input, select {
             width: 100%;
-            padding: 4px 6px;
-            margin-top: 2px;
+            padding: 8px 10px;
             border: 1px solid var(--border);
-            border-radius: 4px;
+            border-radius: 6px;
             background: var(--input-bg);
             color: var(--text);
-            font-size: 0.72rem;
+            font-size: 16px;
         }
         input:focus, select:focus {
             outline: none;
@@ -133,13 +141,12 @@
         .results {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 8px 12px;
-            flex-shrink: 0;
+            border-radius: var(--radius);
+            padding: 10px 12px;
         }
         .results-title {
-            margin: 0 0 6px;
-            font-size: 0.72rem;
+            margin: 0 0 8px;
+            font-size: 0.75rem;
             font-weight: 600;
             color: var(--muted);
             text-transform: uppercase;
@@ -152,30 +159,33 @@
         }
         .result-card {
             text-align: center;
-            padding: 6px 4px;
+            padding: 8px 6px;
             border-radius: 6px;
             background: var(--surface-2);
             border: 1px solid var(--border);
+            min-width: 0;
         }
         .result-card.highlight {
             border-color: var(--accent-dim);
             background: #1a2e1f;
         }
         .result-label {
-            font-size: 0.62rem;
+            font-size: 0.65rem;
             color: var(--muted);
             margin-bottom: 4px;
+            line-height: 1.25;
         }
         .amount-czk {
             display: block;
-            font-size: 0.95rem;
+            font-size: clamp(0.75rem, 2.5vw, 0.9rem);
             font-weight: 700;
             color: var(--text);
             line-height: 1.2;
+            word-break: break-word;
         }
         .amount-eur {
             display: block;
-            font-size: 0.68rem;
+            font-size: 0.7rem;
             font-weight: 500;
             color: var(--muted);
             margin-top: 2px;
@@ -185,11 +195,32 @@
         .profit-positive .amount-eur { color: #6bcb77; }
         .profit-negative .amount-eur { color: #ff7b72; }
 
-        @media (max-width: 1100px) {
-            html, body { overflow: auto; height: auto; }
-            .app { height: auto; max-height: none; overflow: visible; padding: 12px; }
-            .main-grid { grid-template-columns: repeat(2, 1fr); }
-            .results-grid { grid-template-columns: repeat(2, 1fr); }
+        @media (max-width: 720px) {
+            .app { padding: 10px 12px 16px; }
+            header { flex-direction: column; align-items: stretch; }
+            header h1 { font-size: 1.1rem; }
+            .rate-box { justify-content: space-between; }
+            .rate-box input { flex: 1; max-width: 120px; }
+            .blocks-row,
+            .inputs-row { grid-template-columns: 1fr; }
+            .field-grid { grid-template-columns: 1fr; }
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .result-card.highlight {
+                grid-column: 1 / -1;
+            }
+            .amount-czk { font-size: 0.85rem; }
+        }
+
+        @media (min-width: 721px) and (max-width: 960px) {
+            .inputs-row { grid-template-columns: 1fr 1fr; }
+            .inputs-row .panel:last-child { grid-column: 1 / -1; }
+            .results-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .result-card:nth-child(4) { grid-column: 1 / 2; }
+            .result-card:nth-child(5) { grid-column: 2 / 4; }
         }
     </style>
 </head>
@@ -199,67 +230,100 @@
     <header>
         <div>
             <h1>Block A Calculator</h1>
-            <p>Revenue, development costs and profit by strategy, prices, rents and yields.</p>
+            <p>Revenue, costs and profit</p>
         </div>
         <div class="rate-box">
             <label for="fx_rate">CZK per 1 EUR</label>
-            <input type="number" id="fx_rate" value="25" min="0.01" step="0.01">
+            <input type="number" id="fx_rate" value="25" min="0.01" step="0.01" inputmode="decimal">
         </div>
     </header>
 
-    <div class="main-grid">
+    <div class="blocks-row">
         <div class="panel">
             <h2>Block A1</h2>
-            <p class="meta">Apts 4,840 m² · Comm. 760 m² · Park. 50</p>
-            <label for="strat_a1">Strategy</label>
-            <select id="strat_a1">
-                <option value="markt">Individual sale (Market)</option>
-                <option value="belegger">Sale to investor (Rental)</option>
-            </select>
+            <p class="meta">4,840 m² apts · 760 m² comm. · 50 parking</p>
+            <div class="field">
+                <label for="strat_a1">Strategy</label>
+                <select id="strat_a1">
+                    <option value="markt">Individual sale (Market)</option>
+                    <option value="belegger">Sale to investor (Rental)</option>
+                </select>
+            </div>
         </div>
-
         <div class="panel">
             <h2>Block A2</h2>
-            <p class="meta">Apts 13,505 m² · Comm. 920 m² · Park. 280</p>
-            <label for="strat_a2">Strategy</label>
-            <select id="strat_a2">
-                <option value="belegger">Sale to investor (Rental)</option>
-                <option value="markt">Individual sale (Market)</option>
-            </select>
+            <p class="meta">13,505 m² apts · 920 m² comm. · 280 parking</p>
+            <div class="field">
+                <label for="strat_a2">Strategy</label>
+                <select id="strat_a2">
+                    <option value="belegger">Sale to investor (Rental)</option>
+                    <option value="markt">Individual sale (Market)</option>
+                </select>
+            </div>
         </div>
+    </div>
 
+    <div class="inputs-row">
         <div class="panel">
             <h3>Sale prices (CZK)</h3>
-            <label for="vkp_app">Apartment / m²</label>
-            <input type="number" id="vkp_app" value="140000" min="0" step="1">
-            <label for="vkp_comm">Commercial / m²</label>
-            <input type="number" id="vkp_comm" value="57851" min="0" step="1">
-            <label for="vkp_park">Parking / unit</label>
-            <input type="number" id="vkp_park" value="500000" min="0" step="1">
+            <div class="field-grid">
+                <div class="field">
+                    <label for="vkp_app">Apartment / m²</label>
+                    <input type="number" id="vkp_app" value="140000" min="0" step="1" inputmode="numeric">
+                </div>
+                <div class="field">
+                    <label for="vkp_comm">Commercial / m²</label>
+                    <input type="number" id="vkp_comm" value="57851" min="0" step="1" inputmode="numeric">
+                </div>
+                <div class="field field-full">
+                    <label for="vkp_park">Parking / unit</label>
+                    <input type="number" id="vkp_park" value="500000" min="0" step="1" inputmode="numeric">
+                </div>
+            </div>
         </div>
 
         <div class="panel">
             <h3>Rental / investor</h3>
-            <label for="huur_app">Apartment rent / m² / mo</label>
-            <input type="number" id="huur_app" value="400" min="0" step="1">
-            <label for="huur_comm">Commercial rent / m² / mo</label>
-            <input type="number" id="huur_comm" value="400" min="0" step="1">
-            <label for="huur_park">Parking rent / unit / mo</label>
-            <input type="number" id="huur_park" value="2500" min="0" step="1">
-            <label for="yield_perc">Required yield (%)</label>
-            <input type="number" id="yield_perc" step="0.1" value="4.5" min="0.1">
+            <div class="field-grid">
+                <div class="field">
+                    <label for="huur_app">Apt rent / m² / mo</label>
+                    <input type="number" id="huur_app" value="400" min="0" step="1" inputmode="numeric">
+                </div>
+                <div class="field">
+                    <label for="huur_comm">Comm. rent / m² / mo</label>
+                    <input type="number" id="huur_comm" value="400" min="0" step="1" inputmode="numeric">
+                </div>
+                <div class="field">
+                    <label for="huur_park">Parking / unit / mo</label>
+                    <input type="number" id="huur_park" value="2500" min="0" step="1" inputmode="numeric">
+                </div>
+                <div class="field">
+                    <label for="yield_perc">Yield (%)</label>
+                    <input type="number" id="yield_perc" step="0.1" value="4.5" min="0.1" inputmode="decimal">
+                </div>
+            </div>
         </div>
 
         <div class="panel">
             <h3>Development costs (CZK)</h3>
-            <label for="kosten_a1">Construction A1</label>
-            <input type="number" id="kosten_a1" value="263212140" min="0" step="1">
-            <label for="kosten_a2">Construction A2</label>
-            <input type="number" id="kosten_a2" value="802241140" min="0" step="1">
-            <label for="kosten_buiten">Outdoor (infra / garden)</label>
-            <input type="number" id="kosten_buiten" value="22468000" min="0" step="1">
-            <label for="kosten_bijk_pct">Additional costs (%)</label>
-            <input type="number" id="kosten_bijk_pct" step="0.1" value="2" min="0">
+            <div class="field-grid">
+                <div class="field">
+                    <label for="kosten_a1">Construction A1</label>
+                    <input type="number" id="kosten_a1" value="263212140" min="0" step="1" inputmode="numeric">
+                </div>
+                <div class="field">
+                    <label for="kosten_a2">Construction A2</label>
+                    <input type="number" id="kosten_a2" value="802241140" min="0" step="1" inputmode="numeric">
+                </div>
+                <div class="field">
+                    <label for="kosten_buiten">Outdoor areas</label>
+                    <input type="number" id="kosten_buiten" value="22468000" min="0" step="1" inputmode="numeric">
+                </div>
+                <div class="field">
+                    <label for="kosten_bijk_pct">Extra costs (%)</label>
+                    <input type="number" id="kosten_bijk_pct" step="0.1" value="2" min="0" inputmode="decimal">
+                </div>
+            </div>
         </div>
     </div>
 
@@ -267,14 +331,14 @@
         <p class="results-title">Expected project result</p>
         <div class="results-grid">
             <div class="result-card">
-                <div class="result-label">Block A1 revenue</div>
+                <div class="result-label">A1 revenue</div>
                 <div id="res_a1">
                     <span class="amount-czk" data-czk>0 CZK</span>
                     <span class="amount-eur" data-eur>€0</span>
                 </div>
             </div>
             <div class="result-card">
-                <div class="result-label">Block A2 revenue</div>
+                <div class="result-label">A2 revenue</div>
                 <div id="res_a2">
                     <span class="amount-czk" data-czk>0 CZK</span>
                     <span class="amount-eur" data-eur>€0</span>
@@ -288,7 +352,7 @@
                 </div>
             </div>
             <div class="result-card">
-                <div class="result-label">Total development costs</div>
+                <div class="result-label">Dev. costs</div>
                 <div id="res_kosten">
                     <span class="amount-czk" data-czk>0 CZK</span>
                     <span class="amount-eur" data-eur>€0</span>
