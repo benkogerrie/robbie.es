@@ -96,10 +96,39 @@
             color: var(--muted);
             white-space: nowrap;
         }
-        .rate-box input {
-            width: 80px;
-            margin: 0;
+        .rate-box-inner { display: flex; flex-direction: column; gap: 4px; }
+        .rate-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
+        .rate-box input {
+            width: 88px;
+            margin: 0;
+            flex: 1;
+        }
+        .fx-source { font-weight: 400; }
+        .fx-source a { color: var(--accent); text-decoration: none; }
+        .fx-source a:hover { text-decoration: underline; }
+        .fx-status {
+            font-size: 0.72rem;
+            color: var(--muted);
+            line-height: 1.2;
+        }
+        .fx-status.live { color: var(--accent); }
+        .fx-status.error { color: var(--danger); }
+        .fx-refresh {
+            width: auto;
+            padding: 8px 10px;
+            font-size: 1rem;
+            line-height: 1;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--surface-2);
+            color: var(--text);
+            cursor: pointer;
+        }
+        .fx-refresh:hover { border-color: var(--accent-dim); }
         .btn-reset {
             margin-top: 8px;
             padding: 9px 14px;
@@ -289,8 +318,14 @@
             </div>
         </div>
         <div class="rate-box">
-            <label for="fx_rate">CZK per 1 EUR</label>
-            <input type="number" id="fx_rate" value="25" min="0.01" step="0.01" inputmode="decimal">
+            <div class="rate-box-inner">
+                <label for="fx_rate">CZK per 1 EUR <span class="fx-source">(<a id="fx_source_link" href="https://www.google.com/finance/beta/quote/EUR-CZK" target="_blank" rel="noopener noreferrer">Google Finance</a>)</span></label>
+                <div class="rate-row">
+                    <input type="number" id="fx_rate" value="" min="0.01" step="0.0001" inputmode="decimal" placeholder="…">
+                    <button type="button" class="fx-refresh" id="fx_refresh" title="Refresh exchange rate" aria-label="Refresh exchange rate">↻</button>
+                </div>
+                <span id="fx_status" class="fx-status">Loading live rate…</span>
+            </div>
         </div>
     </header>
 
@@ -431,8 +466,11 @@
         A2: { app: 13505, comm: 920, park: 280 }
     };
 
+    const GOOGLE_FX_URL = "https://www.google.com/finance/beta/quote/EUR-CZK";
+    const FX_FALLBACK = 24.284;
+
     const defaults = {
-        fx_rate: "25",
+        fx_rate: String(FX_FALLBACK),
         strat_a1: "markt",
         strat_a2: "belegger",
         vkp_app: "140000",
@@ -458,7 +496,77 @@
     }
 
     function getFxRate() {
-        return parseFloat(document.getElementById("fx_rate").value) || 0;
+        return parseNumberInput(document.getElementById("fx_rate").value);
+    }
+
+    function setFxStatus(text, state) {
+        const el = document.getElementById("fx_status");
+        el.textContent = text;
+        el.className = "fx-status" + (state ? " " + state : "");
+    }
+
+    function applyFxRate(rate) {
+        if (!rate || rate <= 0) return false;
+        const rounded = Math.round(rate * 10000) / 10000;
+        document.getElementById("fx_rate").value = String(rounded);
+        calculate();
+        return true;
+    }
+
+    function parseGoogleFinanceHtml(html) {
+        const priceSpan = html.match(/<span jsname="Pdsbrc"[^>]*>\s*<span>([\d.]+)<\/span>/);
+        if (priceSpan) return parseFloat(priceSpan[1]);
+        const prevClose = html.match(/Prev\.\s*close\s+([\d.]+)/i);
+        if (prevClose) return parseFloat(prevClose[1]);
+        return null;
+    }
+
+    function parseGoogleFinanceMarkdown(markdown) {
+        const block = markdown.match(/Euro \/ Czech Koruna\s*\n+([\d.]+)/);
+        if (block) return parseFloat(block[1]);
+        return null;
+    }
+
+    async function fetchGoogleFinanceHtml() {
+        const response = await fetch(GOOGLE_FX_URL, { credentials: "omit" });
+        if (!response.ok) throw new Error("HTTP " + response.status);
+        return response.text();
+    }
+
+    async function fetchGoogleFinanceViaProxy() {
+        const proxyUrl = "https://r.jina.ai/" + GOOGLE_FX_URL;
+        const response = await fetch(proxyUrl, { credentials: "omit" });
+        if (!response.ok) throw new Error("Proxy HTTP " + response.status);
+        return response.text();
+    }
+
+    async function fetchLiveFxRate() {
+        setFxStatus("Loading live rate…", "");
+        let rate = null;
+
+        try {
+            const html = await fetchGoogleFinanceHtml();
+            rate = parseGoogleFinanceHtml(html);
+        } catch (directError) {
+            try {
+                const markdown = await fetchGoogleFinanceViaProxy();
+                rate = parseGoogleFinanceMarkdown(markdown);
+                if (!rate) rate = parseGoogleFinanceHtml(markdown);
+            } catch (proxyError) {
+                console.warn("FX fetch failed", directError, proxyError);
+            }
+        }
+
+        if (rate && applyFxRate(rate)) {
+            const time = new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+            setFxStatus("Live · 1 EUR = " + formatNumber(rate) + " CZK · " + time, "live");
+            return rate;
+        }
+
+        if (applyFxRate(FX_FALLBACK)) {
+            setFxStatus("Could not load live rate — using fallback", "error");
+        }
+        return FX_FALLBACK;
     }
 
     const numberLocale = "de-DE";
@@ -558,8 +666,11 @@
     });
 
     document.getElementById("btn_reset").addEventListener("click", resetToDefaults);
+    document.getElementById("fx_refresh").addEventListener("click", fetchLiveFxRate);
 
     calculate();
+    fetchLiveFxRate();
+    setInterval(fetchLiveFxRate, 30 * 60 * 1000);
 </script>
 
 </body>
