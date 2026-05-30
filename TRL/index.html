@@ -390,7 +390,20 @@
     <div class="blocks-row">
         <div class="panel">
             <h2>Block A1</h2>
-            <p class="meta">4.840 m² apts · 760 m² comm. · 50 parking</p>
+            <div class="field-grid">
+                <div class="field">
+                    <label for="a1_app">Apartments (m²)</label>
+                    <input type="text" class="input-amount" id="a1_app" value="4.840" inputmode="numeric" autocomplete="off">
+                </div>
+                <div class="field">
+                    <label for="a1_comm">Commercial (m²)</label>
+                    <input type="text" class="input-amount" id="a1_comm" value="760" inputmode="numeric" autocomplete="off">
+                </div>
+                <div class="field field-full">
+                    <label for="a1_park">Parking (units)</label>
+                    <input type="text" class="input-amount" id="a1_park" value="50" inputmode="numeric" autocomplete="off">
+                </div>
+            </div>
             <div class="field">
                 <label for="strat_a1">Strategy</label>
                 <select id="strat_a1">
@@ -401,7 +414,20 @@
         </div>
         <div class="panel">
             <h2>Block A2</h2>
-            <p class="meta">13.505 m² apts · 920 m² comm. · 280 parking</p>
+            <div class="field-grid">
+                <div class="field">
+                    <label for="a2_app">Apartments (m²)</label>
+                    <input type="text" class="input-amount" id="a2_app" value="13.505" inputmode="numeric" autocomplete="off">
+                </div>
+                <div class="field">
+                    <label for="a2_comm">Commercial (m²)</label>
+                    <input type="text" class="input-amount" id="a2_comm" value="920" inputmode="numeric" autocomplete="off">
+                </div>
+                <div class="field field-full">
+                    <label for="a2_park">Parking (units)</label>
+                    <input type="text" class="input-amount" id="a2_park" value="280" inputmode="numeric" autocomplete="off">
+                </div>
+            </div>
             <div class="field">
                 <label for="strat_a2">Strategy</label>
                 <select id="strat_a2">
@@ -572,11 +598,6 @@
         }
     })();
 
-    const data = {
-        A1: { app: 4840, comm: 760, park: 50 },
-        A2: { app: 13505, comm: 920, park: 280 }
-    };
-
     const GOOGLE_FX_URL = "https://www.google.com/finance/beta/quote/EUR-CZK";
     const FX_FALLBACK = 24.284;
     const numberLocale = "de-DE";
@@ -585,6 +606,12 @@
         fx_rate: String(FX_FALLBACK),
         strat_a1: "markt",
         strat_a2: "belegger",
+        a1_app: "4840",
+        a1_comm: "760",
+        a1_park: "50",
+        a2_app: "13505",
+        a2_comm: "920",
+        a2_park: "280",
         vkp_app: "140000",
         vkp_comm: "57851",
         vkp_park: "500000",
@@ -599,6 +626,8 @@
     };
 
     const amountInputIds = [
+        "a1_app", "a1_comm", "a1_park",
+        "a2_app", "a2_comm", "a2_park",
         "vkp_app", "vkp_comm", "vkp_park",
         "huur_app", "huur_comm", "huur_park",
         "kosten_a1", "kosten_a2", "kosten_buiten"
@@ -803,9 +832,18 @@
         el.querySelector("[data-eur]").textContent = formatEUR(czkValue);
     }
 
+    function getBlockData(blockName) {
+        const prefix = blockName.toLowerCase();
+        return {
+            app: parseAmountInput(document.getElementById(prefix + "_app").value),
+            comm: parseAmountInput(document.getElementById(prefix + "_comm").value),
+            park: parseAmountInput(document.getElementById(prefix + "_park").value)
+        };
+    }
+
     function calcBlock(blockName) {
         const strat = document.getElementById("strat_" + blockName.toLowerCase()).value;
-        const bData = data[blockName];
+        const bData = getBlockData(blockName);
 
         if (strat === "markt") {
             const vkp_app = parseAmountInput(document.getElementById("vkp_app").value);
