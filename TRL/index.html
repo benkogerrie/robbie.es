@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Opbrengsten- en winstcalculator voor Horizont Řečkovice - Blok A">
+    <title>Horizont Řečkovice - Blok A Rekentool</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1, h2 { color: #2c3e50; }
+        .grid { display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
+        .column { flex: 1; min-width: 260px; background: #fafafa; padding: 15px; border-radius: 6px; border: 1px solid #ddd; }
+        label { display: block; margin-top: 10px; font-weight: bold; font-size: 0.9em; }
+        input, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .results { background: #2c3e50; color: #fff; padding: 20px; border-radius: 6px; text-align: center; }
+        .results h2 { color: #18bc9c; margin: 0 0 10px 0; }
+        .results .column { color: #fff; }
+        .number { font-size: 1.5em; font-weight: bold; }
+        hr { border: 1px solid #ddd; margin: 20px 0; }
+        .profit-positive { color: #2ecc71 !important; }
+        .profit-negative { color: #e74c3c !important; }
+        @media (max-width: 640px) {
+            body { padding: 12px; }
+            .container { padding: 16px; }
+            .number { font-size: 1.2em; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Horizont Řečkovice - Blok A Rekentool</h1>
+    <p>Bereken de verwachte opbrengsten en winst door te spelen met de marktprijzen, huren en yields. U kunt per blok bepalen of u het los verkoopt of in zijn geheel verkoopt aan een verhurende belegger.</p>
+
+    <div class="grid">
+        <div class="column">
+            <h2>Blok A1</h2>
+            <p>Appartementen: 4.840 m²<br>Commercieel: 760 m²<br>Parkeren: 50 stuks</p>
+            <label for="strat_a1">Strategie Blok A1:</label>
+            <select id="strat_a1">
+                <option value="markt">Losse verkoop (Markt)</option>
+                <option value="belegger">Verkoop aan belegger (Verhuur)</option>
+            </select>
+        </div>
+
+        <div class="column">
+            <h2>Blok A2</h2>
+            <p>Appartementen: 13.505 m²<br>Commercieel: 920 m²<br>Parkeren: 280 stuks</p>
+            <label for="strat_a2">Strategie Blok A2:</label>
+            <select id="strat_a2">
+                <option value="belegger">Verkoop aan belegger (Verhuur)</option>
+                <option value="markt">Losse verkoop (Markt)</option>
+            </select>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="grid">
+        <div class="column">
+            <h3>Prijzen Losse Verkoop (CZK)</h3>
+            <label for="vkp_app">Verkoopprijs appartement per m²:</label>
+            <input type="number" id="vkp_app" value="140000" min="0" step="1">
+
+            <label for="vkp_comm">Verkoopprijs commercieel per m²:</label>
+            <input type="number" id="vkp_comm" value="57851" min="0" step="1">
+
+            <label for="vkp_park">Verkoopprijs parkeerplaats (stuk):</label>
+            <input type="number" id="vkp_park" value="500000" min="0" step="1">
+        </div>
+
+        <div class="column">
+            <h3>Variabelen Belegger / Verhuur</h3>
+            <label for="huur_app">Huurprijs appartement (CZK / m² / mnd):</label>
+            <input type="number" id="huur_app" value="400" min="0" step="1">
+
+            <label for="huur_comm">Huurprijs commercieel (CZK / m² / mnd):</label>
+            <input type="number" id="huur_comm" value="400" min="0" step="1">
+
+            <label for="huur_park">Huurprijs parkeerplaats (CZK / stuk / mnd):</label>
+            <input type="number" id="huur_park" value="2500" min="0" step="1">
+
+            <label for="yield_perc">Geëiste yield koper (%):</label>
+            <input type="number" id="yield_perc" step="0.1" value="4.5" min="0.1">
+        </div>
+    </div>
+
+    <div class="results">
+        <h2>Verwacht Projectresultaat</h2>
+        <div class="grid" style="margin-bottom:0;">
+            <div class="column" style="background:transparent; border:none;">
+                Opbrengst Blok A1:<br>
+                <span class="number" id="res_a1">0 CZK</span>
+            </div>
+            <div class="column" style="background:transparent; border:none;">
+                Opbrengst Blok A2:<br>
+                <span class="number" id="res_a2">0 CZK</span>
+            </div>
+        </div>
+        <hr style="border-color:#555;">
+        <p>Totale opbrengst (A1 + A2): <span class="number" id="res_totaal">0 CZK</span></p>
+        <p>Totale stichtingskosten: <span class="number" id="res_kosten">1.109.679.706 CZK</span></p>
+        <h2>Totale winst: <span class="number" id="res_winst">0 CZK</span></h2>
+    </div>
+</div>
+
+<script>
+    const data = {
+        A1: { app: 4840, comm: 760, park: 50 },
+        A2: { app: 13505, comm: 920, park: 280 }
+    };
+    const kostenTotaal = 1109679706;
+
+    const inputIds = [
+        "strat_a1", "strat_a2",
+        "vkp_app", "vkp_comm", "vkp_park",
+        "huur_app", "huur_comm", "huur_park", "yield_perc"
+    ];
+
+    function formatCZK(number) {
+        return Math.round(number).toLocaleString("nl-NL") + " CZK";
+    }
+
+    function calcBlock(blockName) {
+        const strat = document.getElementById("strat_" + blockName.toLowerCase()).value;
+        const bData = data[blockName];
+
+        if (strat === "markt") {
+            const vkp_app = parseFloat(document.getElementById("vkp_app").value) || 0;
+            const vkp_comm = parseFloat(document.getElementById("vkp_comm").value) || 0;
+            const vkp_park = parseFloat(document.getElementById("vkp_park").value) || 0;
+            return (bData.app * vkp_app) + (bData.comm * vkp_comm) + (bData.park * vkp_park);
+        }
+
+        const huur_app = parseFloat(document.getElementById("huur_app").value) || 0;
+        const huur_comm = parseFloat(document.getElementById("huur_comm").value) || 0;
+        const huur_park = parseFloat(document.getElementById("huur_park").value) || 0;
+        const yield_perc = parseFloat(document.getElementById("yield_perc").value) || 0;
+
+        const annualRent =
+            (bData.app * huur_app * 12) +
+            (bData.comm * huur_comm * 12) +
+            (bData.park * huur_park * 12);
+
+        return yield_perc > 0 ? annualRent / (yield_perc / 100) : 0;
+    }
+
+    function calculate() {
+        const revenueA1 = calcBlock("A1");
+        const revenueA2 = calcBlock("A2");
+        const totalRevenue = revenueA1 + revenueA2;
+        const profit = totalRevenue - kostenTotaal;
+
+        document.getElementById("res_a1").textContent = formatCZK(revenueA1);
+        document.getElementById("res_a2").textContent = formatCZK(revenueA2);
+        document.getElementById("res_totaal").textContent = formatCZK(totalRevenue);
+        document.getElementById("res_kosten").textContent = formatCZK(kostenTotaal);
+
+        const profitEl = document.getElementById("res_winst");
+        profitEl.textContent = formatCZK(profit);
+        profitEl.className = "number " + (profit >= 0 ? "profit-positive" : "profit-negative");
+    }
+
+    inputIds.forEach(function (id) {
+        const el = document.getElementById(id);
+        el.addEventListener("input", calculate);
+        el.addEventListener("change", calculate);
+    });
+
+    calculate();
+</script>
+
+</body>
+</html>
