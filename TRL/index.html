@@ -321,7 +321,7 @@
             <div class="rate-box-inner">
                 <label for="fx_rate">CZK per 1 EUR <span class="fx-source">(<a id="fx_source_link" href="https://www.google.com/finance/beta/quote/EUR-CZK" target="_blank" rel="noopener noreferrer">Google Finance</a>)</span></label>
                 <div class="rate-row">
-                    <input type="number" id="fx_rate" value="" min="0.01" step="0.0001" inputmode="decimal" placeholder="…">
+                    <input type="text" id="fx_rate" value="" inputmode="decimal" placeholder="…" autocomplete="off">
                     <button type="button" class="fx-refresh" id="fx_refresh" title="Refresh exchange rate" aria-label="Refresh exchange rate">↻</button>
                 </div>
                 <span id="fx_status" class="fx-status">Loading live rate…</span>
@@ -360,15 +360,15 @@
             <div class="field-grid">
                 <div class="field">
                     <label for="vkp_app">Apartment / m²</label>
-                    <input type="number" id="vkp_app" value="140000" min="0" step="1" inputmode="numeric">
+                    <input type="text" class="input-amount" id="vkp_app" value="140.000" inputmode="numeric" autocomplete="off">
                 </div>
                 <div class="field">
                     <label for="vkp_comm">Commercial / m²</label>
-                    <input type="number" id="vkp_comm" value="57851" min="0" step="1" inputmode="numeric">
+                    <input type="text" class="input-amount" id="vkp_comm" value="57.851" inputmode="numeric" autocomplete="off">
                 </div>
                 <div class="field field-full">
                     <label for="vkp_park">Parking / unit</label>
-                    <input type="number" id="vkp_park" value="500000" min="0" step="1" inputmode="numeric">
+                    <input type="text" class="input-amount" id="vkp_park" value="500.000" inputmode="numeric" autocomplete="off">
                 </div>
             </div>
         </div>
@@ -378,19 +378,19 @@
             <div class="field-grid">
                 <div class="field">
                     <label for="huur_app">Apt rent / m² / mo</label>
-                    <input type="number" id="huur_app" value="400" min="0" step="1" inputmode="numeric">
+                    <input type="text" class="input-amount" id="huur_app" value="400" inputmode="numeric" autocomplete="off">
                 </div>
                 <div class="field">
                     <label for="huur_comm">Comm. rent / m² / mo</label>
-                    <input type="number" id="huur_comm" value="400" min="0" step="1" inputmode="numeric">
+                    <input type="text" class="input-amount" id="huur_comm" value="400" inputmode="numeric" autocomplete="off">
                 </div>
                 <div class="field">
                     <label for="huur_park">Parking / unit / mo</label>
-                    <input type="number" id="huur_park" value="2500" min="0" step="1" inputmode="numeric">
+                    <input type="text" class="input-amount" id="huur_park" value="2.500" inputmode="numeric" autocomplete="off">
                 </div>
                 <div class="field">
                     <label for="yield_perc">Yield (%)</label>
-                    <input type="number" id="yield_perc" step="0.1" value="4.5" min="0.1" inputmode="decimal">
+                    <input type="text" id="yield_perc" value="4,5" inputmode="decimal" autocomplete="off">
                 </div>
             </div>
         </div>
@@ -400,19 +400,19 @@
             <div class="field-grid">
                 <div class="field">
                     <label for="kosten_a1">Construction A1</label>
-                    <input type="number" id="kosten_a1" value="263212140" min="0" step="1" inputmode="numeric">
+                    <input type="text" class="input-amount" id="kosten_a1" value="263.212.140" inputmode="numeric" autocomplete="off">
                 </div>
                 <div class="field">
                     <label for="kosten_a2">Construction A2</label>
-                    <input type="number" id="kosten_a2" value="802241140" min="0" step="1" inputmode="numeric">
+                    <input type="text" class="input-amount" id="kosten_a2" value="802.241.140" inputmode="numeric" autocomplete="off">
                 </div>
                 <div class="field">
                     <label for="kosten_buiten">Outdoor areas</label>
-                    <input type="number" id="kosten_buiten" value="22468000" min="0" step="1" inputmode="numeric">
+                    <input type="text" class="input-amount" id="kosten_buiten" value="22.468.000" inputmode="numeric" autocomplete="off">
                 </div>
                 <div class="field">
                     <label for="kosten_bijk_pct">Extra costs (%)</label>
-                    <input type="number" id="kosten_bijk_pct" step="0.1" value="2" min="0" inputmode="decimal">
+                    <input type="text" id="kosten_bijk_pct" value="2" inputmode="decimal" autocomplete="off">
                 </div>
             </div>
         </div>
@@ -468,6 +468,7 @@
 
     const GOOGLE_FX_URL = "https://www.google.com/finance/beta/quote/EUR-CZK";
     const FX_FALLBACK = 24.284;
+    const numberLocale = "de-DE";
 
     const defaults = {
         fx_rate: String(FX_FALLBACK),
@@ -486,11 +487,91 @@
         kosten_bijk_pct: "2"
     };
 
-    const inputIds = Object.keys(defaults);
+    const amountInputIds = [
+        "vkp_app", "vkp_comm", "vkp_park",
+        "huur_app", "huur_comm", "huur_park",
+        "kosten_a1", "kosten_a2", "kosten_buiten"
+    ];
+    const decimalInputIds = ["fx_rate", "yield_perc", "kosten_bijk_pct"];
+    const selectIds = ["strat_a1", "strat_a2"];
+
+    function formatAmountInputDisplay(value) {
+        const digits = String(value).replace(/\D/g, "");
+        if (digits === "") return "";
+        return parseInt(digits, 10).toLocaleString(numberLocale);
+    }
+
+    function formatDecimalInputDisplay(value, maxDecimals) {
+        if (value === "" || value == null) return "";
+        const num = parseNumberInput(value);
+        if (!num && num !== 0) return "";
+        return num.toLocaleString(numberLocale, {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: maxDecimals
+        });
+    }
+
+    function cursorAfterAmountFormat(oldValue, oldPos, newValue) {
+        const digitsBefore = String(oldValue).slice(0, oldPos).replace(/\D/g, "").length;
+        if (digitsBefore === 0) return 0;
+        let seen = 0;
+        for (let i = 0; i < newValue.length; i++) {
+            if (/\d/.test(newValue[i])) {
+                seen++;
+                if (seen === digitsBefore) return i + 1;
+            }
+        }
+        return newValue.length;
+    }
+
+    function setInputValue(id, value) {
+        const el = document.getElementById(id);
+        if (amountInputIds.indexOf(id) !== -1) {
+            el.value = value === "" || value == null ? "" : formatAmountInputDisplay(value);
+        } else if (id === "yield_perc" || id === "kosten_bijk_pct") {
+            el.value = value === "" || value == null ? "" : formatDecimalInputDisplay(value, 2);
+        } else if (id === "fx_rate") {
+            el.value = value === "" || value == null ? "" : formatDecimalInputDisplay(value, 4);
+        } else {
+            el.value = value;
+        }
+    }
+
+    function onAmountInput(event) {
+        const input = event.target;
+        const oldValue = input.value;
+        const oldPos = input.selectionStart || 0;
+        const formatted = formatAmountInputDisplay(oldValue);
+        input.value = formatted;
+        const newPos = cursorAfterAmountFormat(oldValue, oldPos, formatted);
+        input.setSelectionRange(newPos, newPos);
+        calculate();
+    }
+
+    function onDecimalInput(event) {
+        const input = event.target;
+        let raw = input.value.replace(/[^\d,.]/g, "");
+        const sepIndex = raw.search(/[,.]/);
+        if (sepIndex !== -1) {
+            const intPart = raw.slice(0, sepIndex).replace(/[^\d]/g, "");
+            const fracPart = raw.slice(sepIndex + 1).replace(/[^\d]/g, "");
+            input.value = intPart + "," + fracPart;
+        } else {
+            input.value = raw.replace(/[^\d]/g, "");
+        }
+        calculate();
+    }
+
+    function onDecimalBlur(event) {
+        const input = event.target;
+        if (input.value === "") return;
+        const maxDec = input.id === "fx_rate" ? 4 : 2;
+        input.value = formatDecimalInputDisplay(parseNumberInput(input.value), maxDec);
+    }
 
     function resetToDefaults() {
         Object.keys(defaults).forEach(function (id) {
-            document.getElementById(id).value = defaults[id];
+            setInputValue(id, defaults[id]);
         });
         calculate();
     }
@@ -508,7 +589,7 @@
     function applyFxRate(rate) {
         if (!rate || rate <= 0) return false;
         const rounded = Math.round(rate * 10000) / 10000;
-        document.getElementById("fx_rate").value = String(rounded);
+        setInputValue("fx_rate", rounded);
         calculate();
         return true;
     }
@@ -569,8 +650,6 @@
         return FX_FALLBACK;
     }
 
-    const numberLocale = "de-DE";
-
     function formatNumber(value) {
         return Math.round(value).toLocaleString(numberLocale);
     }
@@ -584,7 +663,10 @@
         if (/^\d{1,3}(\.\d{3})+$/.test(s)) {
             return parseFloat(s.replace(/\./g, "")) || 0;
         }
-        return parseFloat(s) || 0;
+        if (/^\d+\.\d{1,4}$/.test(s)) {
+            return parseFloat(s) || 0;
+        }
+        return parseFloat(s.replace(/\./g, "")) || parseFloat(s) || 0;
     }
 
     function formatCZK(number) {
@@ -659,7 +741,17 @@
         });
     }
 
-    inputIds.forEach(function (id) {
+    amountInputIds.forEach(function (id) {
+        document.getElementById(id).addEventListener("input", onAmountInput);
+    });
+
+    decimalInputIds.forEach(function (id) {
+        const el = document.getElementById(id);
+        el.addEventListener("input", onDecimalInput);
+        el.addEventListener("blur", onDecimalBlur);
+    });
+
+    selectIds.forEach(function (id) {
         const el = document.getElementById(id);
         el.addEventListener("input", calculate);
         el.addEventListener("change", calculate);
