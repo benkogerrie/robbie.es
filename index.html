@@ -1,35 +1,413 @@
-<!DOCTYPE html>
-<html lang="nl">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Robbie Ski Sprint</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Robbie Höll — successful serial entrepreneur, practical problem solver and builder of focused commercial tools.">
+  <title>Robbie Höll — Problems worth solving</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preload" as="image" href="assets/robbie-portrait-980.webp" type="image/webp">
 </head>
 <body>
-  <main class="layout">
-    <h1>Robbie Ski Sprint</h1>
 
-    <section class="hud">
-      <div>Tijd: <span id="timeLeft">30.0</span>s</div>
-      <div>Meters: <span id="distanceLeft">0</span>m</div>
-      <div>Score: <span id="scoreValue">0</span></div>
-      <div>Highscore: <span id="highScoreValue">0</span></div>
-      <div>Status: <span id="statusText">Klaar</span></div>
-    </section>
+<header class="site-header">
+  <div class="container nav">
+    <div class="brand-wrap">
+      <a class="brand" href="index.html">robbie<span>.</span>es</a>
+      <span class="full-name">Robbie Höll</span>
+    </div>
+    <nav class="nav-links" id="navLinks">
+      <a href="#track-record">Track record</a>
+      <a href="#projects">Projects</a>
+      <a href="#process">How I work</a>
+      <a href="#about">About</a>
+    </nav>
+    <a class="btn btn-primary desktop-cta" href="#contact">Bring me a problem</a>
+    <button class="menu-btn" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+  </div>
+</header>
 
-    <canvas id="gameCanvas" width="960" height="540" aria-label="Ski game canvas"></canvas>
+<main>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrows">
+          <span class="pill">Serial entrepreneur</span>
+          <span class="pill">Selected projects</span>
+          <span class="pill">Practical solutions</span>
+        </div>
+        <h1>I built companies by solving what mattered.</h1>
+        <p class="hero-lead">I built and sold successful companies by spotting what could work better — and finding a smart, practical way to fix it.</p>
+        <p class="hero-note">Now I use that experience for selected commercial problems, useful tools and interesting projects — without building another large organisation around them.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">See what I’ve built →</a>
+          <a class="btn btn-secondary" href="#contact">Bring me a problem</a>
+        </div>
+      </div>
+      <div class="portrait-stage">
+        <picture>
+          <source
+            type="image/webp"
+            srcset="assets/robbie-portrait-640.webp 640w, assets/robbie-portrait-980.webp 980w, assets/robbie-portrait.webp 1254w"
+            sizes="(max-width: 650px) 92vw, 490px">
+          <img
+            class="hero-photo"
+            src="assets/robbie-portrait.jpg"
+            width="1254"
+            height="1254"
+            alt="Robbie Höll"
+            fetchpriority="high"
+            decoding="async">
+        </picture>
+        <div class="floating-note">
+          <strong>Based in Czech Republic</strong>
+          <span>Available worldwide for the right project.</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section class="controls">
-      <button id="startButton">Start ronde</button>
-      <p>
-        Doel: haal de finish binnen 30 seconden.<br>
-        Obstakels: boompjes, skiers en sneeuwpoppetjes.<br>
-        Botsen = vallen, opstaan kost tijd en punten.
-      </p>
-    </section>
-  </main>
+  <div class="proof">
+    <div class="container proof-grid">
+      <div class="proof-item">
+        <strong>Several successful exits</strong>
+        <span>Software, technical services and compliance.</span>
+      </div>
+      <div class="proof-item">
+        <strong>19 acquisitions</strong>
+        <span>Founder, buyer and seller.</span>
+      </div>
+      <div class="proof-item">
+        <strong>SaaS sold to Visma</strong>
+        <span>From practical problem to scalable product.</span>
+      </div>
+      <div class="proof-item">
+        <strong>Now: selected projects</strong>
+        <span>Small enough to move fast. Valuable enough to matter.</span>
+      </div>
+    </div>
+  </div>
 
-  <script src="game.js"></script>
+  <section id="track-record">
+    <div class="container track-record">
+      <div>
+        <div class="kicker">Entrepreneurial track record</div>
+        <h2>I built companies first.</h2>
+        <p class="section-intro">For more than twenty years I founded, acquired, improved and sold businesses. The tools below are not the headline of that career. They are the next chapter: smaller, faster projects built with the same commercial judgement and problem-solving approach.</p>
+      </div>
+      <div class="track-card">
+        <h3>Evidence, not a job title.</h3>
+        <div class="track-list">
+          <div class="track-row">
+            <strong>Multiple successful exits</strong>
+            <span>Including software and technical-services businesses.</span>
+          </div>
+          <div class="track-row">
+            <strong>19 acquisitions completed</strong>
+            <span>Experience on both sides of the table.</span>
+          </div>
+          <div class="track-row">
+            <strong>Credit-management SaaS acquired by Visma</strong>
+            <span>A practical commercial problem developed into a scalable product.</span>
+          </div>
+          <div class="track-row">
+            <strong>A national inspection group built and sold</strong>
+            <span>Growth through acquisitions, local entrepreneurship and practical integration.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:34px 0 10px">
+    <div class="container">
+      <div style="max-width:880px;padding:30px 34px;border-left:4px solid var(--blue);background:#fff;border-radius:0 20px 20px 0;box-shadow:0 10px 32px rgba(17,47,88,.06);">
+        <div class="kicker">The next chapter</div>
+        <p style="margin:0;font-size:23px;line-height:1.5;color:var(--navy);font-weight:650;">
+          I used to solve problems inside companies I owned. Now I use that same experience to solve selected problems for others.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="kicker">What I do now</div>
+          <h2>Focused projects. Same way of thinking.</h2>
+          <p class="section-intro">I am no longer building another large company. I now apply the same instinct for spotting bottlenecks and creating practical solutions to smaller, selected projects. The scale is different; the quality of thinking is not.</p>
+        </div>
+      </div>
+      <div class="projects-grid">
+        <article class="project-card featured">
+          <div class="project-visual dark">
+            <div class="mock-top"><span>KvK Signal</span><span>● monitoring</span></div>
+            <div class="mock-list">
+              <div class="mock-row"><span>Selected companies</span><span>24</span></div>
+              <div class="mock-row"><span>Annual accounts watched</span><span>Active</span></div>
+              <div class="mock-row"><span>Last check</span><span>2 min ago</span></div>
+            </div>
+            <div class="phone-alert">
+              <div class="app">Telegram · KvK Signal</div>
+              <strong>New annual accounts filed</strong>
+              <p>Selected company · Financial year 2025</p>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="tag">Monitoring</span>
+              <span class="tag">Telegram</span>
+              <span class="tag">Working prototype</span>
+            </div>
+            <h3>KvK Signal</h3>
+            <p>A Telegram alert when a selected Dutch company files new annual accounts.</p>
+            <a class="link" href="#projects">View the project →</a>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-visual light">
+            <div class="mock-top"><span>AI Product Advice</span><span>•••</span></div>
+            <div class="chat">
+              <div class="bubble user">I need a durable table-tennis bat for a growing player.</div>
+              <div class="bubble ai">Let me narrow that down. How often do they train and what is their current level?</div>
+              <div class="bubble user">Twice a week, intermediate.</div>
+              <div class="bubble ai">Good. I would compare these two setups first, mainly on control and upgrade potential.</div>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="tag">AI</span>
+              <span class="tag">E-commerce</span>
+            </div>
+            <h3>AI Product Advice Chatbot</h3>
+            <p>A product adviser that talks first and recommends second.</p>
+            <a class="link" href="#projects">View the project →</a>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-visual light">
+            <div class="mock-top"><span>Commercial Opportunities</span><span>Today</span></div>
+            <div class="dashboard-metrics">
+              <div class="metric"><small>New signals</small><strong>128</strong></div>
+              <div class="metric"><small>High potential</small><strong>32</strong></div>
+            </div>
+            <div class="chart">
+              <svg viewBox="0 0 300 90" preserveAspectRatio="none" aria-hidden="true">
+                <polyline fill="none" stroke="#0a6ee8" stroke-width="3" points="0,76 32,66 58,71 90,51 123,58 156,39 187,44 220,25 252,37 300,13"/>
+              </svg>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="tag">Signals</span>
+              <span class="tag">Sales</span>
+            </div>
+            <h3>Commercial Opportunities</h3>
+            <p>Company news turned into relevant reasons to act.</p>
+            <a class="link" href="#projects">View the project →</a>
+          </div>
+        </article>
+        <article class="project-card">
+          <div class="project-visual light">
+            <div class="mock-top"><span>Website Opportunity Scanner</span><span>Report</span></div>
+            <div class="scanner">
+              <div class="score"><strong>62</strong></div>
+              <div class="issue-list">
+                <div>Outdated visual design</div>
+                <div>Weak mobile experience</div>
+                <div>Unclear commercial message</div>
+                <div>Slow performance</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="tag">Automation</span>
+              <span class="tag">Lead generation</span>
+            </div>
+            <h3>Website Opportunity Scanner</h3>
+            <p>Find outdated sites and create a credible first redesign concept.</p>
+            <a class="link" href="#projects">View the project →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="process-wrap">
+    <div class="container process-grid">
+      <div>
+        <div class="kicker">How I work</div>
+        <h2>Problem first. Tool second.</h2>
+        <p class="section-intro">AI helps me move quickly, but it is not the starting point. The real work is finding the bottleneck, deciding what matters and reducing the solution to something people will actually use.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <h3>Find the real bottleneck</h3>
+            <p>Separate the visible annoyance from the underlying commercial problem.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <h3>Remove unnecessary complexity</h3>
+            <p>Decide what the solution must do — and what it can safely ignore.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <h3>Build the smallest useful version</h3>
+            <p>Turn the idea into something visible and testable before it becomes a large project.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div>
+            <h3>Test the impact</h3>
+            <p>Does it save time, reveal an opportunity or help someone make a better decision?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="kicker">What interests me</div>
+          <h2>The right kind of problem.</h2>
+          <p class="section-intro">I am not trying to become a large consultancy or software company. I choose projects where sharp thinking and a focused solution can make a disproportionate difference.</p>
+        </div>
+      </div>
+      <div class="criteria">
+        <div class="criterion">
+          <strong>A real problem</strong>
+          <span>Not technology looking for a use case.</span>
+        </div>
+        <div class="criterion">
+          <strong>Clear potential impact</strong>
+          <span>Better timing, less manual work, stronger sales or a better decision.</span>
+        </div>
+        <div class="criterion">
+          <strong>Freedom to think differently</strong>
+          <span>Enough room to challenge the obvious solution.</span>
+        </div>
+        <div class="criterion">
+          <strong>A path to something working</strong>
+          <span>A prototype or useful result, not just a report.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="container beyond">
+      <div class="beyond-card primary">
+        <div class="kicker">Beyond business</div>
+        <h3>Skiing, kiting and teaching people things I love.</h3>
+        <p>I also enjoy practical, hands-on instruction. Private or small-group lessons, focused on confidence, progress and having a good time.</p>
+        <div class="beyond-icons">
+          <div class="beyond-icon">⛷</div>
+          <div class="beyond-icon">🪁</div>
+          <div class="beyond-icon">🚴</div>
+        </div>
+      </div>
+      <div class="beyond-card secondary">
+        <div class="kicker">Personal projects</div>
+        <h3>Not every useful thing needs to become a company.</h3>
+        <p>Some projects are experiments, some help one person and some may become products. The common thread is that they are worth figuring out.</p>
+        <a class="link" href="#contact">Tell me about yours →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container about-grid">
+      <picture>
+        <source
+          type="image/webp"
+          srcset="assets/robbie-portrait-640.webp 640w, assets/robbie-portrait-980.webp 980w, assets/robbie-portrait.webp 1254w"
+          sizes="(max-width: 980px) 92vw, 360px">
+        <img
+          class="about-photo"
+          src="assets/robbie-portrait.jpg"
+          width="1254"
+          height="1254"
+          alt="Robbie Höll"
+          loading="lazy"
+          decoding="async">
+      </picture>
+      <div class="about-copy">
+        <div class="kicker">About Robbie Höll</div>
+        <h2>I enjoyed the solution more than the organisation chart.</h2>
+        <p>I am a serial entrepreneur with several successful exits. But the part I enjoyed most was never managing a large organisation. It was seeing the opportunity, understanding what was really wrong and creating the solution that made the business work.</p>
+        <p>That is the part I now want to share directly: my experience, my way of thinking and the ability to turn a specific problem into something useful.</p>
+        <div class="signature">Robbie</div>
+        <div class="location">
+          <span>Based in Czech Republic</span>
+          <span>Available worldwide</span>
+          <span>info@robbie.es</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="padding-top:20px">
+    <div class="container contact-panel">
+      <div>
+        <div class="kicker">Bring me a problem</div>
+        <h2>What keeps being postponed, missed or handled manually?</h2>
+        <p>Describe the problem and why it matters. I will quickly tell you whether I see a useful direction.</p>
+        <p><strong>Email:</strong> info@robbie.es</p>
+      </div>
+      <form class="form" id="problemForm">
+        <div>
+          <label for="name">Name</label>
+          <input id="name" name="name" required>
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required>
+        </div>
+        <div>
+          <label for="problem">What is the problem?</label>
+          <textarea id="problem" name="problem" required></textarea>
+        </div>
+        <div>
+          <label for="impact">Why does it matter?</label>
+          <textarea id="impact" name="impact"></textarea>
+        </div>
+        <div>
+          <label for="link">Optional link or context</label>
+          <input id="link" name="link" type="url" placeholder="https://">
+        </div>
+        <button class="btn btn-primary" type="submit">Send me the problem →</button>
+        <div class="form-note">This first version opens your email client and prepares a message to info@robbie.es.</div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <a class="brand" href="index.html">robbie<span>.</span>es</a>
+      <div class="full-name" style="margin-top:7px">Robbie Höll</div>
+    </div>
+    <span>© 2026 Robbie Höll. Based in Czech Republic.</span>
+    <div class="footer-links">
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="mailto:info@robbie.es">info@robbie.es</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
 </body>
 </html>
