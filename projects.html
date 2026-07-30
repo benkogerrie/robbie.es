@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Focused commercial projects by Robbie Höll — practical tools and selected problem-solving work.">
   <title>Projects — Robbie Höll</title>
-  <link rel="stylesheet" href="css/styles.css?v=20260730b">
+  <link rel="stylesheet" href="css/projects.css?v=20260730c">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body>
 
-<header class="site-header">
+<header>
   <div class="container nav">
     <div class="brand-wrap">
       <a class="brand" href="index.html">robbie<span>.</span>es</a>
@@ -22,127 +22,115 @@
       <a href="index.html#process">How I work</a>
       <a href="index.html#about">About</a>
     </nav>
-    <a class="btn btn-primary desktop-cta" href="index.html#contact">Bring me a problem</a>
+    <a class="nav-cta" href="index.html#contact">Bring me a problem</a>
     <button class="menu-btn" aria-label="Open menu" onclick="toggleMenu()">☰</button>
   </div>
 </header>
 
-<main>
-  <section class="page-hero">
-    <div class="container">
-      <div class="kicker">What I do now</div>
-      <h1>Focused projects. Same way of thinking.</h1>
-      <p class="section-intro">I am no longer building another large company. I now apply the same instinct for spotting bottlenecks and creating practical solutions to smaller, selected projects. The scale is different; the quality of thinking is not.</p>
-    </div>
-  </section>
+<section class="hero">
+  <div class="container">
+    <div class="eyebrow">Selected projects</div>
+    <h1>Clear problems.<br>Focused solutions.</h1>
+    <p>Every project is shown in the same way: the problem I noticed, the solution I built, and where it stands today.</p>
+  </div>
+</section>
 
-  <section class="projects-page">
-    <div class="container">
-      <div class="projects-grid">
-        <article class="project-card featured" id="kvk-signal">
-          <div class="project-visual dark">
-            <div class="mock-top"><span>KvK Signal</span><span>● monitoring</span></div>
-            <div class="mock-list">
-              <div class="mock-row"><span>Selected companies</span><span>24</span></div>
-              <div class="mock-row"><span>Annual accounts watched</span><span>Active</span></div>
-              <div class="mock-row"><span>Last check</span><span>2 min ago</span></div>
-            </div>
-            <div class="phone-alert">
-              <div class="app">Telegram · KvK Signal</div>
-              <strong>New annual accounts filed</strong>
-              <p>Selected company · Financial year 2025</p>
-            </div>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span class="tag">Monitoring</span>
-              <span class="tag">Telegram</span>
-              <span class="tag">Working prototype</span>
-            </div>
-            <h3>KvK Signal</h3>
-            <p>A Telegram alert when a selected Dutch company files new annual accounts.</p>
-          </div>
-        </article>
-        <article class="project-card" id="ai-product-advice">
-          <div class="project-visual light">
-            <div class="mock-top"><span>AI Product Advice</span><span>•••</span></div>
-            <div class="chat">
-              <div class="bubble user">I need a durable table-tennis bat for a growing player.</div>
-              <div class="bubble ai">Let me narrow that down. How often do they train and what is their current level?</div>
-              <div class="bubble user">Twice a week, intermediate.</div>
-              <div class="bubble ai">Good. I would compare these two setups first, mainly on control and upgrade potential.</div>
-            </div>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span class="tag">AI</span>
-              <span class="tag">E-commerce</span>
-            </div>
-            <h3>AI Product Advice Chatbot</h3>
-            <p>A product adviser that talks first and recommends second.</p>
-          </div>
-        </article>
-        <article class="project-card" id="commercial-opportunities">
-          <div class="project-visual light">
-            <div class="mock-top"><span>Commercial Opportunities</span><span>Today</span></div>
-            <div class="dashboard-metrics">
-              <div class="metric"><small>New signals</small><strong>128</strong></div>
-              <div class="metric"><small>High potential</small><strong>32</strong></div>
-            </div>
-            <div class="chart">
-              <svg viewBox="0 0 300 90" preserveAspectRatio="none" aria-hidden="true">
-                <polyline fill="none" stroke="#0a6ee8" stroke-width="3" points="0,76 32,66 58,71 90,51 123,58 156,39 187,44 220,25 252,37 300,13"/>
-              </svg>
-            </div>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span class="tag">Signals</span>
-              <span class="tag">Sales</span>
-            </div>
-            <h3>Commercial Opportunities</h3>
-            <p>Company news turned into relevant reasons to act.</p>
-          </div>
-        </article>
-        <article class="project-card" id="website-opportunity-scanner">
-          <div class="project-visual light">
-            <div class="mock-top"><span>Website Opportunity Scanner</span><span>Report</span></div>
-            <div class="scanner">
-              <div class="score"><strong>62</strong></div>
-              <div class="issue-list">
-                <div>Outdated visual design</div>
-                <div>Weak mobile experience</div>
-                <div>Unclear commercial message</div>
-                <div>Slow performance</div>
-              </div>
-            </div>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span class="tag">Automation</span>
-              <span class="tag">Lead generation</span>
-            </div>
-            <h3>Website Opportunity Scanner</h3>
-            <p>Find outdated sites and create a credible first redesign concept.</p>
-          </div>
-        </article>
+<main class="container grid">
+
+  <article class="card" id="kvk-signal">
+    <div class="visual dark">
+      <div class="mock-head"><span>KvK Signal</span><span class="mock-subtle">Monitoring</span></div>
+      <div class="signal-list">
+        <div class="signal-row"><span>Selected companies</span><span>24</span></div>
+        <div class="signal-row"><span>Annual accounts</span><span>Active</span></div>
+      </div>
+      <div class="notification">
+        <small>Telegram · KvK Signal</small>
+        <strong>New annual accounts filed</strong>
+        <p>Selected company · Financial year 2025</p>
       </div>
     </div>
-  </section>
+    <div class="content">
+      <div class="topline"><span class="category">Monitoring tool</span><span class="status">Working prototype</span></div>
+      <h2>KvK Signal</h2>
+      <div class="detail"><span class="detail-label">Problem</span><p>Manually checking whether a selected company has filed new annual accounts.</p></div>
+      <div class="detail"><span class="detail-label">Solution</span><p>A monitoring tool that sends the filing directly to Telegram.</p></div>
+    </div>
+  </article>
 
-  <section class="projects-cta">
-    <div class="container contact-panel">
+  <article class="card" id="ai-product-advice">
+    <div class="visual">
+      <div class="mock-head"><span>AI Product Advice</span><span class="mock-muted">Conversation</span></div>
+      <div class="chat">
+        <div class="bubble user">I need a durable product for a growing player.</div>
+        <div class="bubble ai">How often do they train and what is their current level?</div>
+        <div class="bubble user">Twice a week, intermediate.</div>
+        <div class="bubble ai">Then I would compare these two options first, mainly on control and upgrade potential.</div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="topline"><span class="category">AI assistant</span><span class="status">Working prototype</span></div>
+      <h2>AI Product Advice Chatbot</h2>
+      <div class="detail"><span class="detail-label">Problem</span><p>Online shoppers receive recommendations before their real needs are understood.</p></div>
+      <div class="detail"><span class="detail-label">Solution</span><p>A conversational adviser that asks focused questions before recommending products.</p></div>
+    </div>
+  </article>
+
+  <article class="card" id="commercial-opportunities">
+    <div class="visual">
+      <div class="mock-head"><span>Commercial Opportunities</span><span class="mock-muted">Today</span></div>
+      <div class="metrics">
+        <div class="metric"><span>New signals</span><strong>128</strong></div>
+        <div class="metric"><span>High potential</span><strong>32</strong></div>
+      </div>
+      <div class="chart">
+        <svg viewBox="0 0 500 120" preserveAspectRatio="none" aria-hidden="true">
+          <polyline points="0,96 45,86 88,91 136,70 178,76 223,54 270,61 320,37 370,47 420,28 500,18" fill="none" stroke="#0a84ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+    <div class="content">
+      <div class="topline"><span class="category">Commercial intelligence</span><span class="status">In development</span></div>
+      <h2>Commercial Opportunities Dashboard</h2>
+      <div class="detail"><span class="detail-label">Problem</span><p>Relevant company news is scattered, making commercial opportunities easy to miss.</p></div>
+      <div class="detail"><span class="detail-label">Solution</span><p>A dashboard that turns signals into clear opportunities and suggested outreach.</p></div>
+    </div>
+  </article>
+
+  <article class="card" id="website-opportunity-scanner">
+    <div class="visual">
+      <div class="mock-head"><span>Website Opportunity Scanner</span><span class="mock-muted">Report</span></div>
+      <div class="scanner">
+        <div class="score"><strong>62</strong></div>
+        <div class="issues">
+          <div>Outdated visual design</div>
+          <div>Weak mobile experience</div>
+          <div>Unclear commercial message</div>
+          <div>Slow performance</div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="topline"><span class="category">Workflow automation</span><span class="status">Working workflow</span></div>
+      <h2>Website Opportunity Scanner</h2>
+      <div class="detail"><span class="detail-label">Problem</span><p>Manually reviewing thousands of company websites is too slow.</p></div>
+      <div class="detail"><span class="detail-label">Solution</span><p>An automated workflow that identifies outdated sites and creates a first redesign concept.</p></div>
+    </div>
+  </article>
+
+</main>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-card">
       <div>
-        <div class="kicker">Bring me a problem</div>
         <h2>Working on something similar?</h2>
         <p>Describe the problem and why it matters. I will quickly tell you whether I see a useful direction.</p>
       </div>
-      <div class="hero-actions" style="align-self:center">
-        <a class="btn btn-primary" href="index.html#contact">Bring me a problem →</a>
-      </div>
+      <a class="btn-primary" href="index.html#contact">Bring me a problem →</a>
     </div>
-  </section>
-</main>
+  </div>
+</section>
 
 <footer>
   <div class="container footer-grid">
@@ -159,6 +147,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=20260730b" defer></script>
+<script src="js/main.js?v=20260730c" defer></script>
 </body>
 </html>
