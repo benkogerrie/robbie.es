@@ -191,3 +191,10 @@ body{font-size:16px;letter-spacing:-.05px}
 .btn{letter-spacing:-.1px}
 .kicker{letter-spacing:.095em}
 .project-body p,.section-intro,.about-copy p,.contact-panel p{line-height:1.62}
+
+.page-hero{padding:72px 0 28px;background:linear-gradient(180deg,#f6faff,var(--warm))}
+.page-hero h1{margin:0 0 18px;font:720 clamp(40px,5vw,64px)/1.05 var(--serif);letter-spacing:-1.8px;color:var(--navy);max-width:820px}
+.projects-page{padding:28px 0 72px}
+.projects-cta{padding:0 0 88px}
+.projects-teaser{padding:72px 0}
+.nav-links a[aria-current="page"]{color:var(--blue)}
