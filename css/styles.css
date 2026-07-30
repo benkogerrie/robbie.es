@@ -20,7 +20,7 @@
 html{scroll-behavior:smooth}
 body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--warm);line-height:1.55}
 a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
+img{max-width:100%;height:auto;display:block}
 button,input,textarea{font:inherit}
 .container{width:min(1180px,calc(100% - 40px));margin:auto}
 .site-header{position:sticky;top:0;z-index:20;background:rgba(251,250,246,.91);backdrop-filter:blur(18px);border-bottom:1px solid rgba(223,230,240,.95)}
@@ -49,10 +49,11 @@ h1{margin:0 0 24px;font:720 clamp(54px,6.4vw,84px)/.98 var(--serif);color:var(--
 .hero-lead{font-size:21px;line-height:1.48;color:#40506d;max-width:690px;letter-spacing:-.15px}
 .hero-note{margin-top:18px;font-size:16px;color:var(--muted);max-width:650px}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
-.portrait-stage{position:relative;min-height:545px;display:flex;align-items:flex-end;justify-content:center}
-.portrait-stage:before{content:"";position:absolute;width:480px;height:480px;border-radius:50%;background:linear-gradient(145deg,#dff4f9,#edf5ff 48%,#f9e9df);filter:blur(.2px)}
-.portrait-stage:after{content:"";position:absolute;width:390px;height:390px;border:1px solid rgba(10,110,232,.18);border-radius:50%;transform:translate(48px,-36px)}
-.hero-photo{position:relative;z-index:2;width:min(100%,490px);aspect-ratio:1/1;object-fit:cover;border-radius:34px;box-shadow:var(--shadow)}
+.portrait-stage{position:relative;display:flex;align-items:flex-end;justify-content:center}
+.portrait-stage:before{content:"";position:absolute;width:min(100%,480px);aspect-ratio:1;border-radius:50%;background:linear-gradient(145deg,#dff4f9,#edf5ff 48%,#f9e9df);filter:blur(.2px)}
+.portrait-stage:after{content:"";position:absolute;width:min(82%,390px);aspect-ratio:1;border:1px solid rgba(10,110,232,.18);border-radius:50%;transform:translate(48px,-36px)}
+.portrait-stage picture{position:relative;z-index:2;width:min(100%,490px);display:block}
+.hero-photo{position:relative;z-index:2;width:100%;aspect-ratio:1/1;height:auto;max-height:490px;object-fit:cover;object-position:center top;border-radius:34px;box-shadow:var(--shadow)}
 .floating-note{position:absolute;z-index:3;right:-15px;bottom:50px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px;box-shadow:var(--shadow);max-width:230px}
 .floating-note strong{display:block;color:var(--navy);margin-bottom:3px}
 .floating-note span{color:var(--muted);font-size:13px}
@@ -98,7 +99,7 @@ h2{margin:0;font:720 clamp(36px,4vw,52px)/1.08 var(--serif);letter-spacing:-1.4p
 .metric strong{font-size:28px;color:var(--navy)}
 .chart{margin-top:14px;height:92px;border-radius:12px;background:#fff;border:1px solid var(--line);overflow:hidden}
 .chart svg{display:block;width:100%;height:100%}
-picture{display:contents}
+.about-grid > picture{display:block;width:100%}
 .scanner{display:grid;grid-template-columns:100px 1fr;gap:15px;align-items:center;margin-top:20px}
 .score{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#22b8a0 0 62%,#e4ebf4 62%);position:relative}
 .score:before{content:"";position:absolute;inset:11px;background:#fff;border-radius:50%}
@@ -136,7 +137,7 @@ picture{display:contents}
 .beyond-icons{display:flex;gap:14px;margin-top:28px}
 .beyond-icon{width:54px;height:54px;border-radius:17px;background:#fff;display:grid;place-items:center;font-size:25px;box-shadow:0 10px 28px rgba(22,52,91,.08)}
 .about-grid{display:grid;grid-template-columns:.72fr 1.28fr;gap:48px;align-items:center}
-.about-photo{border-radius:30px;box-shadow:var(--shadow)}
+.about-photo{width:100%;aspect-ratio:1/1;height:auto;object-fit:cover;object-position:center top;border-radius:30px;box-shadow:var(--shadow)}
 .about-copy p{font-size:17px;color:var(--muted)}
 .signature{font:italic 54px/1 "Brush Script MT","Segoe Script",cursive;color:var(--navy);margin:24px 0 8px}
 .location{color:var(--muted);display:flex;gap:20px;flex-wrap:wrap;font-weight:720}
