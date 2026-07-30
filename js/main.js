@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
 
       const data = new FormData(form);
-      // Empty optional URL fields trip some validators; send blank instead.
       if (!data.get("link")) data.set("link", "");
 
       status.textContent = "Sending…";
