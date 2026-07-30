@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Robbie Höll — successful serial entrepreneur, practical problem solver and builder of focused commercial tools.">
   <title>Robbie Höll — Problems worth solving</title>
-  <link rel="stylesheet" href="css/styles.css?v=20260730b">
+  <link rel="stylesheet" href="css/styles.css?v=20260730d">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preload" as="image" href="assets/robbie-portrait-980.webp" type="image/webp">
 </head>
 <body>
 
-<header class="site-header">
+<header>
   <div class="container nav">
     <div class="brand-wrap">
       <a class="brand" href="index.html">robbie<span>.</span>es</a>
@@ -23,29 +23,25 @@
       <a href="#process">How I work</a>
       <a href="#about">About</a>
     </nav>
-    <a class="btn btn-primary desktop-cta" href="#contact">Bring me a problem</a>
+    <a class="nav-cta" href="#contact">Bring me a problem</a>
     <button class="menu-btn" aria-label="Open menu" onclick="toggleMenu()">☰</button>
   </div>
 </header>
 
 <main>
-  <section class="hero">
-    <div class="container hero-grid">
+  <section class="home-hero">
+    <div class="container home-hero-grid">
       <div>
-        <div class="eyebrows">
-          <span class="pill">Serial entrepreneur</span>
-          <span class="pill">Selected projects</span>
-          <span class="pill">Practical solutions</span>
-        </div>
+        <div class="eyebrow">Serial entrepreneur · Selected projects</div>
         <h1>I built companies by solving what mattered.</h1>
-        <p class="hero-lead">I built and sold successful companies by spotting what could work better — and finding a smart, practical way to fix it.</p>
-        <p class="hero-note">Now I use that experience for selected commercial problems, useful tools and interesting projects — without building another large organisation around them.</p>
+        <p class="lead">I built and sold successful companies by spotting what could work better — and finding a smart, practical way to fix it.</p>
+        <p class="note">Now I use that experience for selected commercial problems, useful tools and interesting projects — without building another large organisation around them.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="projects.html">See what I’ve built →</a>
           <a class="btn btn-secondary" href="#contact">Bring me a problem</a>
         </div>
       </div>
-      <div class="portrait-stage">
+      <div class="portrait-wrap">
         <picture>
           <source
             type="image/webp"
@@ -89,14 +85,14 @@
     </div>
   </div>
 
-  <section id="track-record">
-    <div class="container track-record">
+  <section class="section" id="track-record">
+    <div class="container track-grid">
       <div>
         <div class="kicker">Entrepreneurial track record</div>
         <h2>I built companies first.</h2>
         <p class="section-intro">For more than twenty years I founded, acquired, improved and sold businesses. The projects I work on now are not the headline of that career. They are the next chapter: smaller, faster projects built with the same commercial judgement and problem-solving approach.</p>
       </div>
-      <div class="track-card">
+      <div class="panel">
         <h3>Evidence, not a job title.</h3>
         <div class="track-list">
           <div class="track-row">
@@ -120,20 +116,18 @@
     </div>
   </section>
 
-  <section style="padding:34px 0 10px">
+  <section class="quote-band">
     <div class="container">
-      <div style="max-width:880px;padding:30px 34px;border-left:4px solid var(--blue);background:#fff;border-radius:0 20px 20px 0;box-shadow:0 10px 32px rgba(17,47,88,.06);">
+      <div class="quote-card">
         <div class="kicker">The next chapter</div>
-        <p style="margin:0;font-size:23px;line-height:1.5;color:var(--navy);font-weight:650;">
-          I used to solve problems inside companies I owned. Now I use that same experience to solve selected problems for others.
-        </p>
+        <p>I used to solve problems inside companies I owned. Now I use that same experience to solve selected problems for others.</p>
       </div>
     </div>
   </section>
 
-  <section class="projects-teaser">
+  <section class="section">
     <div class="container">
-      <div class="section-head">
+      <div class="teaser-row">
         <div>
           <div class="kicker">What I do now</div>
           <h2>Focused projects. Same way of thinking.</h2>
@@ -144,7 +138,7 @@
     </div>
   </section>
 
-  <section id="process" class="process-wrap">
+  <section class="section" id="process">
     <div class="container process-grid">
       <div>
         <div class="kicker">How I work</div>
@@ -184,15 +178,11 @@
     </div>
   </section>
 
-  <section>
+  <section class="section">
     <div class="container">
-      <div class="section-head">
-        <div>
-          <div class="kicker">What interests me</div>
-          <h2>The right kind of problem.</h2>
-          <p class="section-intro">I am not trying to become a large consultancy or software company. I choose projects where sharp thinking and a focused solution can make a disproportionate difference.</p>
-        </div>
-      </div>
+      <div class="kicker">What interests me</div>
+      <h2>The right kind of problem.</h2>
+      <p class="section-intro">I am not trying to become a large consultancy or software company. I choose projects where sharp thinking and a focused solution can make a disproportionate difference.</p>
       <div class="criteria">
         <div class="criterion">
           <strong>A real problem</strong>
@@ -214,9 +204,9 @@
     </div>
   </section>
 
-  <section style="padding-top:0">
+  <section class="section" style="padding-top:0">
     <div class="container beyond">
-      <div class="beyond-card primary">
+      <div class="beyond-card">
         <div class="kicker">Beyond business</div>
         <h3>Skiing, kiting and teaching people things I love.</h3>
         <p>I also enjoy practical, hands-on instruction. Private or small-group lessons, focused on confidence, progress and having a good time.</p>
@@ -226,7 +216,7 @@
           <div class="beyond-icon">🚴</div>
         </div>
       </div>
-      <div class="beyond-card secondary">
+      <div class="beyond-card">
         <div class="kicker">Personal projects</div>
         <h3>Not every useful thing needs to become a company.</h3>
         <p>Some projects are experiments, some help one person and some may become products. The common thread is that they are worth figuring out.</p>
@@ -235,22 +225,24 @@
     </div>
   </section>
 
-  <section id="about">
+  <section class="section" id="about">
     <div class="container about-grid">
-      <picture>
-        <source
-          type="image/webp"
-          srcset="assets/robbie-portrait-640.webp 640w, assets/robbie-portrait-980.webp 980w, assets/robbie-portrait.webp 1254w"
-          sizes="(max-width: 980px) 92vw, 360px">
-        <img
-          class="about-photo"
-          src="assets/robbie-portrait.jpg"
-          width="1254"
-          height="1254"
-          alt="Robbie Höll"
-          loading="lazy"
-          decoding="async">
-      </picture>
+      <div class="about-photo-wrap">
+        <picture>
+          <source
+            type="image/webp"
+            srcset="assets/robbie-portrait-640.webp 640w, assets/robbie-portrait-980.webp 980w, assets/robbie-portrait.webp 1254w"
+            sizes="(max-width: 980px) 92vw, 360px">
+          <img
+            class="about-photo"
+            src="assets/robbie-portrait.jpg"
+            width="1254"
+            height="1254"
+            alt="Robbie Höll"
+            loading="lazy"
+            decoding="async">
+        </picture>
+      </div>
       <div class="about-copy">
         <div class="kicker">About Robbie Höll</div>
         <h2>I enjoyed the solution more than the organisation chart.</h2>
@@ -266,41 +258,42 @@
     </div>
   </section>
 
-  <section id="contact" style="padding-top:20px">
-    <div class="container contact-panel">
-      <div>
-        <div class="kicker">Bring me a problem</div>
-        <h2>What keeps being postponed, missed or handled manually?</h2>
-        <p>Describe the problem and why it matters. I will quickly tell you whether I see a useful direction.</p>
-        <p><strong>Email:</strong> info@robbie.es</p>
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-panel">
+        <div>
+          <div class="kicker">Bring me a problem</div>
+          <h2>What keeps being postponed, missed or handled manually?</h2>
+          <p>Describe the problem and why it matters. I will quickly tell you whether I see a useful direction.</p>
+        </div>
+        <form class="form" id="problemForm" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="f1d5eb19-cb3a-431c-a717-d96910f5c5bf">
+          <input type="hidden" name="subject" value="A problem worth solving — robbie.es">
+          <input type="checkbox" name="botcheck" class="botcheck" tabindex="-1" autocomplete="off">
+          <div>
+            <label for="name">Name</label>
+            <input id="name" name="name" required>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required>
+          </div>
+          <div>
+            <label for="problem">What is the problem?</label>
+            <textarea id="problem" name="problem" required></textarea>
+          </div>
+          <div>
+            <label for="impact">Why does it matter?</label>
+            <textarea id="impact" name="impact"></textarea>
+          </div>
+          <div>
+            <label for="link">Optional link or context</label>
+            <input id="link" name="link" type="text" inputmode="url" placeholder="https://">
+          </div>
+          <button class="btn btn-primary" type="submit" id="formSubmit">Send me the problem →</button>
+          <div class="form-note" id="formStatus">I’ll reply by email if I see a useful direction.</div>
+        </form>
       </div>
-      <form class="form" id="problemForm" action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="f1d5eb19-cb3a-431c-a717-d96910f5c5bf">
-        <input type="hidden" name="subject" value="A problem worth solving — robbie.es">
-        <input type="checkbox" name="botcheck" class="botcheck" tabindex="-1" autocomplete="off">
-        <div>
-          <label for="name">Name</label>
-          <input id="name" name="name" required>
-        </div>
-        <div>
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" required>
-        </div>
-        <div>
-          <label for="problem">What is the problem?</label>
-          <textarea id="problem" name="problem" required></textarea>
-        </div>
-        <div>
-          <label for="impact">Why does it matter?</label>
-          <textarea id="impact" name="impact"></textarea>
-        </div>
-        <div>
-          <label for="link">Optional link or context</label>
-          <input id="link" name="link" type="text" inputmode="url" placeholder="https://">
-        </div>
-        <button class="btn btn-primary" type="submit" id="formSubmit">Send me the problem →</button>
-        <div class="form-note" id="formStatus">I’ll reply by email if I see a useful direction.</div>
-      </form>
     </div>
   </section>
 </main>
@@ -320,6 +313,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=20260730b" defer></script>
+<script src="js/main.js?v=20260730d" defer></script>
 </body>
 </html>
