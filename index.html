@@ -273,7 +273,10 @@
         <p>Describe the problem and why it matters. I will quickly tell you whether I see a useful direction.</p>
         <p><strong>Email:</strong> info@robbie.es</p>
       </div>
-      <form class="form" id="problemForm">
+      <form class="form" id="problemForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="f1d5eb19-cb3a-431c-a717-d96910f5c5bf">
+        <input type="hidden" name="subject" value="A problem worth solving — robbie.es">
+        <input type="checkbox" name="botcheck" class="botcheck" tabindex="-1" autocomplete="off">
         <div>
           <label for="name">Name</label>
           <input id="name" name="name" required>
@@ -294,8 +297,8 @@
           <label for="link">Optional link or context</label>
           <input id="link" name="link" type="url" placeholder="https://">
         </div>
-        <button class="btn btn-primary" type="submit">Send me the problem →</button>
-        <div class="form-note">This first version opens your email client and prepares a message to info@robbie.es.</div>
+        <button class="btn btn-primary" type="submit" id="formSubmit">Send me the problem →</button>
+        <div class="form-note" id="formStatus">I’ll reply by email if I see a useful direction.</div>
       </form>
     </div>
   </section>

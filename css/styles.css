@@ -150,6 +150,9 @@ h2{margin:0;font:720 clamp(36px,4vw,52px)/1.08 var(--serif);letter-spacing:-1.4p
 .form input:focus,.form textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(10,110,232,.1)}
 .form textarea{min-height:132px;resize:vertical}
 .form-note{font-size:12px;color:var(--muted)}
+.form-status.is-success{color:#0f7a4c;font-weight:750}
+.form-status.is-error{color:#b42318;font-weight:750}
+.botcheck{display:none!important;position:absolute;left:-9999px;opacity:0;pointer-events:none}
 footer{border-top:1px solid var(--line);padding:34px 0 44px;background:#fff}
 .footer-grid{display:flex;justify-content:space-between;align-items:center;gap:24px;color:var(--muted);font-size:14px}
 .footer-links{display:flex;gap:24px}
