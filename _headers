@@ -1,0 +1,15 @@
+/*
+  Cache-Control headers for Cloudflare Pages / compatible hosts.
+  Keeps HTML fresh so CSS/HTML cannot drift after deploys.
+*/
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/css/*
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/assets/*
+  Cache-Control: public, max-age=604800, must-revalidate
