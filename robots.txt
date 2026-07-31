@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
-
 Disallow: /TRL/
+
+User-agent: Googlebot-Image
+Disallow: /assets/robbie-portrait
