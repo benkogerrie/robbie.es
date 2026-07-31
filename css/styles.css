@@ -139,8 +139,8 @@ header{
 .hero{padding:72px 0 56px}
 .hero-grid{
   display:grid;
-  grid-template-columns:minmax(0,1.05fr) minmax(280px,520px);
-  gap:56px;
+  grid-template-columns:minmax(0,1.25fr) minmax(220px,320px);
+  gap:44px;
   align-items:center;
 }
 .hero-meta{
@@ -184,7 +184,7 @@ header{
 .portrait-wrap{
   position:relative;
   width:100%;
-  max-width:520px;
+  max-width:320px;
   justify-self:end;
 }
 .portrait-wrap::before{
