@@ -116,7 +116,7 @@ header{
 .grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:28px;
+  gap:36px;
   padding-bottom:72px;
   align-items:stretch;
 }
@@ -130,7 +130,30 @@ header{
   border-radius:var(--radius);
   background:var(--surface);
   box-shadow:var(--shadow);
+  transition:transform .2s ease,box-shadow .2s ease;
 }
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 48px rgba(0,0,0,.1);
+}
+.card.tone-lead{
+  grid-column:1 / -1;
+  display:grid;
+  grid-template-columns:1.05fr 1fr;
+  border-color:rgba(11,42,88,.14);
+  box-shadow:0 16px 50px rgba(16,40,80,.1);
+  border-top:4px solid #0b69e3;
+}
+.card.tone-lead .visual,
+.card.tone-lead .content{
+  height:auto;
+  flex:none;
+  min-height:100%;
+}
+.card.tone-navy{border-top:4px solid #173654}
+.card.tone-sky{border-top:4px solid #0a84ff}
+.card.tone-slate{border-top:4px solid #6e7f96}
+.card.tone-warm{border-top:4px solid #c4a484}
 .visual{
   height:300px;
   flex:0 0 300px;
@@ -142,6 +165,32 @@ header{
 .visual.dark{
   background:linear-gradient(145deg,#101820,#173654);
   color:#fff;
+}
+.visual-lead{
+  background:linear-gradient(145deg,#0b2a58,#134a86);
+  color:#fff;
+  border-bottom:0;
+}
+.visual-sky{
+  background:linear-gradient(160deg,#eef6ff,#dcecff);
+}
+.visual-slate{
+  background:linear-gradient(160deg,#f2f4f7,#e4e9ef);
+}
+.visual-warm{
+  background:linear-gradient(160deg,#fbf7f2,#f0e6da);
+}
+.tone-sky .content{background:#fcfdff}
+.tone-slate .content{background:#fbfcfd}
+.tone-warm .content{background:#fffcf9}
+.tone-navy .category{color:#173654}
+.tone-sky .category{color:#0a6ee8}
+.tone-slate .category{color:#536479}
+.tone-warm .category{color:#8a6a45}
+.tone-lead .category{color:#0b69e3}
+.tone-lead .status{
+  background:#eaf3ff;
+  color:#0b69e3;
 }
 .mock-head{
   display:flex;
@@ -421,6 +470,14 @@ footer{
   .hero{padding-top:82px}
   .grid{grid-template-columns:1fr}
   .card{min-height:auto}
+  .card.tone-lead{
+    grid-column:auto;
+    grid-template-columns:1fr;
+  }
+  .card.tone-lead .visual{
+    height:300px;
+    flex:0 0 300px;
+  }
   .cta-card{flex-direction:column;align-items:flex-start;padding:32px}
 }
 @media(max-width:520px){
