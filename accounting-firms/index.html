@@ -101,26 +101,35 @@
     .overview-head{
       display:flex;
       justify-content:space-between;
-      align-items:center;
+      align-items:flex-start;
+      gap:20px;
       padding:18px 28px;
       border-bottom:1px solid rgba(255,255,255,.08);
     }
+    .overview-titles{display:grid;gap:4px}
     .overview-head strong{
       font-size:15px;
       font-weight:650;
       letter-spacing:-.01em;
     }
-    .overview-head span{
-      color:rgba(255,255,255,.6);
+    .overview-head .overview-coverage{
+      color:rgba(255,255,255,.78);
+      font-size:14px;
+      font-weight:650;
+    }
+    .overview-head .overview-note{
+      color:rgba(255,255,255,.55);
       font-size:13px;
       font-weight:600;
+      white-space:nowrap;
     }
     .overview-grid{
       display:grid;
       grid-template-columns:1.02fr .98fr;
+      align-items:start;
     }
     .map-col{
-      padding:28px;
+      padding:18px 20px 22px;
       border-right:1px solid rgba(255,255,255,.08);
     }
     .panel-label{
@@ -129,27 +138,14 @@
       font-weight:650;
       letter-spacing:.01em;
     }
-    .map-col h2{
-      margin:10px 0 4px;
-      font-size:clamp(28px,3.2vw,34px);
-      line-height:1.15;
-      letter-spacing:-.03em;
-      font-weight:700;
-      color:#fff;
-    }
-    .map-col p{
-      margin:0;
-      color:rgba(255,255,255,.7);
-      font-size:14px;
-    }
     .map-stage{
-      margin-top:14px;
-      min-height:500px;
+      margin-top:0;
+      min-height:0;
       display:grid;
-      place-items:center;
+      place-items:start center;
       position:relative;
     }
-    .map-stage svg{width:100%;max-width:440px}
+    .map-stage svg{width:100%;max-width:420px;display:block}
     .nl-main,.nl-island{fill:#1a3a5c;stroke:#7eb0ff;stroke-width:2;stroke-linejoin:round}
     .nl-water{fill:#0b1622;stroke:#5a87b8;stroke-width:1.4;stroke-linejoin:round}
     .dot{fill:#9ec4ff;opacity:.85}
@@ -164,8 +160,8 @@
       filter:blur(18px);
     }
 
-    .data-col{padding:28px}
-    .bars{display:grid;gap:14px;margin-top:18px}
+    .data-col{padding:18px 28px 28px}
+    .bars{display:grid;gap:14px;margin-top:14px}
     .bar-row{
       display:grid;
       grid-template-columns:160px 1fr 54px;
@@ -192,7 +188,7 @@
       margin-top:22px;
     }
     .mini-card{
-      min-height:208px;
+      min-height:0;
       padding:16px 18px;
       border-radius:16px;
       background:rgba(255,255,255,.055);
@@ -224,7 +220,7 @@
     .donut{
       position:relative;
       width:128px;height:128px;
-      margin:18px auto 0;
+      margin:22px auto 8px;
       border-radius:50%;
       background:conic-gradient(#0b69e3 0 62%, #3d5f86 62% 86%, #7f9aba 86% 95%, rgba(255,255,255,.35) 95%);
     }
@@ -243,32 +239,12 @@
       font-size:15px;
       color:#fff;
     }
-    .result-box{
-      margin-top:14px;
-      padding:16px 18px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.06);
-    }
-    .result-box small{
-      display:block;
-      color:rgba(255,255,255,.65);
-      font-size:11px;
-      font-weight:650;
-      margin-bottom:6px;
-    }
-    .result-box strong{
-      display:block;
-      font-size:30px;
-      line-height:1;
-      letter-spacing:-.04em;
-      margin-bottom:6px;
-    }
-    .result-box p{
+    .donut-caption{
       margin:0;
-      color:rgba(255,255,255,.72);
-      font-size:13px;
-      line-height:1.45;
+      text-align:center;
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      line-height:1.4;
     }
 
     .story{
@@ -466,7 +442,8 @@
       .value-grid{grid-template-columns:1fr}
       .decision{flex-direction:column;align-items:flex-start}
       .case-cta{grid-template-columns:1fr}
-      .map-stage{min-height:420px}
+      .overview-head{flex-direction:column;align-items:flex-start}
+      .overview-note{white-space:normal}
     }
   </style>
 </head>
@@ -524,16 +501,15 @@
 
   <section class="overview" aria-label="Case overview dashboard">
     <div class="overview-head">
-      <strong>Accounting firms market scanner</strong>
-      <span>Executive overview</span>
+      <div class="overview-titles">
+        <strong>Accounting firms market scanner</strong>
+        <div class="overview-coverage">Market coverage — Netherlands</div>
+      </div>
+      <span class="overview-note">≈ 4,500 firms mapped · 1 dot = 1 firm</span>
     </div>
 
     <div class="overview-grid">
       <div class="map-col">
-        <div class="panel-label">Market coverage</div>
-        <h2>Netherlands</h2>
-        <p>≈ 4,500 firms mapped · 1 dot = 1 firm</p>
-
         <div class="map-stage">
           <div class="map-glow"></div>
           <svg viewBox="0 0 430 620" role="img" aria-label="Kaart van Nederland met vestigingen van accountantskantoren">
@@ -722,11 +698,7 @@
           <div class="mini-card">
             <h3>Market structure</h3>
             <div class="donut"></div>
-            <div class="result-box">
-              <small>Recommendation</small>
-              <strong>No-go</strong>
-              <p>Too few attractive targets at meaningful scale.</p>
-            </div>
+            <p class="donut-caption">Long tail of small owner-led firms</p>
           </div>
         </div>
       </div>
