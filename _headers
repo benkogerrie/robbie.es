@@ -1,19 +1,13 @@
-# Cache and robots headers (Cloudflare Pages / compatible hosts)
+# Cache headers (Cloudflare Pages / compatible hosts)
 
 /
   Cache-Control: public, max-age=0, must-revalidate
-  X-Robots-Tag: noindex, follow, noimageindex
 
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
-  X-Robots-Tag: noindex, follow, noimageindex
 
 /css/*
   Cache-Control: public, max-age=86400, must-revalidate
 
 /assets/*
   Cache-Control: public, max-age=604800, must-revalidate
-  X-Robots-Tag: noindex, noimageindex
-
-/assets/robbie-portrait*
-  X-Robots-Tag: noindex, noimageindex
