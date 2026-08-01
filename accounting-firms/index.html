@@ -6,27 +6,17 @@
   <meta name="description" content="Business use case by Robbie Höll: mapping 4,500 Dutch accounting firms to test a buy-and-build thesis.">
   <meta name="robots" content="noindex, follow, noimageindex, max-image-preview:none">
   <title>Business use case — Accounting firms buy-and-build</title>
-  <link rel="stylesheet" href="../css/home.css?v=20260801a">
+  <link rel="stylesheet" href="../css/home.css?v=20260801b">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <style>
-    /* Case page tokens on top of home.css */
-    :root{
-      --navy-2:#0d2947;
-      --navy-3:#16375f;
-      --surface-2:#fbfbfa;
-    }
-
-    /* Case hero — keep homepage type scale/weight, case layout */
-    .case-hero{
-      padding:72px 0 40px;
-    }
+    /* Case content aligned to homepage language */
+    .case-hero{padding:72px 0 28px}
     .case-hero .eyebrow{
+      margin:0 0 14px;
       color:var(--blue);
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      font-size:12px;
+      font-size:14px;
       font-weight:700;
-      margin-bottom:14px;
+      letter-spacing:.01em;
     }
     .case-hero h1{
       max-width:920px;
@@ -38,113 +28,118 @@
       color:var(--navy);
     }
     .case-hero .hero-copy{
-      max-width:780px;
-      margin:22px 0 0;
-      color:var(--secondary);
+      max-width:740px;
+      margin:20px 0 0;
+      color:#465570;
       font-size:20px;
       line-height:1.5;
       letter-spacing:-.012em;
     }
-    .hero-tags{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:26px;
-    }
-    .hero-tags span{
-      padding:8px 12px;
-      border-radius:999px;
-      background:var(--surface);
-      border:1px solid var(--line);
-      color:#4b5a6c;
-      font-size:12px;
-      font-weight:650;
+    .case-hero .hero-meta{
+      margin:18px 0 0;
+      max-width:40em;
+      color:#5a6a84;
+      font-size:14px;
+      font-weight:600;
+      letter-spacing:-.01em;
+      line-height:1.45;
     }
 
+    /* Summary = homepage track-record strip */
     .summary{
       display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:16px;
-      margin:0 0 24px;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      margin:8px 0 28px;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.72);
     }
     .summary-card{
-      padding:22px;
-      min-height:138px;
-      border:1px solid var(--line);
-      border-radius:20px;
-      background:var(--surface);
-      box-shadow:0 10px 26px rgba(14,30,51,.04);
+      padding:26px 22px;
+      border-right:1px solid var(--line);
+      min-height:0;
+      background:transparent;
+      box-shadow:none;
+      border-radius:0;
+      border-top:0;
+      border-bottom:0;
+      border-left:0;
     }
+    .summary-card:last-child{border-right:0}
     .summary-card small{
       display:block;
       color:var(--secondary);
-      font-size:12px;
-      margin-bottom:10px;
+      font-size:13px;
+      margin-bottom:8px;
+      font-weight:600;
     }
     .summary-card strong{
       display:block;
-      color:var(--text);
-      font-size:26px;
-      line-height:1.08;
-      letter-spacing:-.03em;
+      color:var(--navy);
+      font-size:17px;
+      line-height:1.25;
+      letter-spacing:-.02em;
+      font-weight:700;
     }
     .summary-card p{
-      margin:10px 0 0;
+      margin:8px 0 0;
       color:var(--secondary);
       font-size:13px;
       line-height:1.45;
     }
+    .summary-card strong.is-result{color:var(--blue)}
 
+    /* Overview = projects dark visual language */
     .overview{
       overflow:hidden;
-      border-radius:30px;
-      background:linear-gradient(145deg,var(--navy),var(--navy-2));
+      border-radius:28px;
+      background:linear-gradient(145deg,#101820,#173654);
       color:#fff;
-      box-shadow:0 30px 80px rgba(7,24,46,.22);
+      box-shadow:var(--shadow);
       border:1px solid rgba(255,255,255,.08);
     }
     .overview-head{
       display:flex;
       justify-content:space-between;
       align-items:center;
-      padding:18px 24px;
+      padding:18px 28px;
       border-bottom:1px solid rgba(255,255,255,.08);
     }
     .overview-head strong{
-      font-size:17px;
-      font-weight:720;
+      font-size:15px;
+      font-weight:650;
       letter-spacing:-.01em;
     }
     .overview-head span{
-      color:#9abdf0;
-      font-size:12px;
-      font-weight:650;
+      color:rgba(255,255,255,.6);
+      font-size:13px;
+      font-weight:600;
     }
     .overview-grid{
       display:grid;
       grid-template-columns:1.02fr .98fr;
     }
     .map-col{
-      padding:28px 28px 30px;
+      padding:28px;
       border-right:1px solid rgba(255,255,255,.08);
     }
     .panel-label{
-      color:#79aaf2;
-      text-transform:uppercase;
-      letter-spacing:.1em;
-      font-size:11px;
-      font-weight:820;
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      font-weight:650;
+      letter-spacing:.01em;
     }
     .map-col h2{
-      margin:10px 0 3px;
-      font-size:33px;
-      line-height:1.03;
-      letter-spacing:-.04em;
+      margin:10px 0 4px;
+      font-size:clamp(28px,3.2vw,34px);
+      line-height:1.15;
+      letter-spacing:-.03em;
+      font-weight:700;
       color:#fff;
     }
     .map-col p{
       margin:0;
-      color:#bfd0e3;
+      color:rgba(255,255,255,.7);
       font-size:14px;
     }
     .map-stage{
@@ -155,39 +150,40 @@
       position:relative;
     }
     .map-stage svg{width:100%;max-width:440px}
-    .nl-main,.nl-island{fill:#14385f;stroke:#68a6ff;stroke-width:2.2;stroke-linejoin:round}
-    .nl-water{fill:#071b31;stroke:#4c7fbe;stroke-width:1.5;stroke-linejoin:round}
-    .dot{fill:#8ab8ff;opacity:.82}
+    .nl-main,.nl-island{fill:#1a3a5c;stroke:#7eb0ff;stroke-width:2;stroke-linejoin:round}
+    .nl-water{fill:#0b1622;stroke:#5a87b8;stroke-width:1.4;stroke-linejoin:round}
+    .dot{fill:#9ec4ff;opacity:.85}
     .city{fill:#ffffff}
-    .city-label{fill:#d9e7f7;font-size:10.8px;font-weight:650}
+    .city-label{fill:rgba(255,255,255,.88);font-size:10.8px;font-weight:650}
     .map-glow{
       position:absolute;
       inset:20% 15% auto 15%;
       height:45%;
-      background:radial-gradient(circle, rgba(72,140,255,.12), rgba(72,140,255,0));
+      background:radial-gradient(circle, rgba(11,105,227,.16), transparent 70%);
       pointer-events:none;
       filter:blur(18px);
     }
 
     .data-col{padding:28px}
-    .bars{display:grid;gap:15px;margin-top:18px}
+    .bars{display:grid;gap:14px;margin-top:18px}
     .bar-row{
       display:grid;
       grid-template-columns:160px 1fr 54px;
       gap:12px;
       align-items:center;
-      color:#dae4ef;
+      color:rgba(255,255,255,.86);
       font-size:12px;
     }
-    .track{
-      height:11px;
+    .bar-row strong{font-weight:700}
+    .bar-track{
+      height:10px;
       overflow:hidden;
-      border-radius:5px;
-      background:rgba(255,255,255,.08);
+      border-radius:999px;
+      background:rgba(255,255,255,.1);
     }
-    .fill{
+    .bar-fill{
       height:100%;
-      background:linear-gradient(90deg,#3f86ef,#6ba8ff);
+      background:linear-gradient(90deg,#0b69e3,#5aa2ff);
     }
     .cards-2{
       display:grid;
@@ -198,17 +194,16 @@
     .mini-card{
       min-height:208px;
       padding:16px 18px;
-      border-radius:18px;
-      background:rgba(255,255,255,.03);
+      border-radius:16px;
+      background:rgba(255,255,255,.055);
       border:1px solid rgba(255,255,255,.08);
     }
     .mini-card h3{
       margin:0;
-      color:#8fb8f2;
-      font-size:11px;
-      text-transform:uppercase;
-      letter-spacing:.1em;
-      font-weight:820;
+      color:rgba(255,255,255,.7);
+      font-size:12px;
+      font-weight:650;
+      letter-spacing:.01em;
     }
     .score-list{display:grid;gap:11px;margin-top:16px}
     .score-row{
@@ -217,34 +212,34 @@
       gap:8px;
       align-items:center;
       font-size:11px;
-      color:#dbe5ee;
+      color:rgba(255,255,255,.86);
     }
     .score-track{
       height:8px;
-      background:rgba(255,255,255,.08);
-      border-radius:4px;
+      background:rgba(255,255,255,.1);
+      border-radius:999px;
       overflow:hidden;
     }
-    .score-fill{height:100%;background:#4f93f7}
+    .score-fill{height:100%;background:#0b69e3}
     .donut{
       position:relative;
-      width:138px;height:138px;
+      width:128px;height:128px;
       margin:18px auto 0;
       border-radius:50%;
-      background:conic-gradient(#3f86ef 0 62%, #6682ba 62% 86%, #9eb5df 86% 95%, #e4ebf6 95%);
+      background:conic-gradient(#0b69e3 0 62%, #3d5f86 62% 86%, #7f9aba 86% 95%, rgba(255,255,255,.35) 95%);
     }
     .donut::after{
       content:"4,527\A firms";
       white-space:pre;
       position:absolute;
-      inset:24px;
+      inset:22px;
       border-radius:50%;
-      background:#0c2743;
+      background:#14263a;
       display:grid;
       place-items:center;
       text-align:center;
-      font-weight:820;
-      line-height:1.08;
+      font-weight:700;
+      line-height:1.1;
       font-size:15px;
       color:#fff;
     }
@@ -252,205 +247,226 @@
       margin-top:14px;
       padding:16px 18px;
       border-radius:16px;
-      border:1px solid rgba(123,174,255,.24);
-      background:rgba(103,156,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
     }
     .result-box small{
       display:block;
-      color:#9bbdf0;
-      text-transform:uppercase;
-      letter-spacing:.1em;
-      font-size:10px;
-      font-weight:820;
-      margin-bottom:7px;
+      color:rgba(255,255,255,.65);
+      font-size:11px;
+      font-weight:650;
+      margin-bottom:6px;
     }
     .result-box strong{
       display:block;
-      font-size:34px;
+      font-size:30px;
       line-height:1;
       letter-spacing:-.04em;
       margin-bottom:6px;
     }
     .result-box p{
       margin:0;
-      color:#d0dceb;
+      color:rgba(255,255,255,.72);
       font-size:13px;
+      line-height:1.45;
     }
 
     .story{
       display:grid;
-      grid-template-columns:230px 1fr;
-      gap:50px;
-      padding:84px 0 86px;
+      grid-template-columns:220px 1fr;
+      gap:48px;
+      padding:72px 0 64px;
     }
     .story-nav{
       position:sticky;
-      top:98px;
+      top:92px;
       align-self:start;
-      padding:20px;
-      border-radius:18px;
-      border:1px solid var(--line);
-      background:#fff;
+      padding:0;
+      border:0;
+      background:transparent;
     }
     .story-nav strong{
       display:block;
-      margin-bottom:10px;
-      color:var(--text);
+      margin-bottom:12px;
+      color:var(--navy);
       font-size:13px;
+      font-weight:700;
     }
     .story-nav a{
       display:block;
-      padding:8px 0;
+      padding:7px 0;
       color:var(--secondary);
       font-size:14px;
+      font-weight:580;
     }
-    .story-nav a:hover{color:var(--blue)}
+    .story-nav a:hover{color:var(--navy)}
 
-    .story-content{display:grid;gap:44px}
+    .story-content{display:grid;gap:40px}
     .case-section{
-      padding-bottom:42px;
+      padding-bottom:36px;
       border-bottom:1px solid var(--line);
     }
-    .case-section:last-child{border-bottom:0}
+    .case-section:last-child{border-bottom:0;padding-bottom:0}
     .case-section .kicker{
+      margin:0 0 10px;
       color:var(--blue);
-      text-transform:uppercase;
-      letter-spacing:.1em;
-      font-size:11px;
-      font-weight:820;
-      margin-bottom:10px;
+      font-size:13px;
+      font-weight:650;
+      letter-spacing:0;
+      text-transform:none;
     }
     .case-section h2{
-      margin:0 0 16px;
-      font-size:42px;
-      line-height:1.05;
-      letter-spacing:-.045em;
+      margin:0 0 14px;
+      font-size:clamp(28px,3.6vw,40px);
+      line-height:1.15;
+      letter-spacing:-.035em;
+      font-weight:700;
       color:var(--navy);
     }
     .case-section p{
-      margin:0 0 16px;
+      margin:0 0 12px;
       color:var(--secondary);
-      font-size:17px;
-      line-height:1.68;
-      max-width:840px;
+      font-size:16px;
+      line-height:1.55;
+      max-width:40em;
     }
     .case-section ul{
-      margin:18px 0 0;
-      padding-left:20px;
-      color:#3f4f64;
+      margin:14px 0 0;
+      padding-left:18px;
+      color:var(--secondary);
       font-size:15px;
+      line-height:1.55;
     }
-    .case-section li{margin:8px 0}
+    .case-section li{margin:7px 0}
+
+    /* Quote = homepage transition accent */
     .quote{
-      margin-top:24px;
-      padding:24px 28px;
-      border-left:4px solid var(--blue);
-      border-radius:0 18px 18px 0;
-      background:#fff;
-      color:var(--text);
-      font-size:23px;
-      line-height:1.46;
-      letter-spacing:-.02em;
-      font-weight:650;
-      box-shadow:0 10px 28px rgba(14,30,51,.03);
+      margin-top:22px;
+      max-width:760px;
+      padding:4px 0 4px 18px;
+      border-left:3px solid var(--sand);
+      border-radius:0;
+      background:transparent;
+      box-shadow:none;
+      color:var(--navy);
+      font-size:clamp(22px,2.6vw,30px);
+      line-height:1.3;
+      letter-spacing:-.025em;
+      font-weight:700;
     }
+
     .decision{
       display:flex;
       justify-content:space-between;
       align-items:center;
       gap:24px;
-      margin-top:22px;
-      padding:26px 28px;
-      border-radius:20px;
-      background:#eef5ff;
-      border:1px solid #caddfb;
+      margin-top:20px;
+      padding:28px;
+      border-radius:28px;
+      background:linear-gradient(120deg,#eef6ff,#fff);
+      border:1px solid #dbeafb;
+      box-shadow:0 8px 28px rgba(21,45,82,.05);
     }
     .decision strong{
-      font-size:54px;
+      font-size:clamp(36px,5vw,48px);
       color:var(--blue);
       line-height:1;
-      letter-spacing:-.05em;
+      letter-spacing:-.04em;
+      font-weight:700;
     }
     .decision span{
       max-width:430px;
-      color:#536276;
+      color:var(--secondary);
       font-size:16px;
+      line-height:1.5;
     }
+
     .value-grid{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:16px;
-      margin-top:22px;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+      margin-top:20px;
     }
     .value{
-      padding:22px;
-      border-radius:18px;
-      background:#fff;
+      display:flex;
+      flex-direction:column;
+      padding:28px;
+      border-radius:var(--radius);
+      background:var(--surface);
       border:1px solid var(--line);
+      box-shadow:0 8px 28px rgba(21,45,82,.05);
     }
     .value strong{
       display:block;
-      margin-bottom:8px;
+      margin-bottom:12px;
       color:var(--navy);
-      font-size:18px;
+      font-size:21px;
+      line-height:1.2;
+      letter-spacing:-.02em;
+      font-weight:700;
     }
     .value p{
       margin:0;
-      font-size:14px;
+      font-size:15px;
       line-height:1.55;
       color:var(--secondary);
     }
 
+    /* CTA = homepage contact panel */
     .case-cta{
-      margin:0 0 86px;
-      padding:36px;
-      border-radius:24px;
-      border:1px solid #d4e3fb;
-      background:linear-gradient(135deg,#eef5ff,#ffffff);
+      margin:0 0 72px;
+      padding:30px;
+      border-radius:28px;
+      border:1px solid #dbeafb;
+      background:linear-gradient(120deg,#eef6ff,#fff);
+      box-shadow:0 8px 28px rgba(21,45,82,.05);
       display:grid;
       grid-template-columns:1fr auto;
-      gap:26px;
+      gap:28px;
       align-items:center;
     }
     .case-cta h2{
-      margin:0 0 8px;
+      margin:0 0 10px;
       color:var(--navy);
-      font-size:34px;
-      line-height:1.12;
-      letter-spacing:-.04em;
+      font-size:clamp(28px,3.2vw,38px);
+      line-height:1.15;
+      letter-spacing:-.035em;
+      font-weight:700;
     }
     .case-cta p{
       margin:0;
       color:var(--secondary);
-      font-size:15px;
-    }
-    .case-cta a{
-      padding:14px 20px;
-      border-radius:12px;
-      background:var(--blue);
-      color:#fff;
-      font-weight:700;
-      white-space:nowrap;
+      font-size:16px;
+      line-height:1.5;
+      max-width:36em;
     }
 
     @media (max-width: 980px){
       .summary{grid-template-columns:1fr 1fr}
+      .summary-card:nth-child(2){border-right:0}
+      .summary-card:nth-child(-n+2){border-bottom:1px solid var(--line)}
       .overview-grid{grid-template-columns:1fr}
       .map-col{border-right:0;border-bottom:1px solid rgba(255,255,255,.08)}
       .story{grid-template-columns:1fr}
       .story-nav{display:none}
     }
     @media (max-width: 650px){
-      .case-hero{padding:48px 0 32px}
+      .case-hero{padding:48px 0 24px}
       .case-hero h1{font-size:46px}
       .case-hero .hero-copy{font-size:18px}
       .summary{grid-template-columns:1fr}
+      .summary-card{
+        border-right:0;
+        border-bottom:1px solid var(--line);
+        padding:18px 4px;
+      }
+      .summary-card:last-child{border-bottom:0}
       .bar-row{grid-template-columns:110px 1fr 44px}
       .cards-2{grid-template-columns:1fr}
-      .case-section h2{font-size:34px}
       .value-grid{grid-template-columns:1fr}
       .decision{flex-direction:column;align-items:flex-start}
       .case-cta{grid-template-columns:1fr}
+      .map-stage{min-height:420px}
     }
   </style>
 </head>
@@ -478,12 +494,7 @@
     <div class="eyebrow">Business use case · Private equity</div>
     <h1>Mapped 4,500 accounting firms to test a buy-and-build thesis.</h1>
     <p class="hero-copy">A private-equity investor wanted to know whether the Dutch accounting-firm market could support a consolidation strategy. I built the dataset, screening logic and financial model needed to answer that question.</p>
-    <div class="hero-tags">
-      <span>Decision intelligence</span>
-      <span>Market mapping</span>
-      <span>Screening model</span>
-      <span>Outcome: No-go</span>
-    </div>
+    <p class="hero-meta">Decision intelligence · Market mapping · Screening model · Outcome: No-go</p>
   </div>
 </section>
 
@@ -506,7 +517,7 @@
     </article>
     <article class="summary-card">
       <small>Final recommendation</small>
-      <strong style="color:var(--blue)">No-go</strong>
+      <strong class="is-result">No-go</strong>
       <p>Not enough attractive scale to justify proceeding.</p>
     </article>
   </section>
@@ -689,11 +700,11 @@
         <div class="panel-label">Screening overview</div>
 
         <div class="bars">
-          <div class="bar-row"><span>Firms mapped</span><div class="track"><div class="fill" style="width:100%"></div></div><strong>4,527</strong></div>
-          <div class="bar-row"><span>After basic filters</span><div class="track"><div class="fill" style="width:63%"></div></div><strong>2,842</strong></div>
-          <div class="bar-row"><span>Financial data available</span><div class="track"><div class="fill" style="width:44%"></div></div><strong>1,974</strong></div>
-          <div class="bar-row"><span>Qualified candidates</span><div class="track"><div class="fill" style="width:8%"></div></div><strong>272</strong></div>
-          <div class="bar-row"><span>High-potential targets</span><div class="track"><div class="fill" style="width:3%"></div></div><strong>78</strong></div>
+          <div class="bar-row"><span>Firms mapped</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><strong>4,527</strong></div>
+          <div class="bar-row"><span>After basic filters</span><div class="bar-track"><div class="bar-fill" style="width:63%"></div></div><strong>2,842</strong></div>
+          <div class="bar-row"><span>Financial data available</span><div class="bar-track"><div class="bar-fill" style="width:44%"></div></div><strong>1,974</strong></div>
+          <div class="bar-row"><span>Qualified candidates</span><div class="bar-track"><div class="bar-fill" style="width:8%"></div></div><strong>272</strong></div>
+          <div class="bar-row"><span>High-potential targets</span><div class="bar-track"><div class="bar-fill" style="width:3%"></div></div><strong>78</strong></div>
         </div>
 
         <div class="cards-2">
@@ -807,7 +818,7 @@
       <h2>Have a market or investment question worth testing?</h2>
       <p>I build focused datasets, models and decision tools for business questions that standard research does not answer.</p>
     </div>
-    <a href="mailto:info@robbie.es?subject=Market%20or%20investment%20question">Send it my way →</a>
+    <a class="btn btn-primary" href="mailto:info@robbie.es?subject=Market%20or%20investment%20question">Send it my way</a>
   </section>
 </main>
 
