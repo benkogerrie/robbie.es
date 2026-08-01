@@ -1,0 +1,3 @@
+/accounting-firms /bookkeeping-firms/ 301
+/accounting-firms/ /bookkeeping-firms/ 301
+/accounting-firms/* /bookkeeping-firms/:splat 301
