@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Business use case by Robbie Höll: mapping 4,500 Dutch accounting firms to test a buy-and-build thesis.">
+  <meta name="description" content="Independent feasibility study by Robbie Höll: mapping approximately 4,500 Dutch accounting firms to test a buy-and-build thesis.">
   <meta name="robots" content="noindex, follow, noimageindex, max-image-preview:none">
   <title>Business use case — Accounting firms buy-and-build</title>
   <link rel="stylesheet" href="../css/home.css?v=20260801b">
@@ -88,6 +88,67 @@
       line-height:1.45;
     }
     .summary-card strong.is-result{color:var(--blue)}
+
+    .case-hero .hero-copy + .hero-copy{margin-top:14px}
+    .confidentiality-note{
+      margin:22px 0 0;
+      max-width:720px;
+      padding:0;
+      color:#7a8699;
+      font-size:13px;
+      line-height:1.5;
+    }
+    .confidentiality-note strong{
+      display:block;
+      margin-bottom:4px;
+      color:#6a768a;
+      font-size:12px;
+      font-weight:650;
+    }
+    .confidentiality-note p{margin:0 0 6px}
+    .confidentiality-note p:last-child{margin-bottom:0}
+    .dashboard-note{
+      margin:14px 0 0;
+      color:rgba(255,255,255,.5);
+      font-size:11px;
+      font-weight:600;
+    }
+    .result-box{
+      margin-top:14px;
+      padding:16px 18px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+    }
+    .result-box small{
+      display:block;
+      color:rgba(255,255,255,.65);
+      font-size:11px;
+      font-weight:650;
+      margin-bottom:6px;
+    }
+    .result-box strong{
+      display:block;
+      font-size:30px;
+      line-height:1;
+      letter-spacing:-.04em;
+      margin-bottom:6px;
+    }
+    .result-box p{
+      margin:0;
+      color:rgba(255,255,255,.72);
+      font-size:13px;
+      line-height:1.45;
+    }
+    .decision-nuance{
+      margin:16px 0 0;
+      max-width:40em;
+      color:var(--secondary);
+      font-size:15px;
+      line-height:1.55;
+    }
+    .decision-nuance p{margin:0 0 10px}
+    .decision-nuance p:last-child{margin-bottom:0}
 
     /* Overview = projects dark visual language */
     .overview{
@@ -422,6 +483,7 @@
       .case-hero{padding:48px 0 24px}
       .case-hero h1{font-size:46px}
       .case-hero .hero-copy{font-size:18px}
+      .confidentiality-note{font-size:12px}
       .summary{grid-template-columns:1fr}
       .summary-card{
         border-right:0;
@@ -448,7 +510,7 @@
     </div>
     <nav class="nav-links" id="navLinks">
       <a href="../index.html#track-record">Track record</a>
-      <a href="../projects.html">What I’ve built</a>
+      <a href="../projects.html">Business use cases</a>
       <a href="../index.html#help">How I can help</a>
       <a href="../index.html#about">About</a>
     </nav>
@@ -459,10 +521,17 @@
 
 <section class="case-hero">
   <div class="container">
-    <div class="eyebrow">Business use case · Private equity</div>
+    <div class="eyebrow">Independent feasibility study · Private-equity use case</div>
     <h1>Mapped 4,500 accounting firms to test a buy-and-build thesis.</h1>
-    <p class="hero-copy">A private-equity investor wanted to know whether the Dutch accounting-firm market could support a consolidation strategy. I built the dataset, screening logic and financial model needed to answer that question.</p>
-    <p class="hero-meta">Decision intelligence · Market mapping · Screening model · Outcome: No-go</p>
+    <p class="hero-copy">I explored whether the fragmented Dutch accounting-firm market could support a credible buy-and-build strategy.</p>
+    <p class="hero-copy">A private-equity investor was informally involved in assessing whether the opportunity warranted further work.</p>
+    <p class="hero-copy">To test the thesis, I built a market-wide dataset, screening methodology and financial model covering approximately 4,500 firms.</p>
+    <p class="hero-meta">Independent analysis · Market mapping · Candidate screening · Feasibility conclusion</p>
+    <div class="confidentiality-note">
+      <strong>Confidentiality note</strong>
+      <p>This case presents my independent feasibility analysis. The identity of third parties, individual firms, non-public discussions and any confidential input are not disclosed.</p>
+      <p>Dashboard figures beyond the approximate overall market size are illustrative.</p>
+    </div>
   </div>
 </section>
 
@@ -476,17 +545,17 @@
     <article class="summary-card">
       <small>Market structure</small>
       <strong>Highly fragmented</strong>
-      <p>A long tail of small owner-led firms with limited scale.</p>
+      <p>A long tail of small, owner-led firms with limited individual scale.</p>
     </article>
     <article class="summary-card">
       <small>Thesis tested</small>
       <strong>Buy & build</strong>
-      <p>Target quality, consolidation logic and platform economics.</p>
+      <p>Target availability, platform economics and potential value creation.</p>
     </article>
     <article class="summary-card">
-      <small>Final recommendation</small>
+      <small>Feasibility conclusion</small>
       <strong class="is-result">No-go</strong>
-      <p>Not enough attractive scale to justify proceeding.</p>
+      <p>The specific thesis did not justify further work under the assumptions tested.</p>
     </article>
   </section>
 
@@ -494,7 +563,7 @@
     <div class="overview-head">
       <div class="overview-titles">
         <strong>Accounting firms market scanner</strong>
-        <div class="overview-coverage">Market coverage — Netherlands</div>
+        <div class="overview-coverage">Independent feasibility overview</div>
       </div>
     </div>
 
@@ -1014,6 +1083,7 @@
 
       <div class="data-col">
         <div class="panel-label">Screening overview</div>
+        <div class="dashboard-note">Illustrative screening visualisation</div>
 
         <div class="bars">
           <div class="bar-row"><span>Firms mapped</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><strong>4,527</strong></div>
@@ -1038,7 +1108,11 @@
           <div class="mini-card">
             <h3>Market structure</h3>
             <div class="donut"></div>
-            <p class="donut-caption">Long tail of small owner-led firms</p>
+            <div class="result-box">
+              <small>Feasibility conclusion</small>
+              <strong>No-go</strong>
+              <p>Under the assumptions tested, too few attractive targets were available at meaningful scale.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -1052,73 +1126,84 @@
       <a href="#built">What I built</a>
       <a href="#model">The model</a>
       <a href="#findings">What the data showed</a>
-      <a href="#decision">The decision</a>
+      <a href="#conclusion">The feasibility conclusion</a>
       <a href="#value">Why it mattered</a>
     </aside>
 
     <div class="story-content">
       <section class="case-section" id="question">
         <div class="kicker">The question</div>
-        <h2>Was the market fragmented — or actually investable?</h2>
-        <p>The initial thesis was attractive: thousands of firms, many small owner-led businesses and a market that looked ripe for consolidation.</p>
-        <p>But fragmentation alone does not create a good buy-and-build. The real question was whether there were enough suitable targets, whether integration economics worked and whether multiple uplift justified the complexity.</p>
-        <div class="quote">The goal was not to prove the thesis. It was to test whether the thesis deserved capital.</div>
+        <h2>Could fragmentation support an attractive buy-and-build strategy?</h2>
+        <p>The initial thesis looked promising: thousands of firms, many small owner-led businesses and a market that appeared suitable for consolidation.</p>
+        <p>But fragmentation alone does not create an attractive investment case.</p>
+        <p>The real questions were whether there were enough suitable acquisition targets, whether a meaningful platform could be assembled and whether the potential value creation justified the complexity, time and risk.</p>
+        <div class="quote">The goal was not to prove the idea. It was to determine whether the idea deserved further investment.</div>
       </section>
 
       <section class="case-section" id="built">
         <div class="kicker">What I built</div>
-        <h2>A proprietary market map and screening engine.</h2>
-        <p>I created a structured dataset covering approximately 4,500 Dutch accounting firms and translated it into a repeatable investment-screening workflow.</p>
+        <h2>A market-wide dataset and screening engine.</h2>
+        <p>I created a structured dataset covering approximately 4,500 Dutch accounting firms and translated it into a repeatable feasibility-assessment workflow.</p>
+        <p>The system combined market mapping, company-level enrichment, target screening and financial modelling in one decision framework.</p>
         <ul>
-          <li>Automated market data collection and enrichment</li>
-          <li>Multi-criteria target scoring</li>
+          <li>Automated collection and structuring of market data</li>
+          <li>Company-level enrichment and classification</li>
+          <li>Multi-criteria acquisition-candidate scoring</li>
           <li>Geographic and market-fragmentation analysis</li>
-          <li>Acquisition candidate ranking</li>
+          <li>Ranking of potentially relevant targets</li>
         </ul>
       </section>
 
       <section class="case-section" id="model">
         <div class="kicker">The model</div>
-        <h2>From company data to platform economics.</h2>
-        <p>The system modelled what a consolidating platform could look like over time, including acquisition pace, financing, integration, synergies and valuation uplift.</p>
+        <h2>From market data to platform economics.</h2>
+        <p>The analysis tested what a consolidating platform could realistically look like over time.</p>
+        <p>It considered acquisition pace, target availability, purchase multiples, financing, integration effort, synergies and potential valuation uplift.</p>
         <ul>
-          <li>Organic growth plus bolt-on acquisitions</li>
-          <li>Purchase multiples and exit sensitivities</li>
-          <li>Cost synergies and revenue cross-sell</li>
-          <li>IRR, cash-on-cash and payback analysis</li>
+          <li>Organic growth and bolt-on acquisitions</li>
+          <li>Purchase-multiple and exit-multiple sensitivities</li>
+          <li>Cost synergies and potential revenue cross-sell</li>
+          <li>Financing requirements and integration capacity</li>
+          <li>IRR, cash-on-cash and payback scenarios</li>
         </ul>
       </section>
 
       <section class="case-section" id="findings">
         <div class="kicker">What the data showed</div>
-        <h2>Highly fragmented. Not enough quality at scale.</h2>
-        <p>The market contained many firms, but the strongest candidates were too limited in number and scale. The economics weakened once realistic integration effort, payback periods and target quality were included.</p>
+        <h2>Highly fragmented, but not sufficiently attractive at scale.</h2>
+        <p>The market contained a large number of firms, but the strongest candidates were limited in both number and scale.</p>
+        <p>Once realistic assumptions were applied to acquisition quality, integration effort, payback periods and platform economics, the thesis became less compelling.</p>
+        <p>There were potentially interesting firms, but not enough evidence that the proposed strategy could create an attractive platform at the required scale.</p>
       </section>
 
-      <section class="case-section" id="decision">
-        <div class="kicker">The decision</div>
-        <h2>Sometimes the best outcome is to walk away.</h2>
+      <section class="case-section" id="conclusion">
+        <div class="kicker">The feasibility conclusion</div>
+        <h2>A clear answer to whether the thesis warranted further work.</h2>
         <div class="decision">
           <strong>No-go</strong>
-          <span>The investment thesis did not justify further commitment of time and capital.</span>
+          <span>Under the assumptions and investment criteria tested, the opportunity did not justify proceeding to a full investment process.</span>
+        </div>
+        <div class="decision-nuance">
+          <p>This conclusion applied to the specific strategy, assumptions and return requirements tested.</p>
+          <p>A different operating model, investor profile or consolidation strategy could lead to a different outcome.</p>
         </div>
       </section>
 
       <section class="case-section" id="value">
         <div class="kicker">Why it mattered</div>
-        <h2>The value was the decision — not the dashboard.</h2>
+        <h2>The value was the decision, not the dashboard.</h2>
         <div class="value-grid">
           <article class="value">
             <strong>Faster conviction</strong>
-            <p>The investor could test the market without months of manual research.</p>
+            <p>The thesis could be tested systematically without months of fragmented manual research.</p>
           </article>
           <article class="value">
-            <strong>Capital protected</strong>
-            <p>A well-founded no prevented resources from flowing into a weak thesis.</p>
+            <strong>Better capital allocation</strong>
+            <p>A well-founded no prevented further time and resources from being committed to a weak version of the opportunity.</p>
           </article>
           <article class="value">
-            <strong>Reusable approach</strong>
-            <p>The same decision framework can be applied to other fragmented markets.</p>
+            <strong>Reusable methodology</strong>
+            <p>The same approach can be applied to other fragmented markets, investment themes and commercial hypotheses.</p>
           </article>
         </div>
       </section>
@@ -1127,10 +1212,10 @@
 
   <section class="case-cta">
     <div>
-      <h2>Have a market or investment question worth testing?</h2>
-      <p>I build focused datasets, models and decision tools for business questions that standard research does not answer.</p>
+      <h2>Have a market, investment or commercial thesis worth testing?</h2>
+      <p>I build focused datasets, screening frameworks and decision tools to determine whether an opportunity deserves further work.</p>
     </div>
-    <a class="btn btn-primary" href="mailto:info@robbie.es?subject=Market%20or%20investment%20question">Send it my way</a>
+    <a class="btn btn-primary" href="mailto:info@robbie.es?subject=Feasibility%20study%20enquiry">Send me the question →</a>
   </section>
 </main>
 
@@ -1142,7 +1227,7 @@
     </div>
     <span>© 2026 Robbie Höll. Based in Czech Republic.</span>
     <div class="footer-links">
-      <a href="../projects.html">What I’ve built</a>
+      <a href="../projects.html">Business use cases</a>
       <a href="../index.html#about">About</a>
       <a href="mailto:info@robbie.es">info@robbie.es</a>
     </div>
