@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="KVK Monitor by Robbie Höll: a working monitoring and alert service that watches selected companies for status, insolvency, legal form, activity and location changes — and delivers them to Telegram.">
+  <meta name="description" content="KVK Monitor by Robbie Höll: a working monitoring and alert service focused on annual accounts, address changes and insolvency — with additional register signals as nice-to-have coverage.">
   <title>Business use case — KVK Monitor</title>
   <link rel="stylesheet" href="../css/home.css?v=20260801b">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -186,14 +186,21 @@
     .signal-table td:first-child{
       color:#fff;
       font-weight:650;
-      width:46%;
+      width:42%;
     }
-    .signal-table td:last-child{
+    .signal-table td:nth-child(2){
       color:rgba(255,255,255,.72);
       font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
       font-size:11px;
     }
+    .signal-table td:last-child{
+      width:88px;
+      white-space:nowrap;
+    }
     .signal-table tr:last-child td{border-bottom:0}
+    .signal-table tr.is-core td{
+      background:rgba(11,105,227,.08);
+    }
     .signal-table .field-note{
       display:block;
       margin-top:3px;
@@ -201,6 +208,43 @@
       font-family:var(--font);
       font-size:11px;
       font-weight:580;
+    }
+    .prio-tag{
+      display:inline-flex;
+      align-items:center;
+      padding:5px 9px;
+      border-radius:999px;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:.01em;
+    }
+    .prio-tag.is-core{
+      background:rgba(11,105,227,.22);
+      color:#9ec5ff;
+    }
+    .prio-tag.is-extra{
+      background:rgba(255,255,255,.08);
+      color:rgba(255,255,255,.62);
+    }
+    .signal-card.is-core{
+      border-color:#cfe0fb;
+      background:linear-gradient(180deg,#f7faff,#fff);
+    }
+    .signal-card .prio{
+      display:inline-block;
+      margin:0 0 10px;
+      padding:4px 9px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:700;
+    }
+    .signal-card .prio.is-core{
+      background:#e8f1ff;
+      color:var(--blue);
+    }
+    .signal-card .prio.is-extra{
+      background:#f1f3f7;
+      color:#6a768a;
     }
 
     .flow{
@@ -574,9 +618,9 @@
 <section class="case-hero">
   <div class="container">
     <div class="eyebrow">Monitoring &amp; alert service · Working prototype</div>
-    <h1>Company-register changes, delivered as alerts.</h1>
-    <p class="hero-copy">KVK Monitor watches selected companies across multiple register fields — status, insolvency, legal form, activity, postcode region and start date — and pushes the relevant change to Telegram.</p>
-    <p class="hero-meta">Multi-signal monitoring · Selected-company watchlist · Telegram alerts · Working prototype</p>
+    <h1>Annual accounts, address changes and insolvency — as alerts.</h1>
+    <p class="hero-copy">KVK Monitor watches selected companies and pushes the three most important changes to Telegram: new annual accounts, address changes and insolvency. Extra register fields are monitored as nice-to-have coverage.</p>
+    <p class="hero-meta">3 core alerts · Extra register signals · Selected-company watchlist · Telegram delivery</p>
   </div>
 </section>
 
@@ -588,9 +632,9 @@
       <p>A focused list of selected companies under active monitoring.</p>
     </article>
     <article class="summary-card">
-      <small>Signals tracked</small>
-      <strong>6 register fields</strong>
-      <p>Status, insolvency, legal form, activity, region and start date.</p>
+      <small>Core alerts</small>
+      <strong>3 priority signals</strong>
+      <p>Annual accounts, address change and insolvency.</p>
     </article>
     <article class="summary-card">
       <small>Delivery</small>
@@ -608,7 +652,7 @@
     <div class="overview-head">
       <div class="overview-titles">
         <strong>KVK Monitor</strong>
-        <div class="overview-coverage">Multi-signal company monitoring &amp; alerts</div>
+        <div class="overview-coverage">Core alerts first · Extra signals as coverage</div>
       </div>
       <div class="overview-status">Monitoring active</div>
     </div>
@@ -616,39 +660,56 @@
     <div class="overview-grid">
       <div class="watch-col">
         <div class="panel-label">Signals monitored</div>
-        <div class="dashboard-note">Register fields under active watch</div>
+        <div class="dashboard-note">3 core alerts + nice-to-have coverage</div>
 
         <table class="signal-table">
           <thead>
             <tr>
               <th>Signal</th>
               <th>Field</th>
+              <th>Priority</th>
             </tr>
           </thead>
           <tbody>
+            <tr class="is-core">
+              <td>Jaarrekening</td>
+              <td>annual accounts <span class="field-note">new filing alert</span></td>
+              <td><span class="prio-tag is-core">Core</span></td>
+            </tr>
+            <tr class="is-core">
+              <td>Adreswijziging</td>
+              <td>address change <span class="field-note">registered address</span></td>
+              <td><span class="prio-tag is-core">Core</span></td>
+            </tr>
+            <tr class="is-core">
+              <td>Faillissement / surseance / schuldsanering</td>
+              <td>insolventieCode <span class="field-note">FAIL / SURS / SSAN</span></td>
+              <td><span class="prio-tag is-core">Core</span></td>
+            </tr>
             <tr>
               <td>Actief / inactief</td>
               <td>actief <span class="field-note">J / N</span></td>
-            </tr>
-            <tr>
-              <td>Faillissement / surseance / schuldsanering</td>
-              <td>insolventieCode <span class="field-note">FAIL / SURS / SSAN</span></td>
+              <td><span class="prio-tag is-extra">Nice to have</span></td>
             </tr>
             <tr>
               <td>Rechtsvorm</td>
               <td>rechtsvormCode <span class="field-note">BV / NV</span></td>
+              <td><span class="prio-tag is-extra">Nice to have</span></td>
             </tr>
             <tr>
               <td>SBI / activiteit</td>
               <td>activiteiten[]</td>
+              <td><span class="prio-tag is-extra">Nice to have</span></td>
             </tr>
             <tr>
               <td>Postcode-regio</td>
               <td>postcodeRegio <span class="field-note">first 2 digits</span></td>
+              <td><span class="prio-tag is-extra">Nice to have</span></td>
             </tr>
             <tr>
               <td>Aanvangsdatum</td>
               <td>datumAanvang</td>
+              <td><span class="prio-tag is-extra">Nice to have</span></td>
             </tr>
           </tbody>
         </table>
@@ -660,18 +721,18 @@
           </div>
           <div class="flow-step">
             <small>02</small>
-            <strong>Monitor multiple register fields</strong>
+            <strong>Prioritise the 3 core alerts</strong>
           </div>
           <div class="flow-step">
             <small>03</small>
-            <strong>Push relevant changes to Telegram</strong>
+            <strong>Push changes to Telegram</strong>
           </div>
         </div>
       </div>
 
       <div class="alert-col">
-        <div class="panel-label">Alert delivery</div>
-        <div class="dashboard-note">Example Telegram notifications</div>
+        <div class="panel-label">Core alert delivery</div>
+        <div class="dashboard-note">The three Telegram alerts that matter most</div>
 
         <div class="telegram-card">
           <div class="telegram-head">
@@ -682,25 +743,34 @@
             </div>
             <div>
               <strong>Telegram · KVK Monitor</strong>
-              <small>Register-change alerts</small>
+              <small>Core alerts</small>
             </div>
           </div>
           <div class="telegram-body">
-            <small>Insolvency alert</small>
+            <small>Annual accounts</small>
+            <strong>New annual accounts filed</strong>
+            <p>Selected company · Financial year 2025</p>
+            <div class="telegram-meta">
+              <span class="telegram-chip">Jaarrekening</span>
+              <span class="telegram-chip">Core</span>
+            </div>
+          </div>
+          <div class="telegram-body">
+            <small>Address change</small>
+            <strong>Registered address changed</strong>
+            <p>Selected company · New address on file</p>
+            <div class="telegram-meta">
+              <span class="telegram-chip">Adreswijziging</span>
+              <span class="telegram-chip">Core</span>
+            </div>
+          </div>
+          <div class="telegram-body">
+            <small>Insolvency</small>
             <strong>Insolvency signal detected</strong>
             <p>Selected company · insolventieCode FAIL</p>
             <div class="telegram-meta">
               <span class="telegram-chip is-alert">FAIL</span>
-              <span class="telegram-chip">Watchlist match</span>
-            </div>
-          </div>
-          <div class="telegram-body">
-            <small>Status alert</small>
-            <strong>Company marked inactive</strong>
-            <p>Selected company · actief N</p>
-            <div class="telegram-meta">
-              <span class="telegram-chip">actief</span>
-              <span class="telegram-chip">Sent instantly</span>
+              <span class="telegram-chip">Core</span>
             </div>
           </div>
         </div>
@@ -722,56 +792,74 @@
     <div class="story-content">
       <section class="case-section" id="problem">
         <div class="kicker">The problem</div>
-        <h2>Important company changes are easy to miss.</h2>
-        <p>For a selected set of companies, changes in status, insolvency, legal form, activity or location can matter immediately — but checking the register by hand is slow and inconsistent.</p>
-        <p>The need was not another dashboard. It was a reliable way to notice the change as soon as it appears.</p>
-        <div class="quote">The useful moment is not when you remember to check. It is when the register changes.</div>
+        <h2>The changes that matter most are easy to miss.</h2>
+        <p>For a selected set of companies, new annual accounts, address changes and insolvency signals can matter immediately — but checking the register by hand is slow and inconsistent.</p>
+        <p>The need was not another dashboard. It was a reliable way to notice those core changes as soon as they appear.</p>
+        <div class="quote">The useful moment is not when you remember to check. It is when the filing, address or insolvency status changes.</div>
       </section>
 
       <section class="case-section" id="built">
         <div class="kicker">What I built</div>
-        <h2>A monitoring and alert service for selected companies.</h2>
-        <p>KVK Monitor watches a defined company list across multiple register fields and sends a Telegram alert when a relevant change is detected.</p>
-        <p>It is shaped around operational awareness: clear signals, fast delivery, and a shortlist that actually matters.</p>
+        <h2>A monitoring and alert service with clear priorities.</h2>
+        <p>KVK Monitor watches a defined company list and sends Telegram alerts when relevant register changes appear.</p>
+        <p>The service is organised around three core alerts first. Extra fields are monitored as useful additional coverage, not as the main product story.</p>
         <ul>
           <li>Selected-company watchlist</li>
-          <li>Multi-field register monitoring</li>
-          <li>Immediate Telegram alerts on relevant changes</li>
-          <li>Working prototype built around a real workflow</li>
+          <li>Core alerts for annual accounts, address change and insolvency</li>
+          <li>Additional register signals as nice-to-have coverage</li>
+          <li>Immediate Telegram delivery for relevant changes</li>
         </ul>
       </section>
 
       <section class="case-section" id="signals">
         <div class="kicker">Signals monitored</div>
-        <h2>Six fields that trigger an alert.</h2>
-        <p>The service monitors a focused set of commercially relevant register fields — not the entire register dump.</p>
+        <h2>Three core alerts. Extra signals as coverage.</h2>
+        <p>The service prioritises the three alerts that matter most in practice. The remaining fields are also monitored, but as nice-to-have signals.</p>
         <div class="signals-grid">
+          <article class="signal-card is-core">
+            <span class="prio is-core">Core alert</span>
+            <strong>Jaarrekening</strong>
+            <code>annual accounts</code>
+            <p>Alert when new annual accounts are filed for a watched company.</p>
+          </article>
+          <article class="signal-card is-core">
+            <span class="prio is-core">Core alert</span>
+            <strong>Adreswijziging</strong>
+            <code>address change</code>
+            <p>Alert when the registered address of a watched company changes.</p>
+          </article>
+          <article class="signal-card is-core">
+            <span class="prio is-core">Core alert</span>
+            <strong>Insolventie</strong>
+            <code>insolventieCode</code>
+            <p>Alert on faillissement, surseance or schuldsanering: FAIL, SURS or SSAN.</p>
+          </article>
           <article class="signal-card">
+            <span class="prio is-extra">Nice to have</span>
             <strong>Actief / inactief</strong>
             <code>actief</code>
             <p>Whether the company is active (J) or inactive (N).</p>
           </article>
           <article class="signal-card">
-            <strong>Faillissement / surseance / schuldsanering</strong>
-            <code>insolventieCode</code>
-            <p>Insolvency signals: FAIL, SURS or SSAN.</p>
-          </article>
-          <article class="signal-card">
+            <span class="prio is-extra">Nice to have</span>
             <strong>Rechtsvorm</strong>
             <code>rechtsvormCode</code>
             <p>Legal-form changes such as BV or NV.</p>
           </article>
           <article class="signal-card">
+            <span class="prio is-extra">Nice to have</span>
             <strong>SBI / activiteit</strong>
             <code>activiteiten[]</code>
             <p>Changes in registered activities.</p>
           </article>
           <article class="signal-card">
+            <span class="prio is-extra">Nice to have</span>
             <strong>Postcode-regio</strong>
             <code>postcodeRegio</code>
             <p>Region based on the first two digits of the postcode.</p>
           </article>
           <article class="signal-card">
+            <span class="prio is-extra">Nice to have</span>
             <strong>Aanvangsdatum</strong>
             <code>datumAanvang</code>
             <p>The company’s registered start date.</p>
@@ -782,13 +870,13 @@
       <section class="case-section" id="flow">
         <div class="kicker">How it works</div>
         <h2>From watchlist to alert in one loop.</h2>
-        <p>Companies are added to a monitoring list. The prototype checks the watched register fields against that list and pushes a concise Telegram alert when a change appears.</p>
+        <p>Companies are added to a monitoring list. The prototype watches the register and pushes a concise Telegram alert when a change appears — with annual accounts, address changes and insolvency treated as the primary alerts.</p>
         <p>The goal is practical awareness: know what changed, for which company, without keeping a manual register check running in the background.</p>
         <ul>
           <li>Define the companies that matter</li>
-          <li>Monitor the selected register fields</li>
+          <li>Prioritise the three core alerts</li>
+          <li>Keep extra register fields as optional coverage</li>
           <li>Deliver each relevant change through Telegram</li>
-          <li>Act without opening the register by hand</li>
         </ul>
       </section>
 
@@ -803,19 +891,19 @@
 
       <section class="case-section" id="value">
         <div class="kicker">Why it mattered</div>
-        <h2>Broader awareness. Still a focused tool.</h2>
+        <h2>Clear priorities. Still a focused tool.</h2>
         <div class="value-grid">
           <article class="value">
-            <strong>More than one signal</strong>
-            <p>Status, insolvency, legal form, activity, region and start date are watched in one loop.</p>
+            <strong>Core alerts first</strong>
+            <p>Annual accounts, address change and insolvency stay front and centre as the three alerts that matter most.</p>
           </article>
           <article class="value">
             <strong>Faster reaction</strong>
             <p>An alert arrives as soon as the monitor picks up a change, instead of whenever someone remembers to look.</p>
           </article>
           <article class="value">
-            <strong>Operational by design</strong>
-            <p>A monitoring and alert service with a clear job — not an oversized platform.</p>
+            <strong>Extra coverage without noise</strong>
+            <p>Additional register fields are available as nice-to-have signals, without diluting the main use case.</p>
           </article>
         </div>
       </section>
