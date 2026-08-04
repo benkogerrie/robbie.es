@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="KVK Monitor by Robbie Höll: a working prototype that watches selected companies for new annual accounts and sends filings to Telegram.">
+  <meta name="description" content="KVK Monitor by Robbie Höll: a working monitoring and alert service that watches selected companies for status, insolvency, legal form, activity and location changes — and delivers them to Telegram.">
   <title>Business use case — KVK Monitor</title>
   <link rel="stylesheet" href="../css/home.css?v=20260801b">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -35,7 +35,7 @@
     }
     .case-hero .hero-meta{
       margin:18px 0 0;
-      max-width:40em;
+      max-width:42em;
       color:#5a6a84;
       font-size:14px;
       font-weight:600;
@@ -136,7 +136,7 @@
 
     .overview-grid{
       display:grid;
-      grid-template-columns:1.05fr .95fr;
+      grid-template-columns:1.18fr .82fr;
       align-items:stretch;
     }
     .watch-col,
@@ -159,46 +159,74 @@
       font-weight:600;
     }
 
-    .watch-list{
+    .signal-table{
+      width:100%;
+      margin-top:18px;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.03);
+    }
+    .signal-table th,
+    .signal-table td{
+      padding:12px 14px;
+      text-align:left;
+      font-size:12px;
+      line-height:1.4;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      vertical-align:top;
+    }
+    .signal-table th{
+      color:rgba(255,255,255,.55);
+      font-weight:650;
+      background:rgba(255,255,255,.04);
+    }
+    .signal-table td:first-child{
+      color:#fff;
+      font-weight:650;
+      width:46%;
+    }
+    .signal-table td:last-child{
+      color:rgba(255,255,255,.72);
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      font-size:11px;
+    }
+    .signal-table tr:last-child td{border-bottom:0}
+    .signal-table .field-note{
+      display:block;
+      margin-top:3px;
+      color:rgba(255,255,255,.48);
+      font-family:var(--font);
+      font-size:11px;
+      font-weight:580;
+    }
+
+    .flow{
       display:grid;
-      gap:10px;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
       margin-top:18px;
     }
-    .watch-row{
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:12px;
-      align-items:center;
+    .flow-step{
       padding:14px 16px;
       border-radius:16px;
       background:rgba(255,255,255,.055);
       border:1px solid rgba(255,255,255,.08);
     }
-    .watch-row strong{
+    .flow-step small{
       display:block;
-      font-size:14px;
-      font-weight:650;
-      letter-spacing:-.01em;
-    }
-    .watch-row span{
-      display:block;
-      margin-top:3px;
-      color:rgba(255,255,255,.62);
-      font-size:12px;
-      font-weight:580;
-    }
-    .watch-tag{
-      padding:6px 10px;
-      border-radius:999px;
-      background:rgba(11,105,227,.18);
-      color:#9ec5ff;
+      color:rgba(255,255,255,.55);
       font-size:11px;
-      font-weight:700;
-      letter-spacing:.01em;
+      font-weight:650;
+      margin-bottom:6px;
     }
-    .watch-tag.is-new{
-      background:rgba(34,197,94,.16);
-      color:#86efac;
+    .flow-step strong{
+      display:block;
+      font-size:13px;
+      line-height:1.35;
+      font-weight:650;
     }
 
     .telegram-card{
@@ -245,6 +273,7 @@
       background:rgba(8,18,30,.55);
       border:1px solid rgba(255,255,255,.08);
     }
+    .telegram-body + .telegram-body{margin-top:12px}
     .telegram-body small{
       display:block;
       color:rgba(255,255,255,.58);
@@ -254,13 +283,13 @@
     }
     .telegram-body strong{
       display:block;
-      font-size:18px;
+      font-size:16px;
       line-height:1.25;
       letter-spacing:-.025em;
       font-weight:700;
     }
     .telegram-body p{
-      margin:10px 0 0;
+      margin:8px 0 0;
       color:rgba(255,255,255,.72);
       font-size:13px;
       line-height:1.45;
@@ -269,7 +298,7 @@
       display:flex;
       flex-wrap:wrap;
       gap:8px;
-      margin-top:14px;
+      margin-top:12px;
     }
     .telegram-chip{
       padding:6px 10px;
@@ -279,31 +308,9 @@
       font-size:11px;
       font-weight:650;
     }
-
-    .flow{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px;
-      margin-top:18px;
-    }
-    .flow-step{
-      padding:14px 16px;
-      border-radius:16px;
-      background:rgba(255,255,255,.055);
-      border:1px solid rgba(255,255,255,.08);
-    }
-    .flow-step small{
-      display:block;
-      color:rgba(255,255,255,.55);
-      font-size:11px;
-      font-weight:650;
-      margin-bottom:6px;
-    }
-    .flow-step strong{
-      display:block;
-      font-size:13px;
-      line-height:1.35;
-      font-weight:650;
+    .telegram-chip.is-alert{
+      background:rgba(248,113,113,.16);
+      color:#fecaca;
     }
 
     .story{
@@ -446,6 +453,45 @@
       color:var(--secondary);
     }
 
+    .signals-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      margin-top:20px;
+    }
+    .signal-card{
+      padding:20px 22px;
+      border-radius:20px;
+      background:var(--surface);
+      border:1px solid var(--line);
+      box-shadow:0 8px 28px rgba(21,45,82,.04);
+    }
+    .signal-card strong{
+      display:block;
+      margin-bottom:6px;
+      color:var(--navy);
+      font-size:16px;
+      font-weight:700;
+      letter-spacing:-.02em;
+    }
+    .signal-card code{
+      display:inline-block;
+      margin-bottom:8px;
+      padding:3px 8px;
+      border-radius:8px;
+      background:#eef4ff;
+      color:var(--blue);
+      font-size:12px;
+      font-weight:650;
+    }
+    .signal-card p{
+      margin:0;
+      color:var(--secondary);
+      font-size:14px;
+      line-height:1.45;
+      max-width:none;
+    }
+
     .case-cta{
       margin:0 0 72px;
       padding:30px;
@@ -483,6 +529,7 @@
       .story{grid-template-columns:1fr}
       .story-nav{display:none}
       .flow{grid-template-columns:1fr}
+      .signals-grid{grid-template-columns:1fr}
     }
     @media (max-width: 650px){
       .case-hero{padding:48px 0 24px}
@@ -496,6 +543,8 @@
       }
       .summary-card:last-child{border-bottom:0}
       .overview-head{flex-direction:column;align-items:flex-start}
+      .signal-table th,
+      .signal-table td{padding:10px}
       .value-grid{grid-template-columns:1fr}
       .decision{flex-direction:column;align-items:flex-start}
       .case-cta{grid-template-columns:1fr}
@@ -524,10 +573,10 @@
 
 <section class="case-hero">
   <div class="container">
-    <div class="eyebrow">Monitoring tool · Working prototype</div>
-    <h1>New annual accounts, delivered to Telegram.</h1>
-    <p class="hero-copy">KVK Monitor watches a selected set of companies and alerts you when new annual accounts are filed — so you no longer have to check the register by hand.</p>
-    <p class="hero-meta">Company watchlist · Annual-accounts monitoring · Telegram delivery · Working prototype</p>
+    <div class="eyebrow">Monitoring &amp; alert service · Working prototype</div>
+    <h1>Company-register changes, delivered as alerts.</h1>
+    <p class="hero-copy">KVK Monitor watches selected companies across multiple register fields — status, insolvency, legal form, activity, postcode region and start date — and pushes the relevant change to Telegram.</p>
+    <p class="hero-meta">Multi-signal monitoring · Selected-company watchlist · Telegram alerts · Working prototype</p>
   </div>
 </section>
 
@@ -539,19 +588,19 @@
       <p>A focused list of selected companies under active monitoring.</p>
     </article>
     <article class="summary-card">
-      <small>Signal tracked</small>
-      <strong>Annual accounts</strong>
-      <p>Detects when a monitored company files new accounts.</p>
+      <small>Signals tracked</small>
+      <strong>6 register fields</strong>
+      <p>Status, insolvency, legal form, activity, region and start date.</p>
     </article>
     <article class="summary-card">
       <small>Delivery</small>
-      <strong>Telegram</strong>
-      <p>The filing notification arrives where it can be acted on immediately.</p>
+      <strong>Telegram alerts</strong>
+      <p>Each relevant change arrives where it can be acted on immediately.</p>
     </article>
     <article class="summary-card">
       <small>Status</small>
       <strong class="is-result">Working prototype</strong>
-      <p>Built to remove a repetitive manual check from the workflow.</p>
+      <p>Built as a practical monitoring and alert service, not a dashboard.</p>
     </article>
   </section>
 
@@ -559,46 +608,50 @@
     <div class="overview-head">
       <div class="overview-titles">
         <strong>KVK Monitor</strong>
-        <div class="overview-coverage">Selected-company annual accounts monitoring</div>
+        <div class="overview-coverage">Multi-signal company monitoring &amp; alerts</div>
       </div>
       <div class="overview-status">Monitoring active</div>
     </div>
 
     <div class="overview-grid">
       <div class="watch-col">
-        <div class="panel-label">Watchlist</div>
-        <div class="dashboard-note">Illustrative monitoring view</div>
+        <div class="panel-label">Signals monitored</div>
+        <div class="dashboard-note">Register fields under active watch</div>
 
-        <div class="watch-list">
-          <div class="watch-row">
-            <div>
-              <strong>Selected company A</strong>
-              <span>Financial year 2025 · Filed today</span>
-            </div>
-            <span class="watch-tag is-new">New filing</span>
-          </div>
-          <div class="watch-row">
-            <div>
-              <strong>Selected company B</strong>
-              <span>Last check · No new accounts</span>
-            </div>
-            <span class="watch-tag">Watching</span>
-          </div>
-          <div class="watch-row">
-            <div>
-              <strong>Selected company C</strong>
-              <span>Last check · No new accounts</span>
-            </div>
-            <span class="watch-tag">Watching</span>
-          </div>
-          <div class="watch-row">
-            <div>
-              <strong>+ 21 more companies</strong>
-              <span>Shared monitoring cycle</span>
-            </div>
-            <span class="watch-tag">Active</span>
-          </div>
-        </div>
+        <table class="signal-table">
+          <thead>
+            <tr>
+              <th>Signal</th>
+              <th>Field</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Actief / inactief</td>
+              <td>actief <span class="field-note">J / N</span></td>
+            </tr>
+            <tr>
+              <td>Faillissement / surseance / schuldsanering</td>
+              <td>insolventieCode <span class="field-note">FAIL / SURS / SSAN</span></td>
+            </tr>
+            <tr>
+              <td>Rechtsvorm</td>
+              <td>rechtsvormCode <span class="field-note">BV / NV</span></td>
+            </tr>
+            <tr>
+              <td>SBI / activiteit</td>
+              <td>activiteiten[]</td>
+            </tr>
+            <tr>
+              <td>Postcode-regio</td>
+              <td>postcodeRegio <span class="field-note">first 2 digits</span></td>
+            </tr>
+            <tr>
+              <td>Aanvangsdatum</td>
+              <td>datumAanvang</td>
+            </tr>
+          </tbody>
+        </table>
 
         <div class="flow">
           <div class="flow-step">
@@ -607,18 +660,18 @@
           </div>
           <div class="flow-step">
             <small>02</small>
-            <strong>Monitor for new filings</strong>
+            <strong>Monitor multiple register fields</strong>
           </div>
           <div class="flow-step">
             <small>03</small>
-            <strong>Push the signal to Telegram</strong>
+            <strong>Push relevant changes to Telegram</strong>
           </div>
         </div>
       </div>
 
       <div class="alert-col">
         <div class="panel-label">Alert delivery</div>
-        <div class="dashboard-note">Prototype notification format</div>
+        <div class="dashboard-note">Example Telegram notifications</div>
 
         <div class="telegram-card">
           <div class="telegram-head">
@@ -629,16 +682,24 @@
             </div>
             <div>
               <strong>Telegram · KVK Monitor</strong>
-              <small>New annual accounts filed</small>
+              <small>Register-change alerts</small>
             </div>
           </div>
           <div class="telegram-body">
-            <small>Filing alert</small>
-            <strong>New annual accounts filed</strong>
-            <p>Selected company · Financial year 2025</p>
+            <small>Insolvency alert</small>
+            <strong>Insolvency signal detected</strong>
+            <p>Selected company · insolventieCode FAIL</p>
             <div class="telegram-meta">
-              <span class="telegram-chip">KVK source</span>
+              <span class="telegram-chip is-alert">FAIL</span>
               <span class="telegram-chip">Watchlist match</span>
+            </div>
+          </div>
+          <div class="telegram-body">
+            <small>Status alert</small>
+            <strong>Company marked inactive</strong>
+            <p>Selected company · actief N</p>
+            <div class="telegram-meta">
+              <span class="telegram-chip">actief</span>
               <span class="telegram-chip">Sent instantly</span>
             </div>
           </div>
@@ -652,6 +713,7 @@
       <strong>In this case</strong>
       <a href="#problem">The problem</a>
       <a href="#built">What I built</a>
+      <a href="#signals">Signals monitored</a>
       <a href="#flow">How it works</a>
       <a href="#status">Where it stands</a>
       <a href="#value">Why it mattered</a>
@@ -660,62 +722,100 @@
     <div class="story-content">
       <section class="case-section" id="problem">
         <div class="kicker">The problem</div>
-        <h2>Manually checking filings does not scale.</h2>
-        <p>For a selected set of companies, knowing when new annual accounts appear is useful — but repeatedly checking the register is slow, easy to miss and hard to keep consistent.</p>
-        <p>The need was simple: notice the filing as soon as it becomes available, without turning that into a recurring manual task.</p>
-        <div class="quote">The useful moment is not when you remember to check. It is when the filing appears.</div>
+        <h2>Important company changes are easy to miss.</h2>
+        <p>For a selected set of companies, changes in status, insolvency, legal form, activity or location can matter immediately — but checking the register by hand is slow and inconsistent.</p>
+        <p>The need was not another dashboard. It was a reliable way to notice the change as soon as it appears.</p>
+        <div class="quote">The useful moment is not when you remember to check. It is when the register changes.</div>
       </section>
 
       <section class="case-section" id="built">
         <div class="kicker">What I built</div>
-        <h2>A focused monitor for selected companies.</h2>
-        <p>KVK Monitor is a working prototype that watches a defined company list and sends a Telegram alert when new annual accounts are filed.</p>
-        <p>It is deliberately narrow: one signal, one delivery channel, and a clear operational outcome.</p>
+        <h2>A monitoring and alert service for selected companies.</h2>
+        <p>KVK Monitor watches a defined company list across multiple register fields and sends a Telegram alert when a relevant change is detected.</p>
+        <p>It is shaped around operational awareness: clear signals, fast delivery, and a shortlist that actually matters.</p>
         <ul>
           <li>Selected-company watchlist</li>
-          <li>Monitoring for new annual-accounts filings</li>
-          <li>Immediate Telegram notification when a match appears</li>
-          <li>Lightweight prototype shaped around a real workflow</li>
+          <li>Multi-field register monitoring</li>
+          <li>Immediate Telegram alerts on relevant changes</li>
+          <li>Working prototype built around a real workflow</li>
         </ul>
+      </section>
+
+      <section class="case-section" id="signals">
+        <div class="kicker">Signals monitored</div>
+        <h2>Six fields that trigger an alert.</h2>
+        <p>The service monitors a focused set of commercially relevant register fields — not the entire register dump.</p>
+        <div class="signals-grid">
+          <article class="signal-card">
+            <strong>Actief / inactief</strong>
+            <code>actief</code>
+            <p>Whether the company is active (J) or inactive (N).</p>
+          </article>
+          <article class="signal-card">
+            <strong>Faillissement / surseance / schuldsanering</strong>
+            <code>insolventieCode</code>
+            <p>Insolvency signals: FAIL, SURS or SSAN.</p>
+          </article>
+          <article class="signal-card">
+            <strong>Rechtsvorm</strong>
+            <code>rechtsvormCode</code>
+            <p>Legal-form changes such as BV or NV.</p>
+          </article>
+          <article class="signal-card">
+            <strong>SBI / activiteit</strong>
+            <code>activiteiten[]</code>
+            <p>Changes in registered activities.</p>
+          </article>
+          <article class="signal-card">
+            <strong>Postcode-regio</strong>
+            <code>postcodeRegio</code>
+            <p>Region based on the first two digits of the postcode.</p>
+          </article>
+          <article class="signal-card">
+            <strong>Aanvangsdatum</strong>
+            <code>datumAanvang</code>
+            <p>The company’s registered start date.</p>
+          </article>
+        </div>
       </section>
 
       <section class="case-section" id="flow">
         <div class="kicker">How it works</div>
         <h2>From watchlist to alert in one loop.</h2>
-        <p>Companies are added to a monitoring list. The prototype checks for new annual accounts against that list and pushes a concise alert when a filing is found.</p>
-        <p>The goal is not a broad dashboard. It is a reliable signal that removes the need to keep checking by hand.</p>
+        <p>Companies are added to a monitoring list. The prototype checks the watched register fields against that list and pushes a concise Telegram alert when a change appears.</p>
+        <p>The goal is practical awareness: know what changed, for which company, without keeping a manual register check running in the background.</p>
         <ul>
           <li>Define the companies that matter</li>
-          <li>Monitor filings for that shortlist</li>
-          <li>Deliver the update through Telegram</li>
-          <li>Act on the filing without manual register checks</li>
+          <li>Monitor the selected register fields</li>
+          <li>Deliver each relevant change through Telegram</li>
+          <li>Act without opening the register by hand</li>
         </ul>
       </section>
 
       <section class="case-section" id="status">
         <div class="kicker">Where it stands</div>
-        <h2>A working prototype with a clear job.</h2>
+        <h2>A working monitoring and alert service.</h2>
         <div class="decision">
           <strong>Live prototype</strong>
-          <span>The monitoring loop and Telegram delivery are already working for a selected set of companies.</span>
+          <span>The multi-signal monitoring loop and Telegram delivery are already working for a selected set of companies.</span>
         </div>
       </section>
 
       <section class="case-section" id="value">
         <div class="kicker">Why it mattered</div>
-        <h2>Less checking. Faster awareness.</h2>
+        <h2>Broader awareness. Still a focused tool.</h2>
         <div class="value-grid">
           <article class="value">
-            <strong>No manual loop</strong>
-            <p>Removes the need to keep opening the register for the same selected companies.</p>
+            <strong>More than one signal</strong>
+            <p>Status, insolvency, legal form, activity, region and start date are watched in one loop.</p>
           </article>
           <article class="value">
             <strong>Faster reaction</strong>
-            <p>A filing alert arrives as soon as the monitor picks it up, instead of whenever someone remembers to look.</p>
+            <p>An alert arrives as soon as the monitor picks up a change, instead of whenever someone remembers to look.</p>
           </article>
           <article class="value">
-            <strong>Narrow by design</strong>
-            <p>One practical signal, delivered clearly, without turning the tool into an oversized platform.</p>
+            <strong>Operational by design</strong>
+            <p>A monitoring and alert service with a clear job — not an oversized platform.</p>
           </article>
         </div>
       </section>
@@ -724,8 +824,8 @@
 
   <section class="case-cta">
     <div>
-      <h2>Need a focused monitor for a practical signal?</h2>
-      <p>I build lightweight tools that watch for the change that matters and deliver it where you can act on it.</p>
+      <h2>Need a monitoring and alert service for practical signals?</h2>
+      <p>I build lightweight tools that watch the changes that matter and deliver them where you can act on them.</p>
     </div>
     <a class="btn btn-primary" href="/#contact">Tell me what you have in mind →</a>
   </section>
