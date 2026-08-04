@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="KVK Monitor by Robbie Höll: a working prototype that watches selected companies for new annual accounts and sends filings to Telegram.">
+  <title>Business use case — KVK Monitor</title>
+  <link rel="stylesheet" href="../css/home.css?v=20260801b">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <style>
+    .case-hero{padding:72px 0 28px}
+    .case-hero .eyebrow{
+      margin:0 0 14px;
+      color:var(--blue);
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.01em;
+    }
+    .case-hero h1{
+      max-width:920px;
+      margin:0;
+      font-size:clamp(48px,6vw,76px);
+      line-height:.98;
+      letter-spacing:-.05em;
+      font-weight:700;
+      color:var(--navy);
+    }
+    .case-hero .hero-copy{
+      max-width:740px;
+      margin:20px 0 0;
+      color:#465570;
+      font-size:20px;
+      line-height:1.5;
+      letter-spacing:-.012em;
+    }
+    .case-hero .hero-meta{
+      margin:18px 0 0;
+      max-width:40em;
+      color:#5a6a84;
+      font-size:14px;
+      font-weight:600;
+      letter-spacing:-.01em;
+      line-height:1.45;
+    }
+
+    .summary{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      margin:8px 0 28px;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.72);
+    }
+    .summary-card{
+      padding:26px 22px;
+      border-right:1px solid var(--line);
+      min-height:0;
+      background:transparent;
+      box-shadow:none;
+      border-radius:0;
+      border-top:0;
+      border-bottom:0;
+      border-left:0;
+    }
+    .summary-card:last-child{border-right:0}
+    .summary-card small{
+      display:block;
+      color:var(--secondary);
+      font-size:13px;
+      margin-bottom:8px;
+      font-weight:600;
+    }
+    .summary-card strong{
+      display:block;
+      color:var(--navy);
+      font-size:17px;
+      line-height:1.25;
+      letter-spacing:-.02em;
+      font-weight:700;
+    }
+    .summary-card p{
+      margin:8px 0 0;
+      color:var(--secondary);
+      font-size:13px;
+      line-height:1.45;
+    }
+    .summary-card strong.is-result{color:var(--blue)}
+
+    .overview{
+      overflow:hidden;
+      border-radius:28px;
+      background:linear-gradient(145deg,#101820,#173654);
+      color:#fff;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .overview-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 28px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .overview-titles{display:grid;gap:4px}
+    .overview-head strong{
+      font-size:15px;
+      font-weight:650;
+      letter-spacing:-.01em;
+    }
+    .overview-head .overview-coverage{
+      color:rgba(255,255,255,.78);
+      font-size:14px;
+      font-weight:650;
+    }
+    .overview-status{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(34,197,94,.12);
+      color:#86efac;
+      font-size:12px;
+      font-weight:650;
+      white-space:nowrap;
+    }
+    .overview-status::before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:#4ade80;
+      box-shadow:0 0 0 4px rgba(74,222,128,.15);
+    }
+
+    .overview-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      align-items:stretch;
+    }
+    .watch-col,
+    .alert-col{
+      padding:24px 28px 28px;
+    }
+    .watch-col{
+      border-right:1px solid rgba(255,255,255,.08);
+    }
+    .panel-label{
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      font-weight:650;
+      letter-spacing:.01em;
+    }
+    .dashboard-note{
+      margin:8px 0 0;
+      color:rgba(255,255,255,.5);
+      font-size:11px;
+      font-weight:600;
+    }
+
+    .watch-list{
+      display:grid;
+      gap:10px;
+      margin-top:18px;
+    }
+    .watch-row{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:12px;
+      align-items:center;
+      padding:14px 16px;
+      border-radius:16px;
+      background:rgba(255,255,255,.055);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .watch-row strong{
+      display:block;
+      font-size:14px;
+      font-weight:650;
+      letter-spacing:-.01em;
+    }
+    .watch-row span{
+      display:block;
+      margin-top:3px;
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      font-weight:580;
+    }
+    .watch-tag{
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(11,105,227,.18);
+      color:#9ec5ff;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.01em;
+    }
+    .watch-tag.is-new{
+      background:rgba(34,197,94,.16);
+      color:#86efac;
+    }
+
+    .telegram-card{
+      margin-top:18px;
+      padding:18px;
+      border-radius:22px;
+      background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.1);
+      box-shadow:0 18px 40px rgba(0,0,0,.18);
+    }
+    .telegram-head{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:16px;
+    }
+    .telegram-icon{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(145deg,#2aabee,#229ed9);
+      box-shadow:0 8px 18px rgba(42,171,238,.28);
+      flex-shrink:0;
+    }
+    .telegram-icon svg{width:22px;height:22px;fill:#fff}
+    .telegram-head strong{
+      display:block;
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:-.01em;
+    }
+    .telegram-head small{
+      display:block;
+      margin-top:2px;
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      font-weight:580;
+    }
+    .telegram-body{
+      padding:16px 18px;
+      border-radius:16px;
+      background:rgba(8,18,30,.55);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .telegram-body small{
+      display:block;
+      color:rgba(255,255,255,.58);
+      font-size:11px;
+      font-weight:650;
+      margin-bottom:8px;
+    }
+    .telegram-body strong{
+      display:block;
+      font-size:18px;
+      line-height:1.25;
+      letter-spacing:-.025em;
+      font-weight:700;
+    }
+    .telegram-body p{
+      margin:10px 0 0;
+      color:rgba(255,255,255,.72);
+      font-size:13px;
+      line-height:1.45;
+    }
+    .telegram-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:14px;
+    }
+    .telegram-chip{
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      color:rgba(255,255,255,.78);
+      font-size:11px;
+      font-weight:650;
+    }
+
+    .flow{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:18px;
+    }
+    .flow-step{
+      padding:14px 16px;
+      border-radius:16px;
+      background:rgba(255,255,255,.055);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .flow-step small{
+      display:block;
+      color:rgba(255,255,255,.55);
+      font-size:11px;
+      font-weight:650;
+      margin-bottom:6px;
+    }
+    .flow-step strong{
+      display:block;
+      font-size:13px;
+      line-height:1.35;
+      font-weight:650;
+    }
+
+    .story{
+      display:grid;
+      grid-template-columns:220px 1fr;
+      gap:48px;
+      padding:72px 0 64px;
+    }
+    .story-nav{
+      position:sticky;
+      top:92px;
+      align-self:start;
+      padding:0;
+      border:0;
+      background:transparent;
+    }
+    .story-nav strong{
+      display:block;
+      margin-bottom:12px;
+      color:var(--navy);
+      font-size:13px;
+      font-weight:700;
+    }
+    .story-nav a{
+      display:block;
+      padding:7px 0;
+      color:var(--secondary);
+      font-size:14px;
+      font-weight:580;
+    }
+    .story-nav a:hover{color:var(--navy)}
+
+    .story-content{display:grid;gap:40px}
+    .case-section{
+      padding-bottom:36px;
+      border-bottom:1px solid var(--line);
+    }
+    .case-section:last-child{border-bottom:0;padding-bottom:0}
+    .case-section .kicker{
+      margin:0 0 10px;
+      color:var(--blue);
+      font-size:13px;
+      font-weight:650;
+      letter-spacing:0;
+      text-transform:none;
+    }
+    .case-section h2{
+      margin:0 0 14px;
+      font-size:clamp(28px,3.6vw,40px);
+      line-height:1.15;
+      letter-spacing:-.035em;
+      font-weight:700;
+      color:var(--navy);
+    }
+    .case-section p{
+      margin:0 0 12px;
+      color:var(--secondary);
+      font-size:16px;
+      line-height:1.55;
+      max-width:40em;
+    }
+    .case-section ul{
+      margin:14px 0 0;
+      padding-left:18px;
+      color:var(--secondary);
+      font-size:15px;
+      line-height:1.55;
+    }
+    .case-section li{margin:7px 0}
+
+    .quote{
+      margin-top:22px;
+      max-width:760px;
+      padding:4px 0 4px 18px;
+      border-left:3px solid var(--sand);
+      border-radius:0;
+      background:transparent;
+      box-shadow:none;
+      color:var(--navy);
+      font-size:clamp(22px,2.6vw,30px);
+      line-height:1.3;
+      letter-spacing:-.025em;
+      font-weight:700;
+    }
+
+    .decision{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:24px;
+      margin-top:20px;
+      padding:28px;
+      border-radius:28px;
+      background:linear-gradient(120deg,#eef6ff,#fff);
+      border:1px solid #dbeafb;
+      box-shadow:0 8px 28px rgba(21,45,82,.05);
+    }
+    .decision strong{
+      font-size:clamp(28px,4vw,40px);
+      color:var(--blue);
+      line-height:1;
+      letter-spacing:-.04em;
+      font-weight:700;
+    }
+    .decision span{
+      max-width:430px;
+      color:var(--secondary);
+      font-size:16px;
+      line-height:1.5;
+    }
+
+    .value-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+      margin-top:20px;
+    }
+    .value{
+      display:flex;
+      flex-direction:column;
+      padding:28px;
+      border-radius:var(--radius);
+      background:var(--surface);
+      border:1px solid var(--line);
+      box-shadow:0 8px 28px rgba(21,45,82,.05);
+    }
+    .value strong{
+      display:block;
+      margin-bottom:12px;
+      color:var(--navy);
+      font-size:21px;
+      line-height:1.2;
+      letter-spacing:-.02em;
+      font-weight:700;
+    }
+    .value p{
+      margin:0;
+      font-size:15px;
+      line-height:1.55;
+      color:var(--secondary);
+    }
+
+    .case-cta{
+      margin:0 0 72px;
+      padding:30px;
+      border-radius:28px;
+      border:1px solid #dbeafb;
+      background:linear-gradient(120deg,#eef6ff,#fff);
+      box-shadow:0 8px 28px rgba(21,45,82,.05);
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:28px;
+      align-items:center;
+    }
+    .case-cta h2{
+      margin:0 0 10px;
+      color:var(--navy);
+      font-size:clamp(28px,3.2vw,38px);
+      line-height:1.15;
+      letter-spacing:-.035em;
+      font-weight:700;
+    }
+    .case-cta p{
+      margin:0;
+      color:var(--secondary);
+      font-size:16px;
+      line-height:1.5;
+      max-width:36em;
+    }
+
+    @media (max-width: 980px){
+      .summary{grid-template-columns:1fr 1fr}
+      .summary-card:nth-child(2){border-right:0}
+      .summary-card:nth-child(-n+2){border-bottom:1px solid var(--line)}
+      .overview-grid{grid-template-columns:1fr}
+      .watch-col{border-right:0;border-bottom:1px solid rgba(255,255,255,.08)}
+      .story{grid-template-columns:1fr}
+      .story-nav{display:none}
+      .flow{grid-template-columns:1fr}
+    }
+    @media (max-width: 650px){
+      .case-hero{padding:48px 0 24px}
+      .case-hero h1{font-size:46px}
+      .case-hero .hero-copy{font-size:18px}
+      .summary{grid-template-columns:1fr}
+      .summary-card{
+        border-right:0;
+        border-bottom:1px solid var(--line);
+        padding:18px 4px;
+      }
+      .summary-card:last-child{border-bottom:0}
+      .overview-head{flex-direction:column;align-items:flex-start}
+      .value-grid{grid-template-columns:1fr}
+      .decision{flex-direction:column;align-items:flex-start}
+      .case-cta{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="brand-wrap">
+      <a class="brand" href="../index.html">robbie<span>.</span>es</a>
+      <span class="full-name">Robbie Höll</span>
+    </div>
+    <nav class="nav-links" id="navLinks">
+      <a href="../index.html#track-record">Track record</a>
+      <a href="../projects.html">Business use cases</a>
+      <a href="../index.html#help">How I can help</a>
+      <a href="../index.html#about">About</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <a class="nav-cta" href="../index.html#contact">Tell me what you have in mind</a>
+    <button class="menu-btn" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+  </div>
+</header>
+
+<section class="case-hero">
+  <div class="container">
+    <div class="eyebrow">Monitoring tool · Working prototype</div>
+    <h1>New annual accounts, delivered to Telegram.</h1>
+    <p class="hero-copy">KVK Monitor watches a selected set of companies and alerts you when new annual accounts are filed — so you no longer have to check the register by hand.</p>
+    <p class="hero-meta">Company watchlist · Annual-accounts monitoring · Telegram delivery · Working prototype</p>
+  </div>
+</section>
+
+<main class="container">
+  <section class="summary" aria-label="Case summary">
+    <article class="summary-card">
+      <small>Watchlist</small>
+      <strong>24 companies</strong>
+      <p>A focused list of selected companies under active monitoring.</p>
+    </article>
+    <article class="summary-card">
+      <small>Signal tracked</small>
+      <strong>Annual accounts</strong>
+      <p>Detects when a monitored company files new accounts.</p>
+    </article>
+    <article class="summary-card">
+      <small>Delivery</small>
+      <strong>Telegram</strong>
+      <p>The filing notification arrives where it can be acted on immediately.</p>
+    </article>
+    <article class="summary-card">
+      <small>Status</small>
+      <strong class="is-result">Working prototype</strong>
+      <p>Built to remove a repetitive manual check from the workflow.</p>
+    </article>
+  </section>
+
+  <section class="overview" aria-label="KVK Monitor overview">
+    <div class="overview-head">
+      <div class="overview-titles">
+        <strong>KVK Monitor</strong>
+        <div class="overview-coverage">Selected-company annual accounts monitoring</div>
+      </div>
+      <div class="overview-status">Monitoring active</div>
+    </div>
+
+    <div class="overview-grid">
+      <div class="watch-col">
+        <div class="panel-label">Watchlist</div>
+        <div class="dashboard-note">Illustrative monitoring view</div>
+
+        <div class="watch-list">
+          <div class="watch-row">
+            <div>
+              <strong>Selected company A</strong>
+              <span>Financial year 2025 · Filed today</span>
+            </div>
+            <span class="watch-tag is-new">New filing</span>
+          </div>
+          <div class="watch-row">
+            <div>
+              <strong>Selected company B</strong>
+              <span>Last check · No new accounts</span>
+            </div>
+            <span class="watch-tag">Watching</span>
+          </div>
+          <div class="watch-row">
+            <div>
+              <strong>Selected company C</strong>
+              <span>Last check · No new accounts</span>
+            </div>
+            <span class="watch-tag">Watching</span>
+          </div>
+          <div class="watch-row">
+            <div>
+              <strong>+ 21 more companies</strong>
+              <span>Shared monitoring cycle</span>
+            </div>
+            <span class="watch-tag">Active</span>
+          </div>
+        </div>
+
+        <div class="flow">
+          <div class="flow-step">
+            <small>01</small>
+            <strong>Select companies to watch</strong>
+          </div>
+          <div class="flow-step">
+            <small>02</small>
+            <strong>Monitor for new filings</strong>
+          </div>
+          <div class="flow-step">
+            <small>03</small>
+            <strong>Push the signal to Telegram</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert-col">
+        <div class="panel-label">Alert delivery</div>
+        <div class="dashboard-note">Prototype notification format</div>
+
+        <div class="telegram-card">
+          <div class="telegram-head">
+            <div class="telegram-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="img" focusable="false">
+                <path d="M21.8 4.3c.4-.2.8.2.7.6l-2.9 14.2c-.1.4-.5.6-.9.4l-4.4-1.8-2.4 2.3c-.3.3-.9.1-.9-.3l.1-3.9 8.3-7.5c.2-.2-.1-.4-.3-.3L7.4 13.4 3.7 12c-.5-.2-.5-.9.1-1.1l18-6.6z"/>
+              </svg>
+            </div>
+            <div>
+              <strong>Telegram · KVK Monitor</strong>
+              <small>New annual accounts filed</small>
+            </div>
+          </div>
+          <div class="telegram-body">
+            <small>Filing alert</small>
+            <strong>New annual accounts filed</strong>
+            <p>Selected company · Financial year 2025</p>
+            <div class="telegram-meta">
+              <span class="telegram-chip">KVK source</span>
+              <span class="telegram-chip">Watchlist match</span>
+              <span class="telegram-chip">Sent instantly</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="story">
+    <aside class="story-nav">
+      <strong>In this case</strong>
+      <a href="#problem">The problem</a>
+      <a href="#built">What I built</a>
+      <a href="#flow">How it works</a>
+      <a href="#status">Where it stands</a>
+      <a href="#value">Why it mattered</a>
+    </aside>
+
+    <div class="story-content">
+      <section class="case-section" id="problem">
+        <div class="kicker">The problem</div>
+        <h2>Manually checking filings does not scale.</h2>
+        <p>For a selected set of companies, knowing when new annual accounts appear is useful — but repeatedly checking the register is slow, easy to miss and hard to keep consistent.</p>
+        <p>The need was simple: notice the filing as soon as it becomes available, without turning that into a recurring manual task.</p>
+        <div class="quote">The useful moment is not when you remember to check. It is when the filing appears.</div>
+      </section>
+
+      <section class="case-section" id="built">
+        <div class="kicker">What I built</div>
+        <h2>A focused monitor for selected companies.</h2>
+        <p>KVK Monitor is a working prototype that watches a defined company list and sends a Telegram alert when new annual accounts are filed.</p>
+        <p>It is deliberately narrow: one signal, one delivery channel, and a clear operational outcome.</p>
+        <ul>
+          <li>Selected-company watchlist</li>
+          <li>Monitoring for new annual-accounts filings</li>
+          <li>Immediate Telegram notification when a match appears</li>
+          <li>Lightweight prototype shaped around a real workflow</li>
+        </ul>
+      </section>
+
+      <section class="case-section" id="flow">
+        <div class="kicker">How it works</div>
+        <h2>From watchlist to alert in one loop.</h2>
+        <p>Companies are added to a monitoring list. The prototype checks for new annual accounts against that list and pushes a concise alert when a filing is found.</p>
+        <p>The goal is not a broad dashboard. It is a reliable signal that removes the need to keep checking by hand.</p>
+        <ul>
+          <li>Define the companies that matter</li>
+          <li>Monitor filings for that shortlist</li>
+          <li>Deliver the update through Telegram</li>
+          <li>Act on the filing without manual register checks</li>
+        </ul>
+      </section>
+
+      <section class="case-section" id="status">
+        <div class="kicker">Where it stands</div>
+        <h2>A working prototype with a clear job.</h2>
+        <div class="decision">
+          <strong>Live prototype</strong>
+          <span>The monitoring loop and Telegram delivery are already working for a selected set of companies.</span>
+        </div>
+      </section>
+
+      <section class="case-section" id="value">
+        <div class="kicker">Why it mattered</div>
+        <h2>Less checking. Faster awareness.</h2>
+        <div class="value-grid">
+          <article class="value">
+            <strong>No manual loop</strong>
+            <p>Removes the need to keep opening the register for the same selected companies.</p>
+          </article>
+          <article class="value">
+            <strong>Faster reaction</strong>
+            <p>A filing alert arrives as soon as the monitor picks it up, instead of whenever someone remembers to look.</p>
+          </article>
+          <article class="value">
+            <strong>Narrow by design</strong>
+            <p>One practical signal, delivered clearly, without turning the tool into an oversized platform.</p>
+          </article>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="case-cta">
+    <div>
+      <h2>Need a focused monitor for a practical signal?</h2>
+      <p>I build lightweight tools that watch for the change that matters and deliver it where you can act on it.</p>
+    </div>
+    <a class="btn btn-primary" href="/#contact">Tell me what you have in mind →</a>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <a class="brand" href="../index.html">robbie<span>.</span>es</a>
+      <div class="full-name" style="margin-top:6px">Robbie Höll</div>
+    </div>
+    <span>© 2026 Robbie Höll. Based in Czech Republic.</span>
+    <div class="footer-links">
+      <a href="../projects.html">Business use cases</a>
+      <a href="../index.html#about">About</a>
+      <a href="mailto:info@robbie.es">info@robbie.es</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js?v=20260801c" defer></script>
+</body>
+</html>
