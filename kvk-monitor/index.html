@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="KVK Monitor van Robbie Höll: een werkende monitoring- en alertservice gericht op jaarrekeningen, adreswijzigingen en insolventie — met extra handelsregistervelden als nice-to-have.">
+  <meta name="description" content="KVK Monitor van Robbie Höll: een werkende monitoring- en alertservice voor jaarrekeningen, adreswijzigingen, insolventie en andere handelsregisterwijzigingen via Telegram.">
   <title>Use case — KVK Monitor</title>
   <link rel="stylesheet" href="../css/home.css?v=20260801b">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -136,7 +136,7 @@
 
     .overview-grid{
       display:grid;
-      grid-template-columns:1.18fr .82fr;
+      grid-template-columns:1.45fr .9fr;
       align-items:stretch;
     }
     .watch-col,
@@ -159,117 +159,106 @@
       font-weight:600;
     }
 
-    .signal-table{
-      width:100%;
-      margin-top:18px;
-      border-collapse:separate;
-      border-spacing:0;
-      overflow:hidden;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.1);
-      background:rgba(255,255,255,.03);
-    }
-    .signal-table th,
-    .signal-table td{
-      padding:12px 14px;
-      text-align:left;
-      font-size:12px;
-      line-height:1.4;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      vertical-align:top;
-    }
-    .signal-table th{
-      color:rgba(255,255,255,.55);
-      font-weight:650;
-      background:rgba(255,255,255,.04);
-    }
-    .signal-table td:first-child{
-      color:#fff;
-      font-weight:650;
-      width:42%;
-    }
-    .signal-table td:nth-child(2){
-      color:rgba(255,255,255,.72);
-      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-      font-size:11px;
-    }
-    .signal-table td:last-child{
-      width:110px;
-      white-space:nowrap;
-    }
-    .signal-table tr:last-child td{border-bottom:0}
-    .signal-table tr.is-core td{
-      background:rgba(11,105,227,.08);
-    }
-    .signal-table .field-note{
-      display:block;
-      margin-top:3px;
-      color:rgba(255,255,255,.48);
-      font-family:var(--font);
-      font-size:11px;
-      font-weight:580;
-    }
-    .prio-tag{
-      display:inline-flex;
-      align-items:center;
-      padding:5px 9px;
-      border-radius:999px;
-      font-size:10px;
-      font-weight:700;
-      letter-spacing:.01em;
-    }
-    .prio-tag.is-core{
-      background:rgba(11,105,227,.22);
-      color:#9ec5ff;
-    }
-    .prio-tag.is-extra{
-      background:rgba(255,255,255,.08);
-      color:rgba(255,255,255,.62);
-    }
-    .signal-card.is-core{
-      border-color:#cfe0fb;
-      background:linear-gradient(180deg,#f7faff,#fff);
-    }
-    .signal-card .prio{
-      display:inline-block;
-      margin:0 0 10px;
-      padding:4px 9px;
-      border-radius:999px;
-      font-size:11px;
-      font-weight:700;
-    }
-    .signal-card .prio.is-core{
-      background:#e8f1ff;
-      color:var(--blue);
-    }
-    .signal-card .prio.is-extra{
-      background:#f1f3f7;
-      color:#6a768a;
-    }
-
-    .flow{
+    .dash-stats{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px;
+      gap:10px;
       margin-top:18px;
     }
-    .flow-step{
+    .dash-stat{
       padding:14px 16px;
       border-radius:16px;
       background:rgba(255,255,255,.055);
       border:1px solid rgba(255,255,255,.08);
     }
-    .flow-step small{
+    .dash-stat small{
       display:block;
       color:rgba(255,255,255,.55);
       font-size:11px;
       font-weight:650;
       margin-bottom:6px;
     }
-    .flow-step strong{
+    .dash-stat strong{
       display:block;
-      font-size:13px;
+      font-size:18px;
+      letter-spacing:-.03em;
+      font-weight:700;
+    }
+
+    .company-table-wrap{
+      margin-top:16px;
+      overflow:auto;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.03);
+    }
+    .company-table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:520px;
+    }
+    .company-table th,
+    .company-table td{
+      padding:11px 14px;
+      text-align:left;
+      font-size:12px;
       line-height:1.35;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      white-space:nowrap;
+    }
+    .company-table th{
+      color:rgba(255,255,255,.55);
+      font-weight:650;
+      background:rgba(255,255,255,.04);
+    }
+    .company-table td{color:rgba(255,255,255,.78)}
+    .company-table td:first-child{
+      color:#fff;
+      font-weight:650;
+    }
+    .company-table tr:last-child td{border-bottom:0}
+    .company-table tr.is-alert td{
+      background:rgba(11,105,227,.1);
+    }
+    .company-table .kvk{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      font-size:11px;
+      color:rgba(255,255,255,.58);
+    }
+    .status-pill{
+      display:inline-flex;
+      align-items:center;
+      padding:4px 9px;
+      border-radius:999px;
+      font-size:10px;
+      font-weight:700;
+    }
+    .status-pill.is-ok{
+      background:rgba(34,197,94,.14);
+      color:#86efac;
+    }
+    .status-pill.is-new{
+      background:rgba(11,105,227,.22);
+      color:#9ec5ff;
+    }
+    .status-pill.is-warn{
+      background:rgba(248,113,113,.16);
+      color:#fecaca;
+    }
+
+    .signal-chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:16px;
+    }
+    .signal-chip{
+      padding:7px 11px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.1);
+      color:rgba(255,255,255,.78);
+      font-size:11px;
       font-weight:650;
     }
 
@@ -317,7 +306,6 @@
       background:rgba(8,18,30,.55);
       border:1px solid rgba(255,255,255,.08);
     }
-    .telegram-body + .telegram-body{margin-top:12px}
     .telegram-body small{
       display:block;
       color:rgba(255,255,255,.58);
@@ -512,7 +500,7 @@
     }
     .signal-card strong{
       display:block;
-      margin-bottom:6px;
+      margin:0 0 6px;
       color:var(--navy);
       font-size:16px;
       font-weight:700;
@@ -572,7 +560,6 @@
       .watch-col{border-right:0;border-bottom:1px solid rgba(255,255,255,.08)}
       .story{grid-template-columns:1fr}
       .story-nav{display:none}
-      .flow{grid-template-columns:1fr}
       .signals-grid{grid-template-columns:1fr}
     }
     @media (max-width: 650px){
@@ -587,10 +574,7 @@
       }
       .summary-card:last-child{border-bottom:0}
       .overview-head{flex-direction:column;align-items:flex-start}
-      .signal-table th,
-      .signal-table td{padding:10px}
-      .signal-table td:last-child{width:auto}
-      .prio-tag{padding:4px 7px;font-size:9px}
+      .dash-stats{grid-template-columns:1fr}
       .value-grid{grid-template-columns:1fr}
       .decision{flex-direction:column;align-items:flex-start}
       .case-cta{grid-template-columns:1fr}
@@ -621,8 +605,8 @@
   <div class="container">
     <div class="eyebrow">Monitoring- &amp; alertservice · Werkend prototype</div>
     <h1>Jaarrekeningen, adreswijzigingen en insolventie — als alert.</h1>
-    <p class="hero-copy">KVK Monitor houdt geselecteerde bedrijven in de gaten en stuurt de drie belangrijkste wijzigingen naar Telegram: nieuwe jaarrekeningen, adreswijzigingen en insolventie. Extra handelsregistervelden worden meegenomen als nice-to-have.</p>
-    <p class="hero-meta">3 kernalerts · Extra handelsregistersignalen · Volglijst · Telegram-delivery</p>
+    <p class="hero-copy">KVK Monitor houdt een selectie bedrijven in de gaten en stuurt relevante handelsregisterwijzigingen naar Telegram. Denk aan nieuwe jaarrekeningen, adreswijzigingen en insolventie — en andere alerts die je kunt instellen.</p>
+    <p class="hero-meta">Volglijst · Configureerbare alerts · Telegram-delivery · Showcase dashboard</p>
   </div>
 </section>
 
@@ -630,13 +614,13 @@
   <section class="summary" aria-label="Samenvatting van de case">
     <article class="summary-card">
       <small>Volglijst</small>
-      <strong>24 bedrijven</strong>
-      <p>Een gerichte lijst van geselecteerde bedrijven onder actieve monitoring.</p>
+      <strong>Selectie bedrijven</strong>
+      <p>Een gerichte lijst van bedrijven onder actieve monitoring.</p>
     </article>
     <article class="summary-card">
-      <small>Kernalerts</small>
-      <strong>3 prioriteitssignalen</strong>
-      <p>Jaarrekening, adreswijziging en insolventie.</p>
+      <small>Belangrijkste alerts</small>
+      <strong>Jaarrekening · Adres · Insolventie</strong>
+      <p>Plus andere handelsregistersignalen die je kunt instellen.</p>
     </article>
     <article class="summary-card">
       <small>Aflevering</small>
@@ -646,95 +630,140 @@
     <article class="summary-card">
       <small>Status</small>
       <strong class="is-result">Werkend prototype</strong>
-      <p>Gebouwd als praktische monitoring- en alertservice, niet als dashboard.</p>
+      <p>Gebouwd als praktische monitoring- en alertservice.</p>
     </article>
   </section>
 
-  <section class="overview" aria-label="KVK Monitor overzicht">
+  <section class="overview" aria-label="KVK Monitor showcase dashboard">
     <div class="overview-head">
       <div class="overview-titles">
         <strong>KVK Monitor</strong>
-        <div class="overview-coverage">Eerst de kernalerts · Extra signalen als dekking</div>
+        <div class="overview-coverage">Showcase dashboard · fictieve voorbeeldbedrijven</div>
       </div>
       <div class="overview-status">Monitoring actief</div>
     </div>
 
     <div class="overview-grid">
       <div class="watch-col">
-        <div class="panel-label">Gemonitorde signalen</div>
-        <div class="dashboard-note">3 kernalerts + nice-to-have dekking</div>
+        <div class="panel-label">Dashboard</div>
+        <div class="dashboard-note">Illustratief overzicht met 10 niet-bestaande bedrijven</div>
 
-        <table class="signal-table">
-          <thead>
-            <tr>
-              <th>Signaal</th>
-              <th>Veld</th>
-              <th>Prioriteit</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="is-core">
-              <td>Jaarrekening</td>
-              <td>jaarrekening <span class="field-note">nieuwe deponering</span></td>
-              <td><span class="prio-tag is-core">Kern</span></td>
-            </tr>
-            <tr class="is-core">
-              <td>Adreswijziging</td>
-              <td>adreswijziging <span class="field-note">statutair / vestigingsadres</span></td>
-              <td><span class="prio-tag is-core">Kern</span></td>
-            </tr>
-            <tr class="is-core">
-              <td>Faillissement / surseance / schuldsanering</td>
-              <td>insolventieCode <span class="field-note">FAIL / SURS / SSAN</span></td>
-              <td><span class="prio-tag is-core">Kern</span></td>
-            </tr>
-            <tr>
-              <td>Actief / inactief</td>
-              <td>actief <span class="field-note">J / N</span></td>
-              <td><span class="prio-tag is-extra">Nice to have</span></td>
-            </tr>
-            <tr>
-              <td>Rechtsvorm</td>
-              <td>rechtsvormCode <span class="field-note">BV / NV</span></td>
-              <td><span class="prio-tag is-extra">Nice to have</span></td>
-            </tr>
-            <tr>
-              <td>SBI / activiteit</td>
-              <td>activiteiten[]</td>
-              <td><span class="prio-tag is-extra">Nice to have</span></td>
-            </tr>
-            <tr>
-              <td>Postcode-regio</td>
-              <td>postcodeRegio <span class="field-note">eerste 2 cijfers</span></td>
-              <td><span class="prio-tag is-extra">Nice to have</span></td>
-            </tr>
-            <tr>
-              <td>Aanvangsdatum</td>
-              <td>datumAanvang</td>
-              <td><span class="prio-tag is-extra">Nice to have</span></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="dash-stats">
+          <div class="dash-stat">
+            <small>In volglijst</small>
+            <strong>10</strong>
+          </div>
+          <div class="dash-stat">
+            <small>Alerts vandaag</small>
+            <strong>2</strong>
+          </div>
+          <div class="dash-stat">
+            <small>Actieve monitoring</small>
+            <strong>Aan</strong>
+          </div>
+        </div>
 
-        <div class="flow">
-          <div class="flow-step">
-            <small>01</small>
-            <strong>Selecteer bedrijven om te volgen</strong>
-          </div>
-          <div class="flow-step">
-            <small>02</small>
-            <strong>Prioriteer de 3 kernalerts</strong>
-          </div>
-          <div class="flow-step">
-            <small>03</small>
-            <strong>Stuur wijzigingen naar Telegram</strong>
-          </div>
+        <div class="company-table-wrap">
+          <table class="company-table">
+            <thead>
+              <tr>
+                <th>Bedrijf</th>
+                <th>KvK</th>
+                <th>Actief</th>
+                <th>Laatste signaal</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="is-alert">
+                <td>Jansen BV</td>
+                <td class="kvk">90012345</td>
+                <td>J</td>
+                <td>Jaarrekening 2025</td>
+                <td><span class="status-pill is-new">Nieuw</span></td>
+              </tr>
+              <tr>
+                <td>Noordhaven Logistiek BV</td>
+                <td class="kvk">90023456</td>
+                <td>J</td>
+                <td>—</td>
+                <td><span class="status-pill is-ok">Volgend</span></td>
+              </tr>
+              <tr>
+                <td>Atlas Techniek BV</td>
+                <td class="kvk">90034567</td>
+                <td>J</td>
+                <td>—</td>
+                <td><span class="status-pill is-ok">Volgend</span></td>
+              </tr>
+              <tr class="is-alert">
+                <td>Rivierenland Advies BV</td>
+                <td class="kvk">90045678</td>
+                <td>J</td>
+                <td>Adreswijziging</td>
+                <td><span class="status-pill is-new">Nieuw</span></td>
+              </tr>
+              <tr>
+                <td>Helder Bouw BV</td>
+                <td class="kvk">90056789</td>
+                <td>J</td>
+                <td>—</td>
+                <td><span class="status-pill is-ok">Volgend</span></td>
+              </tr>
+              <tr>
+                <td>Meridiaan IT BV</td>
+                <td class="kvk">90067890</td>
+                <td>J</td>
+                <td>—</td>
+                <td><span class="status-pill is-ok">Volgend</span></td>
+              </tr>
+              <tr>
+                <td>Zonnewende Energie BV</td>
+                <td class="kvk">90078901</td>
+                <td>J</td>
+                <td>—</td>
+                <td><span class="status-pill is-ok">Volgend</span></td>
+              </tr>
+              <tr>
+                <td>Kaapzicht Handel BV</td>
+                <td class="kvk">90089012</td>
+                <td>N</td>
+                <td>Actief → N</td>
+                <td><span class="status-pill is-warn">Inactief</span></td>
+              </tr>
+              <tr>
+                <td>Lindenberg Groep BV</td>
+                <td class="kvk">90090123</td>
+                <td>J</td>
+                <td>—</td>
+                <td><span class="status-pill is-ok">Volgend</span></td>
+              </tr>
+              <tr>
+                <td>Waterlinie Services BV</td>
+                <td class="kvk">90101234</td>
+                <td>J</td>
+                <td>—</td>
+                <td><span class="status-pill is-ok">Volgend</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="signal-chips" aria-label="Instelbare alerts">
+          <span class="signal-chip">Jaarrekening</span>
+          <span class="signal-chip">Adreswijziging</span>
+          <span class="signal-chip">Insolventie</span>
+          <span class="signal-chip">Actief / inactief</span>
+          <span class="signal-chip">Rechtsvorm</span>
+          <span class="signal-chip">SBI / activiteit</span>
+          <span class="signal-chip">Postcode-regio</span>
+          <span class="signal-chip">Aanvangsdatum</span>
         </div>
       </div>
 
       <div class="alert-col">
-        <div class="panel-label">Kernalert-delivery</div>
-        <div class="dashboard-note">De drie Telegram-alerts die er het meest toe doen</div>
+        <div class="panel-label">Voorbeeld Telegram-alert</div>
+        <div class="dashboard-note">Showcase-bericht met fictieve bedrijfsnaam</div>
 
         <div class="telegram-card">
           <div class="telegram-head">
@@ -745,34 +774,16 @@
             </div>
             <div>
               <strong>Telegram · KVK Monitor</strong>
-              <small>Kernalerts</small>
+              <small>Zo ziet een alert eruit</small>
             </div>
           </div>
           <div class="telegram-body">
             <small>Jaarrekening</small>
             <strong>Nieuwe jaarrekening gedeponeerd</strong>
-            <p>Geselecteerd bedrijf · Boekjaar 2025</p>
+            <p>Jansen BV · KvK 90012345 · Boekjaar 2025</p>
             <div class="telegram-meta">
               <span class="telegram-chip">Jaarrekening</span>
-              <span class="telegram-chip">Kern</span>
-            </div>
-          </div>
-          <div class="telegram-body">
-            <small>Adreswijziging</small>
-            <strong>Adres gewijzigd in het register</strong>
-            <p>Geselecteerd bedrijf · Nieuw adres vastgelegd</p>
-            <div class="telegram-meta">
-              <span class="telegram-chip">Adreswijziging</span>
-              <span class="telegram-chip">Kern</span>
-            </div>
-          </div>
-          <div class="telegram-body">
-            <small>Insolventie</small>
-            <strong>Insolventiesignaal gedetecteerd</strong>
-            <p>Geselecteerd bedrijf · insolventieCode FAIL</p>
-            <div class="telegram-meta">
-              <span class="telegram-chip is-alert">FAIL</span>
-              <span class="telegram-chip">Kern</span>
+              <span class="telegram-chip">Direct verstuurd</span>
             </div>
           </div>
         </div>
@@ -795,73 +806,65 @@
       <section class="case-section" id="problem">
         <div class="kicker">Het probleem</div>
         <h2>De wijzigingen die ertoe doen, mis je makkelijk.</h2>
-        <p>Voor een geselecteerde set bedrijven kunnen nieuwe jaarrekeningen, adreswijzigingen en insolventiesignalen meteen relevant zijn — maar het handelsregister handmatig checken is traag en inconsistent.</p>
-        <p>De behoefte was geen nieuw dashboard. Het was een betrouwbare manier om die kernwijzigingen te zien zodra ze verschijnen.</p>
+        <p>Voor een selectie bedrijven kunnen nieuwe jaarrekeningen, adreswijzigingen en insolventiesignalen meteen relevant zijn — maar het handelsregister handmatig checken is traag en inconsistent.</p>
+        <p>De behoefte was een betrouwbare manier om die wijzigingen te zien zodra ze verschijnen, zonder zelf te blijven kijken.</p>
         <div class="quote">Het nuttige moment is niet wanneer je eraan denkt om te checken. Het is wanneer de jaarrekening, het adres of de insolventiestatus wijzigt.</div>
       </section>
 
       <section class="case-section" id="built">
         <div class="kicker">Wat ik bouwde</div>
-        <h2>Een monitoring- en alertservice met duidelijke prioriteiten.</h2>
-        <p>KVK Monitor volgt een gedefinieerde bedrijfslijst en stuurt een Telegram-alert zodra een relevante handelsregisterwijziging verschijnt.</p>
-        <p>De service is georganiseerd rond drie kernalerts. Extra velden worden meegenomen als nuttige aanvullende dekking, niet als het hoofdverhaal.</p>
+        <h2>Een monitoring- en alertservice voor geselecteerde bedrijven.</h2>
+        <p>KVK Monitor volgt een volglijst en stuurt een Telegram-alert zodra een relevante handelsregisterwijziging verschijnt.</p>
+        <p>Jaarrekening, adreswijziging en insolventie zijn in de praktijk het belangrijkst. Andere signalen kun je ook instellen, afhankelijk van wat je wilt volgen.</p>
         <ul>
-          <li>Volglijst met geselecteerde bedrijven</li>
-          <li>Kernalerts voor jaarrekening, adreswijziging en insolventie</li>
-          <li>Extra handelsregistersignalen als nice-to-have</li>
+          <li>Volglijst met een selectie bedrijven</li>
+          <li>Alerts voor jaarrekening, adreswijziging en insolventie</li>
+          <li>Extra handelsregistersignalen die je kunt aanzetten</li>
           <li>Directe Telegram-delivery bij relevante wijzigingen</li>
         </ul>
       </section>
 
       <section class="case-section" id="signals">
         <div class="kicker">Gemonitorde signalen</div>
-        <h2>Drie kernalerts. Extra signalen als dekking.</h2>
-        <p>De service prioriteert de drie alerts die in de praktijk het meest tellen. De overige velden worden ook gevolgd, maar als nice-to-have.</p>
+        <h2>Alerts die je kunt instellen.</h2>
+        <p>In de praktijk tellen vooral jaarrekening, adreswijziging en insolventie. Daarnaast zijn er andere alerts beschikbaar die je kunt inschakelen.</p>
         <div class="signals-grid">
-          <article class="signal-card is-core">
-            <span class="prio is-core">Kernalert</span>
+          <article class="signal-card">
             <strong>Jaarrekening</strong>
             <code>jaarrekening</code>
             <p>Alert wanneer voor een gevolgd bedrijf een nieuwe jaarrekening wordt gedeponeerd.</p>
           </article>
-          <article class="signal-card is-core">
-            <span class="prio is-core">Kernalert</span>
+          <article class="signal-card">
             <strong>Adreswijziging</strong>
             <code>adreswijziging</code>
             <p>Alert wanneer het geregistreerde adres van een gevolgd bedrijf wijzigt.</p>
           </article>
-          <article class="signal-card is-core">
-            <span class="prio is-core">Kernalert</span>
+          <article class="signal-card">
             <strong>Insolventie</strong>
             <code>insolventieCode</code>
             <p>Alert bij faillissement, surseance of schuldsanering: FAIL, SURS of SSAN.</p>
           </article>
           <article class="signal-card">
-            <span class="prio is-extra">Nice to have</span>
             <strong>Actief / inactief</strong>
             <code>actief</code>
             <p>Of het bedrijf actief (J) of inactief (N) is.</p>
           </article>
           <article class="signal-card">
-            <span class="prio is-extra">Nice to have</span>
             <strong>Rechtsvorm</strong>
             <code>rechtsvormCode</code>
             <p>Wijzigingen in rechtsvorm, zoals BV of NV.</p>
           </article>
           <article class="signal-card">
-            <span class="prio is-extra">Nice to have</span>
             <strong>SBI / activiteit</strong>
             <code>activiteiten[]</code>
             <p>Wijzigingen in geregistreerde activiteiten.</p>
           </article>
           <article class="signal-card">
-            <span class="prio is-extra">Nice to have</span>
             <strong>Postcode-regio</strong>
             <code>postcodeRegio</code>
             <p>Regio op basis van de eerste twee cijfers van de postcode.</p>
           </article>
           <article class="signal-card">
-            <span class="prio is-extra">Nice to have</span>
             <strong>Aanvangsdatum</strong>
             <code>datumAanvang</code>
             <p>De geregistreerde aanvangsdatum van het bedrijf.</p>
@@ -872,12 +875,12 @@
       <section class="case-section" id="flow">
         <div class="kicker">Hoe het werkt</div>
         <h2>Van volglijst naar alert in één loop.</h2>
-        <p>Bedrijven worden aan een monitoringlijst toegevoegd. Het prototype volgt het handelsregister en stuurt een korte Telegram-alert zodra er iets wijzigt — met jaarrekening, adreswijziging en insolventie als primaire alerts.</p>
+        <p>Bedrijven worden aan een volglijst toegevoegd. Het prototype volgt het handelsregister en stuurt een korte Telegram-alert zodra er iets wijzigt.</p>
         <p>Het doel is praktische alertheid: weten wat er veranderde, bij welk bedrijf, zonder handmatig het register te blijven checken.</p>
         <ul>
-          <li>Bepaal welke bedrijven ertoe doen</li>
-          <li>Prioriteer de drie kernalerts</li>
-          <li>Houd extra handelsregistervelden als optionele dekking</li>
+          <li>Bepaal welke bedrijven je wilt volgen</li>
+          <li>Stel in welke alerts je wilt ontvangen</li>
+          <li>Monitor het handelsregister op die signalen</li>
           <li>Lever elke relevante wijziging via Telegram</li>
         </ul>
       </section>
@@ -887,25 +890,25 @@
         <h2>Een werkende monitoring- en alertservice.</h2>
         <div class="decision">
           <strong>Live prototype</strong>
-          <span>De multi-signaal monitoringloop en Telegram-aflevering werken al voor een geselecteerde set bedrijven.</span>
+          <span>De monitoringloop en Telegram-aflevering werken al voor een selectie bedrijven.</span>
         </div>
       </section>
 
       <section class="case-section" id="value">
         <div class="kicker">Waarom het ertoe deed</div>
-        <h2>Duidelijke prioriteiten. Nog steeds een gericht hulpmiddel.</h2>
+        <h2>Minder checken. Sneller weten.</h2>
         <div class="value-grid">
           <article class="value">
-            <strong>Eerst de kernalerts</strong>
-            <p>Jaarrekening, adreswijziging en insolventie blijven voorop staan als de drie alerts die er het meest toe doen.</p>
+            <strong>Relevante alerts</strong>
+            <p>Jaarrekening, adreswijziging en insolventie staan voorop; andere signalen kun je erbij zetten.</p>
           </article>
           <article class="value">
             <strong>Sneller reageren</strong>
             <p>Een alert komt binnen zodra de monitor een wijziging ziet, in plaats van wanneer iemand eraan denkt om te kijken.</p>
           </article>
           <article class="value">
-            <strong>Extra dekking zonder ruis</strong>
-            <p>Aanvullende handelsregistervelden zijn beschikbaar als nice-to-have, zonder de use case te verwateren.</p>
+            <strong>Gericht houden</strong>
+            <p>Je volgt een selectie bedrijven die ertoe doen — niet het hele handelsregister in één keer.</p>
           </article>
         </div>
       </section>
