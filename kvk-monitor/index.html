@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="nl">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="KVK Monitor: een monitoring- en alertservice voor jaarrekeningen, adreswijzigingen, insolventie en andere handelsregisterwijzigingen.">
-  <title>Use case — KVK Monitor</title>
+  <meta name="description" content="A working prototype that monitors selected Dutch companies for relevant trade-register changes and sends alerts when something changes.">
+  <title>KVK Monitor — Company Monitoring &amp; Alerts | Robbie Höll</title>
   <link rel="stylesheet" href="../css/home.css?v=20260801b">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <style>
@@ -33,6 +33,7 @@
       line-height:1.5;
       letter-spacing:-.012em;
     }
+    .case-hero .hero-copy + .hero-copy{margin-top:14px}
     .case-hero .hero-meta{
       margin:18px 0 0;
       max-width:42em;
@@ -556,6 +557,7 @@
       line-height:1.5;
       max-width:36em;
     }
+    .case-cta p + p{margin-top:12px}
 
     @media (max-width: 980px){
       .summary{grid-template-columns:1fr 1fr}
@@ -602,40 +604,41 @@
       <a href="../index.html#contact">Contact</a>
     </nav>
     <a class="nav-cta" href="../index.html#contact">Tell me what you have in mind</a>
-    <button class="menu-btn" aria-label="Menu openen" onclick="toggleMenu()">☰</button>
+    <button class="menu-btn" aria-label="Open menu" onclick="toggleMenu()">☰</button>
   </div>
 </header>
 
 <section class="case-hero">
   <div class="container">
-    <div class="eyebrow">Monitoring- &amp; alertservice</div>
-    <h1>Nieuwe jaarrekeningen, adreswijzigingen en insolventie — als alert.</h1>
-    <p class="hero-copy">KVK Monitor houdt jouw selectie bedrijven in de gaten en stuurt relevante handelsregisterwijzigingen naar je via Telegram of e-mail. Denk aan nieuwe jaarrekeningen, adreswijzigingen en insolventie.</p>
-    <p class="hero-meta">Volglijst · Directe alerts · Telegram &amp; e-mail-delivery</p>
+    <div class="eyebrow">Company monitoring &amp; alerts</div>
+    <h1>Know when something changes.</h1>
+    <p class="hero-copy">KVK Monitor follows a selected list of Dutch companies and sends an alert when something relevant changes in the trade register.</p>
+    <p class="hero-copy">New annual accounts, address changes, insolvency signals and other company events — delivered through Telegram or email.</p>
+    <p class="hero-meta">Watchlist · Relevant alerts · Telegram &amp; email</p>
   </div>
 </section>
 
 <main class="container">
-  <section class="summary" aria-label="Samenvatting van de case">
+  <section class="summary" aria-label="Case summary">
     <article class="summary-card">
-      <small>Volglijst</small>
-      <strong>Selectie bedrijven</strong>
-      <p>Een gerichte lijst van bedrijven onder actieve monitoring.</p>
+      <small>Watchlist</small>
+      <strong>Selected companies</strong>
+      <p>A focused list of companies worth keeping an eye on.</p>
     </article>
     <article class="summary-card">
-      <small>Belangrijkste alerts</small>
-      <strong>Jaarrekening · Insolventie</strong>
-      <p>Plus andere handelsregistersignalen die je kunt instellen.</p>
+      <small>Key alerts</small>
+      <strong>Annual accounts · Insolvency</strong>
+      <p>Plus other trade-register signals when relevant.</p>
     </article>
     <article class="summary-card">
-      <small>Aflevering</small>
-      <strong>Telegram-alerts</strong>
-      <p>Elke relevante wijziging komt automatisch binnen.</p>
+      <small>Delivery</small>
+      <strong>Telegram alerts</strong>
+      <p>Relevant changes arrive automatically.</p>
     </article>
     <article class="summary-card">
       <small>Status</small>
-      <strong class="is-result">Werkend prototype</strong>
-      <p>Gebouwd als praktische monitoring- en alertservice.</p>
+      <strong class="is-result">Working prototype</strong>
+      <p>Built and tested as a practical monitoring tool.</p>
     </article>
   </section>
 
@@ -643,28 +646,28 @@
     <div class="overview-head">
       <div class="overview-titles">
         <strong>KVK Monitor</strong>
-        <div class="overview-coverage">(fictieve voorbeeldbedrijven)</div>
+        <div class="overview-coverage">Illustrative example using fictitious companies</div>
       </div>
-      <div class="overview-status">Monitoring actief</div>
+      <div class="overview-status">Monitoring active</div>
     </div>
 
     <div class="overview-grid">
       <div class="watch-col">
         <div class="panel-label">Dashboard</div>
-        <div class="dashboard-note">Illustratief overzicht met 10 niet-bestaande bedrijven</div>
+        <div class="dashboard-note">Illustrative overview with 10 fictitious companies</div>
 
         <div class="dash-stats">
           <div class="dash-stat">
-            <small>In volglijst</small>
+            <small>In watchlist</small>
             <strong>10</strong>
           </div>
           <div class="dash-stat">
-            <small>Alerts vandaag</small>
+            <small>Alerts today</small>
             <strong>2</strong>
           </div>
           <div class="dash-stat">
-            <small>Actieve monitoring</small>
-            <strong>Aan</strong>
+            <small>Monitoring active</small>
+            <strong>On</strong>
           </div>
         </div>
 
@@ -672,10 +675,10 @@
           <table class="company-table">
             <thead>
               <tr>
-                <th>Bedrijf</th>
-                <th>KvK</th>
-                <th>Actief</th>
-                <th>Laatste signaal</th>
+                <th>Company</th>
+                <th>KVK number</th>
+                <th>Active</th>
+                <th>Latest signal</th>
                 <th>Status</th>
               </tr>
             </thead>
@@ -684,91 +687,91 @@
                 <td>Jansen BV</td>
                 <td class="kvk">90012345</td>
                 <td>J</td>
-                <td>Jaarrekening 2025</td>
-                <td><span class="status-pill is-new">Nieuw</span></td>
+                <td>Annual accounts 2025</td>
+                <td><span class="status-pill is-new">New</span></td>
               </tr>
               <tr>
                 <td>Noordhaven Logistiek BV</td>
                 <td class="kvk">90023456</td>
                 <td>J</td>
                 <td>—</td>
-                <td><span class="status-pill is-ok">Volgend</span></td>
+                <td><span class="status-pill is-ok">Watching</span></td>
               </tr>
               <tr>
                 <td>Atlas Techniek BV</td>
                 <td class="kvk">90034567</td>
                 <td>J</td>
                 <td>—</td>
-                <td><span class="status-pill is-ok">Volgend</span></td>
+                <td><span class="status-pill is-ok">Watching</span></td>
               </tr>
               <tr class="is-alert">
                 <td>Rivierenland Advies BV</td>
                 <td class="kvk">90045678</td>
                 <td>J</td>
-                <td>Adreswijziging</td>
-                <td><span class="status-pill is-new">Nieuw</span></td>
+                <td>Address change</td>
+                <td><span class="status-pill is-new">New</span></td>
               </tr>
               <tr>
                 <td>Helder Bouw BV</td>
                 <td class="kvk">90056789</td>
                 <td>J</td>
                 <td>—</td>
-                <td><span class="status-pill is-ok">Volgend</span></td>
+                <td><span class="status-pill is-ok">Watching</span></td>
               </tr>
               <tr>
                 <td>Meridiaan IT BV</td>
                 <td class="kvk">90067890</td>
                 <td>J</td>
                 <td>—</td>
-                <td><span class="status-pill is-ok">Volgend</span></td>
+                <td><span class="status-pill is-ok">Watching</span></td>
               </tr>
               <tr>
                 <td>Zonnewende Energie BV</td>
                 <td class="kvk">90078901</td>
                 <td>J</td>
                 <td>—</td>
-                <td><span class="status-pill is-ok">Volgend</span></td>
+                <td><span class="status-pill is-ok">Watching</span></td>
               </tr>
               <tr>
                 <td>Kaapzicht Handel BV</td>
                 <td class="kvk">90089012</td>
                 <td>N</td>
-                <td>Actief → N</td>
-                <td><span class="status-pill is-warn">Inactief</span></td>
+                <td>Active → N</td>
+                <td><span class="status-pill is-warn">Inactive</span></td>
               </tr>
               <tr>
                 <td>Lindenberg Groep BV</td>
                 <td class="kvk">90090123</td>
                 <td>J</td>
                 <td>—</td>
-                <td><span class="status-pill is-ok">Volgend</span></td>
+                <td><span class="status-pill is-ok">Watching</span></td>
               </tr>
               <tr>
                 <td>Waterlinie Services BV</td>
                 <td class="kvk">90101234</td>
                 <td>J</td>
                 <td>—</td>
-                <td><span class="status-pill is-ok">Volgend</span></td>
+                <td><span class="status-pill is-ok">Watching</span></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="signal-chips" aria-label="Instelbare alerts">
-          <span class="signal-chip">Jaarrekening</span>
-          <span class="signal-chip">Adreswijziging</span>
-          <span class="signal-chip">Insolventie</span>
-          <span class="signal-chip">Actief / inactief</span>
-          <span class="signal-chip">Rechtsvorm</span>
-          <span class="signal-chip">SBI / activiteit</span>
-          <span class="signal-chip">Postcode-regio</span>
-          <span class="signal-chip">Aanvangsdatum</span>
+        <div class="signal-chips" aria-label="Configurable alerts">
+          <span class="signal-chip">Annual accounts</span>
+          <span class="signal-chip">Address change</span>
+          <span class="signal-chip">Insolvency</span>
+          <span class="signal-chip">Active / inactive</span>
+          <span class="signal-chip">Legal form</span>
+          <span class="signal-chip">SBI / business activity</span>
+          <span class="signal-chip">Postal-code region</span>
+          <span class="signal-chip">Start date</span>
         </div>
       </div>
 
       <div class="alert-col">
-        <div class="panel-label">Voorbeeld Telegram-alert</div>
-        <div class="dashboard-note">Showcase-bericht met fictieve bedrijfsnaam</div>
+        <div class="panel-label">Example Telegram alert</div>
+        <div class="dashboard-note">Illustrative message using a fictitious company</div>
 
         <div class="telegram-card">
           <div class="telegram-head">
@@ -779,16 +782,16 @@
             </div>
             <div>
               <strong>Telegram · KVK Monitor</strong>
-              <small>Zo ziet een alert eruit</small>
+              <small>This is what an alert looks like</small>
             </div>
           </div>
           <div class="telegram-body">
-            <small>Jaarrekening</small>
-            <strong>Nieuwe jaarrekening gedeponeerd</strong>
-            <p>Jansen BV · KvK 90012345 · Boekjaar 2025</p>
+            <small>Annual accounts</small>
+            <strong>New annual accounts filed</strong>
+            <p>Jansen BV · KVK 90012345 · Financial year 2025</p>
             <div class="telegram-meta">
-              <span class="telegram-chip">Jaarrekening</span>
-              <span class="telegram-chip">Direct verstuurd</span>
+              <span class="telegram-chip">Annual accounts</span>
+              <span class="telegram-chip">Sent automatically</span>
             </div>
           </div>
         </div>
@@ -798,134 +801,164 @@
 
   <section class="story">
     <aside class="story-nav">
-      <strong>In deze case</strong>
-      <a href="#problem">Het probleem</a>
-      <a href="#built">Wat ik bouwde</a>
-      <a href="#signals">Gemonitorde signalen</a>
-      <a href="#flow">Hoe het werkt</a>
-      <a href="#status">Waar het staat</a>
-      <a href="#value">Waarom het ertoe deed</a>
+      <strong>In this case</strong>
+      <a href="#problem">The problem</a>
+      <a href="#built">What I built</a>
+      <a href="#signals">Signals</a>
+      <a href="#flow">How it works</a>
+      <a href="#status">Current status</a>
+      <a href="#value">Why it mattered</a>
+      <a href="#idea">The more interesting idea</a>
     </aside>
 
     <div class="story-content">
       <section class="case-section" id="problem">
-        <div class="kicker">Het probleem</div>
-        <h2>De wijzigingen die ertoe doen, mis je makkelijk.</h2>
-        <p>Voor een selectie bedrijven kunnen nieuwe jaarrekeningen, adreswijzigingen en insolventiesignalen meteen relevant zijn — maar het handelsregister handmatig checken is traag en inconsistent.</p>
-        <p>De behoefte was een betrouwbare manier om die wijzigingen te zien zodra ze verschijnen, zonder zelf te blijven kijken.</p>
-        <div class="quote">Het nuttige moment is niet wanneer je eraan denkt om te checken. Het is wanneer de jaarrekening, het adres of de insolventiestatus wijzigt.</div>
+        <div class="kicker">The problem</div>
+        <h2>Important changes are easy to miss.</h2>
+        <p>For a selected group of companies, a new set of annual accounts, an address change or an insolvency signal can be immediately relevant.</p>
+        <p>But repeatedly checking the Dutch trade register is a poor monitoring system.</p>
+        <p>The question was simple:</p>
+        <p>Could I make those changes come to me instead?</p>
+        <p>The useful moment isn't when somebody remembers to check.</p>
+        <div class="quote">It's when something changes.</div>
       </section>
 
       <section class="case-section" id="built">
-        <div class="kicker">Wat ik bouwde</div>
-        <h2>Een monitoring- en alertservice voor geselecteerde bedrijven.</h2>
-        <p>KVK Monitor volgt een volglijst en stuurt een alert via Telegram of e-mail zodra een relevante handelsregisterwijziging verschijnt.</p>
-        <p>Jaarrekening, adreswijziging en insolventie zijn in de praktijk het belangrijkst. Andere signalen kun je ook instellen, afhankelijk van wat je wilt volgen.</p>
+        <div class="kicker">What I built</div>
+        <h2>A lightweight monitoring and alert system.</h2>
+        <p>KVK Monitor follows a selected watchlist of companies and checks for relevant changes in the Dutch trade register.</p>
+        <p>When something changes, it sends a short alert through Telegram or email.</p>
+        <p>The prototype currently supports signals including:</p>
         <ul>
-          <li>Volglijst met een selectie bedrijven</li>
-          <li>Alerts voor jaarrekening, adreswijziging en insolventie</li>
-          <li>Extra handelsregistersignalen die je kunt aanzetten</li>
-          <li>Directe Telegram-delivery bij relevante wijzigingen</li>
+          <li>new annual accounts</li>
+          <li>address changes</li>
+          <li>insolvency signals</li>
+          <li>active / inactive status</li>
+          <li>legal-form changes</li>
+          <li>registered business activities</li>
+          <li>postal-code region</li>
+          <li>company start date</li>
         </ul>
+        <p>The point wasn't to monitor everything.</p>
+        <p>It was to monitor the small set of companies and changes that actually matter to someone.</p>
       </section>
 
       <section class="case-section" id="signals">
-        <div class="kicker">Gemonitorde signalen</div>
-        <h2>Alerts die je kunt instellen.</h2>
-        <p>In de praktijk tellen vooral jaarrekening, adreswijziging en insolventie. Daarnaast zijn er andere alerts beschikbaar die je kunt inschakelen.</p>
+        <div class="kicker">Signals</div>
+        <h2>Monitor what matters.</h2>
         <div class="signals-grid">
           <article class="signal-card">
-            <strong>Jaarrekening</strong>
-            <code>jaarrekening</code>
-            <p>Alert wanneer voor een gevolgd bedrijf een nieuwe jaarrekening wordt gedeponeerd.</p>
+            <strong>Annual accounts</strong>
+            <p>Alert when new annual accounts are filed for a company on the watchlist.</p>
           </article>
           <article class="signal-card">
-            <strong>Adreswijziging</strong>
-            <code>adreswijziging</code>
-            <p>Alert wanneer het geregistreerde adres van een gevolgd bedrijf wijzigt.</p>
+            <strong>Address change</strong>
+            <p>Alert when the registered address changes.</p>
           </article>
           <article class="signal-card">
-            <strong>Insolventie</strong>
-            <code>insolventieCode</code>
-            <p>Alert bij faillissement, surseance of schuldsanering: FAIL, SURS of SSAN.</p>
+            <strong>Insolvency</strong>
+            <p>Alert for registered bankruptcy, suspension of payments or debt restructuring signals.</p>
           </article>
           <article class="signal-card">
-            <strong>Actief / inactief</strong>
-            <code>actief</code>
-            <p>Of het bedrijf actief (J) of inactief (N) is.</p>
+            <strong>Active / inactive</strong>
+            <p>Detect changes in the company's registered operating status.</p>
           </article>
           <article class="signal-card">
-            <strong>Rechtsvorm</strong>
-            <code>rechtsvormCode</code>
-            <p>Wijzigingen in rechtsvorm, zoals BV of NV.</p>
+            <strong>Legal form</strong>
+            <p>Track changes such as BV, NV or other legal forms.</p>
           </article>
           <article class="signal-card">
-            <strong>SBI / activiteit</strong>
-            <code>activiteiten[]</code>
-            <p>Wijzigingen in geregistreerde activiteiten.</p>
+            <strong>Business activities</strong>
+            <p>Detect changes in registered SBI activities.</p>
           </article>
           <article class="signal-card">
-            <strong>Postcode-regio</strong>
-            <code>postcodeRegio</code>
-            <p>Regio op basis van de eerste twee cijfers van de postcode.</p>
+            <strong>Postal-code region</strong>
+            <p>Track changes in registered location.</p>
           </article>
           <article class="signal-card">
-            <strong>Aanvangsdatum</strong>
-            <code>datumAanvang</code>
-            <p>De geregistreerde aanvangsdatum van het bedrijf.</p>
+            <strong>Start date</strong>
+            <p>Monitor the registered company start date.</p>
           </article>
         </div>
       </section>
 
       <section class="case-section" id="flow">
-        <div class="kicker">Hoe het werkt</div>
-        <h2>Van volglijst naar alert in één loop.</h2>
-        <p>Bedrijven worden aan een volglijst toegevoegd. Het prototype volgt het handelsregister en stuurt een korte Telegram-alert zodra er iets wijzigt.</p>
-        <p>Het doel is praktische alertheid: weten wat er veranderde, bij welk bedrijf, zonder handmatig het register te blijven checken.</p>
+        <div class="kicker">How it works</div>
+        <h2>From watchlist to alert.</h2>
+        <p>The loop is deliberately simple:</p>
         <ul>
-          <li>Bepaal welke bedrijven je wilt volgen</li>
-          <li>Stel in welke alerts je wilt ontvangen</li>
-          <li>Monitor het handelsregister op die signalen</li>
-          <li>Lever elke relevante wijziging via Telegram</li>
+          <li><strong>Select the companies</strong> — Choose the companies worth following.</li>
+          <li><strong>Choose the signals</strong> — Decide which changes actually matter.</li>
+          <li><strong>Monitor</strong> — The system checks the relevant company information.</li>
+          <li><strong>Detect</strong> — A change is identified.</li>
+          <li><strong>Notify</strong> — A short alert arrives through Telegram or email.</li>
         </ul>
+        <p>The result is simple:</p>
+        <p>less checking, faster awareness.</p>
       </section>
 
       <section class="case-section" id="status">
-        <div class="kicker">Waar het staat</div>
-        <h2>Een werkende monitoring- en alertservice.</h2>
+        <div class="kicker">Current status</div>
+        <h2>Working prototype.</h2>
+        <p>The monitor is running as a working prototype and can follow selected companies and generate alerts when relevant changes appear.</p>
         <div class="decision">
-          <a href="../index.html#contact"><strong>Live alerts instellen</strong></a>
-          <span>Stuur mij een bericht als je de KVK monitor ook wilt gebruiken.</span>
+          <a href="../index.html#contact"><strong>Send me a message →</strong></a>
+          <span>Interested in trying it with a watchlist of your own?</span>
         </div>
       </section>
 
       <section class="case-section" id="value">
-        <div class="kicker">Waarom het ertoe deed</div>
-        <h2>Minder checken. Sneller weten.</h2>
+        <div class="kicker">Why it mattered</div>
+        <h2>Less checking. Faster knowing.</h2>
         <div class="value-grid">
           <article class="value">
-            <strong>Relevante alerts</strong>
-            <p>Jaarrekening, adreswijziging en insolventie staan voorop; andere signalen kun je erbij zetten.</p>
+            <strong>Relevant signals</strong>
+            <p>Follow the changes that matter instead of repeatedly reviewing company records manually.</p>
           </article>
           <article class="value">
-            <strong>Sneller reageren</strong>
-            <p>Een alert komt binnen zodra de monitor een wijziging ziet, in plaats van wanneer iemand eraan denkt om te kijken.</p>
+            <strong>Earlier awareness</strong>
+            <p>An alert arrives when the monitor detects a change — not when somebody happens to remember to look.</p>
           </article>
           <article class="value">
-            <strong>Gericht houden</strong>
-            <p>Je volgt een selectie bedrijven die ertoe doen — niet het hele handelsregister in één keer.</p>
+            <strong>Focused monitoring</strong>
+            <p>Follow a selected group of relevant companies rather than trying to watch the entire market.</p>
           </article>
         </div>
+      </section>
+
+      <section class="case-section" id="idea">
+        <div class="kicker">The more interesting idea</div>
+        <h2>The interesting part isn't really the KVK data.</h2>
+        <p>KVK Monitor started with one very specific irritation: keeping track of company filings.</p>
+        <p>But while building it, the more interesting pattern became obvious:</p>
+        <div class="quote">monitor → detect → filter → notify → act</div>
+        <p>The source could be a trade register.</p>
+        <p>But it could just as easily be:</p>
+        <ul>
+          <li>management changes</li>
+          <li>acquisitions</li>
+          <li>vacancies</li>
+          <li>new locations</li>
+          <li>investments</li>
+          <li>website changes</li>
+          <li>commercial activity</li>
+          <li>another external signal that matters to a business</li>
+        </ul>
+        <p>Once the information can be monitored reliably, the more useful question becomes:</p>
+        <div class="quote">Who needs to know — and what should they do next?</div>
+        <p>That is a much more interesting problem.</p>
       </section>
     </div>
   </section>
 
   <section class="case-cta">
     <div>
-      <h2>Op zoek naar een monitoring- en alertservice voor praktische signalen?</h2>
-      <p>Ik bouw lichte tools die de wijzigingen volgen die ertoe doen en die afleveren waar je ermee verder kunt.</p>
+      <h2>Is there a business signal you wish someone would simply keep an eye on?</h2>
+      <p>Some monitoring problems are too specific for standard software, but too useful to keep doing manually.</p>
+      <p>Give me the problem.</p>
+      <p>I’m interested in seeing whether there’s a simple way to make it actionable.</p>
     </div>
-    <a class="btn btn-primary" href="/#contact">Vertel me wat je in gedachten hebt →</a>
+    <a class="btn btn-primary" href="/#contact">Tell me what you have in mind →</a>
   </section>
 </main>
 
